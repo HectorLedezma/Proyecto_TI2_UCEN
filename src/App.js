@@ -1,14 +1,11 @@
+//import logo from './logo.svg';
 import './App.css';
-import SignUp from './components/SignUp';
-import SignUpConfirmation from './components/SignUpConfirmation';
-import { Route, Routes } from 'react-router-dom';
-
+import Login from './pages/login';
 function App() {
   return (
-    <Routes>
-      <Route path="/" exact element={<SignUp />} />
-      <Route path="/success" exact element={<SignUpConfirmation />} />
-    </Routes>
+    <div className="App">
+      <Login/>
+    </div>
   );
 }
 
