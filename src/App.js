@@ -1,10 +1,12 @@
-//import logo from './logo.svg';
+
 import './App.css';
-import Login from './pages/login';
+
+import Rutas from './Routes';
+
 function App() {
   return (
     <div className="App">
-      <Login/>
+      <Rutas/>
     </div>
   );
 }

@@ -1,28 +1,31 @@
-import React from "react";
+import { React } from "react";
 import "../styles/style.css";
-import LogoU from '../images/ucen_trans.png'
+import LogoU from '../images/Logo UCEN_R.COQUIMBO_.png'
 import LogoCleta from '../images/QRcleta.png'
+import { Link, Outlet} from "react-router-dom";
 /*
-const signup = document.querySelector('.t-signup');
-const login = document.querySelector('.t-login');
-const addclass = document.querySelector('.site');
-signup.addEventListener('click',function(){
-    addclass.className = 'site signup-show';
-});
-login.addEventListener('click',function(){
-    addclass.className = 'site login-show';
-});
+import Routes from "../Routes";
+
+function toSignup(){
+    console.log('A')
+}
 */
 function Login(){
+
+    
+
     return(
-        <div id="page" class="site login-show">
+        <div id="page" className="site login-show">
+
+            
+
             <div className="container">
                 <div className="wrapper">
                     <div className="login">
                         <div className="content-heading">
                             <div className="y-style">
                                 <div className="logo">
-                                    <img src={LogoU} alt="Logo" height="80"></img>
+                                    <img className="ImgLogoU" src={LogoU} alt="Logo"></img>
                                 </div>
                                 <div className="welcome">
                                     <h2>
@@ -31,7 +34,7 @@ function Login(){
                                     </h2>
                                 </div>
                                 <div className="logo">
-                                    <img src={LogoCleta} alt="Logo" height="180"></img>
+                                    <img className="ImgLogoP" src={LogoCleta} alt="Logo"></img>
                                 </div>
                             </div>
                         </div>
@@ -40,22 +43,24 @@ function Login(){
                                 <form action="">
                                     <p>
                                         <label>Correo</label>
-                                        <input type="email" placeholder="Ingresa tu correo"/>
+                                        <input className="userInput" type="email" placeholder="Ingresa tu correo"/>
                                     </p>
                                     <p>
                                         <label>Contraseña</label>
-                                        <input type="password" placeholder="Ingresa tu contraseña"/>
+                                        <input className="userInput" type="password" placeholder="Ingresa tu contraseña"/>
                                     </p>
                                     <p className="check">
-                                        <label for="remember">Recuérdame</label>
+
                                         <input type="checkbox" id="remember"/>
+                                        <label>Recuérdame</label>
                                     </p>
-                                    <p class="forgot"><a href="#">Recuperar contraseña</a></p>
+                                    <p className="forgot"><a href="">Recuperar contraseña</a></p>
                                     <p><button type="sumbit">Iniciar sesión</button></p>
                                 </form>
                                 <div className="afterform">
                                     <p>¿No tienes una cuenta?</p>
-                                    <a href="" class="t-signup">Registrate</a>
+                                    {/**<a onClick={toSignup} className="t-signup">Registrate</a> */}
+                                    <Link to='/signup'>Registrate</Link>
                                 </div>
                             </div>
                         </div>
@@ -89,13 +94,15 @@ function Login(){
                                 </form>
                                 <div className="afterform">
                                     <p>¿Ya tienes una cuenta?</p>
-                                    <a href="#" class="t-login">Inicia Sesion</a>
+                                    
+                                    {/*<a href="" className="t-login">Inicia Sesion</a>*/}
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <Outlet/>
         </div>
     );
 }

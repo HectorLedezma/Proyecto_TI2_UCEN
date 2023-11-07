@@ -2,8 +2,8 @@
 @import url('https://fonts.cdnfonts.com/css/poppins');
 
 :root{
-    --main-color: #0022fd;
-    --dark-color: #11152a;
+    --main-color: #fd5000;
+    --dark-color: #002aff;
     --light-color: #d0d4ed;
 
 }
@@ -23,11 +23,16 @@ body{
     color: var(--dark-color);
     background-color: #efefef;
 }
+
+.t-signup{
+    cursor: pointer;
+}
+
 a{
     text-decoration: none;
 }
 h2{
-    font-size: 2em;
+    font-size: 1em;
     font-weight: 400;
     line-height: 1.2;
     color: white;
@@ -46,8 +51,8 @@ ul{
     flex-direction: column;
     width: 100%;
     max-width: 500px;
-    min-height: 500px;
-    margin: 5em auto;
+    min-height: 550px;
+    margin: 3em auto;
     background-color: var(--main-color);
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
@@ -55,7 +60,7 @@ ul{
 :is(.login, .signup)>div{
     position: relative;
     flex: 1 0 50%;
-    padding: 60px;
+    padding: 30px;
 }
 
 .content-heading .y-style {
@@ -135,7 +140,7 @@ form .forgot {
 .content-form::before{
     content: '';
     position: absolute;
-    width: 300%;
+    width: 200%;
     height: 200%;
     background-color: white;
     border-radius: 50%;
@@ -178,9 +183,36 @@ form .forgot {
     display: flex;
 }
 
+.ImgLogoU{
+    max-height: 34px;
+}
 
+.ImgLogoP{
+    max-height: 84px;
+}
+
+.userInput{
+    color: var(--dark-color);
+}
 
 @media screen and (min-width: 768px) {
+    h2{
+        font-size: 1.7em;
+        font-weight: 400;
+        line-height: 1.2;
+        color: white;
+        margin-bottom: 20px;
+    }
+
+    .ImgLogoU{
+        max-height: 100px;
+        margin-right: 60px;
+    }
+    
+    .ImgLogoP{
+        max-height: 168px;
+    }
+    
     .wrapper>div {
         flex-direction: row;
         max-width: 800px;
