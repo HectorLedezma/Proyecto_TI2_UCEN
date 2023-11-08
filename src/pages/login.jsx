@@ -1,21 +1,50 @@
-import { React } from "react";
+import { React, useRef, useState } from "react";
 import "../styles/style.css";
 import LogoU from '../images/Logo UCEN_R.COQUIMBO_.png'
 import LogoCleta from '../images/QRcleta.png'
 import Mail from '../images/mail.png'
 import Pass from '../images/pass.png'
 import { Link, Outlet} from "react-router-dom";
-import { AiOutlineMail } from "react-icons/ai";
+import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { BiShow, BiHide } from 'react-icons/bi'
 
 
 function Login(){
 
-    
+    //let passRef = useRef();
+    //let iconRef = useRef();
+
+    const cambio = (ojo) => {
+        if(ojo === 'BiShow'){
+            setEye(
+                <BiHide className="clickeable" fontSize='30'
+                    onClick={()=>cambio('BiHide')}
+                />);
+            setPass('text');
+            
+        }else{
+            setEye(
+                <BiShow id='show' className="clickeable" fontSize='30'
+                    onClick={()=>cambio('BiShow')}
+                />
+            );
+            setPass('password');
+            
+        }
+    }
+
+    const [pass,setPass] = useState('password');
+    const [eye,setEye] = useState(
+        <BiShow className="clickeable" fontSize='30'
+            onClick={()=>cambio(eye.type.name)}
+        />
+    );
+
 
     return(
         <div id="page" className="site login-show">
             <div className="container">
-                <div className="wrapper">
+                <div className="wrappr">
                     <div className="login">
                         <div className="content-heading">
                             <div className="y-style">
@@ -40,7 +69,7 @@ function Login(){
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <img className="userInputIcon" src={Mail} alt=""/>
+                                                <AiOutlineMail fontSize="30"/>
                                             </div>
                                             <div className="InputSide centrado">
                                                 <input className="userInputText" type="email" placeholder="Ingresa tu correo"/>
@@ -50,10 +79,13 @@ function Login(){
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <img className="userInputIcon" src={Pass} alt=""/>
+                                                <AiOutlineLock fontSize="30"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input className="userInputText" type="password" placeholder="Ingresa tu contraseña"/>
+                                                <input className="userInputText" type={pass} placeholder="Ingresa tu contraseña"/>
+                                            </div>
+                                            <div className="IconSide centrado">
+                                                {eye}
                                             </div>
                                         </div>
                                     </div>
