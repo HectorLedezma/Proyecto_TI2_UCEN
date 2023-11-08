@@ -91,31 +91,29 @@ ul{
 
 form input:not(#remember) {
     font-family: inherit;
-    width:100%;
     outline: 0;
-    margin: 0 0 20px;
-    padding: 10px 15px;
-    border-radius: 7px;
-    border: 1px solid var(--light-color);
+    /*padding: 10px 15px;*/
+    background-color: #ffffff00;
+    
 }
 form input::placeholder {
     color: var(--light-color);
 }
 form button {
-    background-color: #ff651e;
+    background-color:var(--dark-color);
     color:white;
     width: 100%;
     margin: 30px 0;
     border: 0;
     line-height: 42px;
-    border-radius: 7px;
+    border-radius: 20px;
     font-weight: 700;
     cursor: pointer;
 /*     transition: all .3s ease-out;
     -webkit-transition: all .3s ease-out; */
 }
 button:hover {
-    background-color: var(--dark-color);
+    background-color: var(--main-color);
 }
 .afterform{
     text-align: center;
@@ -192,7 +190,42 @@ form .forgot {
 }
 
 .userInput{
-    color: var(--dark-color);
+    background-color: var(--main-color);
+    border-radius: 20px;
+    margin: 0 0 10px;
+    text-align: right;
+}
+
+.userInputContent{
+    display: flex;
+    padding: 10px 15px;
+}
+
+.centrado{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.userInputText{
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    font-size: large;
+    border: 0px solid var(--light-color);
+}
+
+.userInputIcon{
+    width: 20px;
+}
+
+.IconSide{
+    width: 10%;
+    text-align: center;
+}
+.InputSide{
+    width: 90%;
 }
 
 @media screen and (min-width: 768px) {

@@ -2,23 +2,18 @@ import { React } from "react";
 import "../styles/style.css";
 import LogoU from '../images/Logo UCEN_R.COQUIMBO_.png'
 import LogoCleta from '../images/QRcleta.png'
+import Mail from '../images/mail.png'
+import Pass from '../images/pass.png'
 import { Link, Outlet} from "react-router-dom";
-/*
-import Routes from "../Routes";
+import { AiOutlineMail } from "react-icons/ai";
 
-function toSignup(){
-    console.log('A')
-}
-*/
+
 function Login(){
 
     
 
     return(
         <div id="page" className="site login-show">
-
-            
-
             <div className="container">
                 <div className="wrapper">
                     <div className="login">
@@ -40,22 +35,35 @@ function Login(){
                         </div>
                         <div className="content-form">
                             <div className="y-style">
+                                <h1>Bienvenido</h1>
                                 <form action="">
-                                    <p>
-                                        <label>Correo</label>
-                                        <input className="userInput" type="email" placeholder="Ingresa tu correo"/>
-                                    </p>
-                                    <p>
-                                        <label>Contraseña</label>
-                                        <input className="userInput" type="password" placeholder="Ingresa tu contraseña"/>
-                                    </p>
+                                    <div className="userInput">
+                                        <div className="userInputContent">
+                                            <div className="IconSide centrado">
+                                                <img className="userInputIcon" src={Mail} alt=""/>
+                                            </div>
+                                            <div className="InputSide centrado">
+                                                <input className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="userInput">
+                                        <div className="userInputContent">
+                                            <div className="IconSide centrado">
+                                                <img className="userInputIcon" src={Pass} alt=""/>
+                                            </div>
+                                            <div className="InputSide centrado">
+                                                <input className="userInputText" type="password" placeholder="Ingresa tu contraseña"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <p className="check">
 
                                         <input type="checkbox" id="remember"/>
                                         <label>Recuérdame</label>
                                     </p>
                                     <p className="forgot"><a href="">Recuperar contraseña</a></p>
-                                    <p><button type="sumbit">Iniciar sesión</button></p>
+                                    <p><button className="Iniciar" type="sumbit">Iniciar sesión</button></p>
                                 </form>
                                 <div className="afterform">
                                     <p>¿No tienes una cuenta?</p>
