@@ -68,6 +68,7 @@ ul{
 .content-heading .y-style {
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 .logo a{
     display: inline-block;
