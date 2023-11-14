@@ -1,17 +1,19 @@
-import { React, useRef, useState } from "react";
+import { React, useRef, useState} from "react";
 import "../styles/style.css";
 import LogoU from '../images/Logo UCEN_R.COQUIMBO_.png'
 import LogoCleta from '../images/QRcleta.png'
-import Mail from '../images/mail.png'
-import Pass from '../images/pass.png'
+//import Mail from '../images/mail.png'
+//import Pass from '../images/pass.png'
 import { Link, Outlet} from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiShow, BiHide } from 'react-icons/bi'
-
+import CryptoJS from 'crypto-js';
+import Users from './users.json'
 
 function Login(){
-
-    //let passRef = useRef();
+    
+    let mailRef = useRef();
+    let passRef = useRef();
     //let iconRef = useRef();
 
     const cambio = (ojo) => {
@@ -29,7 +31,6 @@ function Login(){
                 />
             );
             setPass('password');
-            
         }
     }
 
@@ -40,9 +41,35 @@ function Login(){
         />
     );
 
-
+    const [Log,setLog] = useState('/')
+    
+    function verificar(mail,pass,obj){
+        let fin = '/';
+        let tokken = false;
+        try{
+            let Cpass = CryptoJS.SHA256(pass).toString();
+            console.log(pass+': '+Cpass)
+            if(obj[mail].Pass === Cpass){
+                tokken = true;
+                fin = '/UserProf';
+            }else{
+                fin = '/';
+                tokken = false;
+            }
+        }catch(ex){
+            console.log('error: '+String(ex));
+            fin = '/';
+            tokken = false;
+        }
+        localStorage.setItem('Tokken',tokken);
+        console.log(fin)
+        console.log(localStorage.getItem('Tokken'))
+        return fin;
+    }
+    localStorage.setItem('Tokken',false);
     return(
         <div id="page" className="site login-show">
+            
             <div className="container">
                 <div className="wrappr">
                     <div className="login">
@@ -65,14 +92,25 @@ function Login(){
                         <div className="content-form">
                             <div className="y-style">
                                 <h1>Bienvenido</h1>
-                                <form action="">
+                                <form action="" 
+                                    onChange={
+                                        ev=>{
+                                            ev.preventDefault()
+                                            setLog(verificar(
+                                                mailRef.current.value,
+                                                passRef.current.value,
+                                                Users
+                                            ))
+                                        }
+                                    }
+                                >
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
                                                 <AiOutlineMail fontSize="30"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                                <input ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="Ingresa tu correo"/>
                                             </div>
                                         </div>
                                     </div>
@@ -82,7 +120,7 @@ function Login(){
                                                 <AiOutlineLock fontSize="30"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input className="userInputText" type={pass} placeholder="Ingresa tu contraseña"/>
+                                                <input ref={passRef} id="InputPassword" className="userInputText" type={pass} placeholder="Ingresa tu contraseña"/>
                                             </div>
                                             <div className="IconSide centrado">
                                                 {eye}
@@ -94,8 +132,12 @@ function Login(){
                                         <input type="checkbox" id="remember"/>
                                         <label>Recuérdame</label>
                                     </p>
-                                    <p className="forgot"><a href="">Recuperar contraseña</a></p>
-                                    <p><button className="Iniciar" type="sumbit">Iniciar sesión</button></p>
+                                    <p className="forgot">Recuperar contraseña</p>
+                                    <Link to={
+                                        Log
+                                    }>
+                                        <button id='BtnLogIn' className="Iniciar" type="sumbit">Iniciar sesión</button>
+                                    </Link>
                                 </form>
                                 <div className="afterform">
                                     <p>¿No tienes una cuenta?</p>
@@ -105,41 +147,7 @@ function Login(){
                             </div>
                         </div>
                     </div>
-                    <div className="signup">
-                        <div className="content-heading">
-                            <div className="y-style">
-                                <div className="logo"><a href=""><span></span></a></div>
-                                <div className="welcome">
-                                    <h2>Registrate<br/>Ahora </h2>
-                                    <p>Estacionamiento QR para bicicletas</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="content-form">
-                            <div className="y-style">
-                                <form action="">
-                                    <p>
-                                        <label>Nombre completo</label>
-                                        <input type="text" placeholder="Ingresa tu nombre completo"/>
-                                    </p>
-                                    <p>
-                                        <label>Correo</label>
-                                        <input type="email" placeholder="Ingresa tu correo"/>
-                                    </p>
-                                    <p>
-                                        <label>Contraseña</label>
-                                        <input type="password" placeholder="Ingresa tu contraseña"/>
-                                    </p>
-                                    <p><button type="sumbit">Registrarse</button></p>
-                                </form>
-                                <div className="afterform">
-                                    <p>¿Ya tienes una cuenta?</p>
-                                    
-                                    {/*<a href="" className="t-login">Inicia Sesion</a>*/}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
             <Outlet/>

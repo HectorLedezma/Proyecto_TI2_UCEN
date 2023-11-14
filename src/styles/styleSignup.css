@@ -76,7 +76,9 @@ ul{
 .logo span{
     color:#213ef1;
 }
-
+.badText{
+    color: red;
+}
 .content-heading p{
     color: var(--light-color);
 }

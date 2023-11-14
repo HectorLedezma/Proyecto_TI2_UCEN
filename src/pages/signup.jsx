@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "../styles/styleSignup.css";
 import { Link, Outlet} from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiHide, BiShow, BiUser } from "react-icons/bi";
-
+import user from '../pages/users.json'
+import CryptoJS from 'crypto-js';
 
 function Signup(){
     const cambio = (ojo) => {
@@ -56,6 +57,38 @@ function Signup(){
             onClick={()=>cambio2(eye.type.name)}
         />
     );
+    localStorage.setItem('Tokken',false)
+
+    function revisa(nomb,apel,mail,pass,pess){
+        //chekear usuario
+        const existe = mail in user;
+        if(existe){
+            alert('El usuario ya existe')
+        }
+        //chekear pass
+        const confir = revisapass(pass,pess);
+        if(!existe && confir){
+            user[mail]={
+                "Nombre":nomb,
+                "Apellido":apel,
+                "Pass":CryptoJS.SHA256(pass).toString(),
+                "Type":"0"
+            }
+            alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito')
+        }
+    }
+
+    function revisapass(pass1,pass2){
+        return pass1 === pass2;
+    }
+
+    let nombre = useRef();
+    let apelli = useRef();
+    let correo = useRef();
+    let passi1 = useRef();
+    let passi2 = useRef();
+
+    let [samepass,setSamepass] = useState(true)
 
     return(
         <div id="page" className="site login-show">
@@ -86,7 +119,7 @@ function Signup(){
                                                 <BiUser fontSize='30'/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input className="userInputText" type="email" placeholder="Ingresa tu nombre"/>
+                                                <input ref={nombre} className="userInputText" type="text" placeholder="Ingresa tu nombre"/>
                                             </div>
                                         </div>
                                     </div>
@@ -96,7 +129,7 @@ function Signup(){
                                                 <BiUser fontSize='30'/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input className="userInputText" type="email" placeholder="Ingresa tu apellido"/>
+                                                <input ref={apelli} className="userInputText" type="text" placeholder="Ingresa tu apellido"/>
                                             </div>
                                         </div>
                                     </div>
@@ -106,7 +139,7 @@ function Signup(){
                                                 <AiOutlineMail fontSize='30'/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                                <input ref={correo} className="userInputText" type="email" placeholder="Ingresa tu correo"/>
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +149,7 @@ function Signup(){
                                                 <AiOutlineLock fontSize="30"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input className="userInputText" type={pass} placeholder="Ingresa tu contraseña"/>
+                                                <input ref={passi1} className="userInputText" type={pass} placeholder="Ingresa tu contraseña"/>
                                             </div>
                                             <div className="IconSide centrado">
                                                 {eye}
@@ -129,54 +162,30 @@ function Signup(){
                                                 <AiOutlineLock fontSize="30"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input className="userInputText" type={pass2} placeholder="Repite tu contraseña"/>
+                                                <input onChange={ev=>{setSamepass(revisapass(passi1.current.value,passi2.current.value))}} ref={passi2} className="userInputText" type={pass2} placeholder="Repite tu contraseña"/>
                                             </div>
                                             <div className="IconSide centrado">
                                                 {eye2}
                                             </div>
                                         </div>
                                     </div>
-                                    <p><button className="Iniciar" type="sumbit">Crear cuenta</button></p>
+                                    <p className="badText" hidden={samepass}>las contraseñas no coinsiden</p>
+                                    <button onClick={
+                                        ev=>{
+                                            revisa(
+                                                nombre.current.value,
+                                                apelli.current.value,
+                                                correo.current.value,
+                                                passi1.current.value,
+                                                passi2.current.value
+                                                );
+                                        }
+                                    } className="Iniciar" type="sumbit">Crear cuenta</button>
                                 </form>
                                 <div className="afterform">
                                     <p>¿Ya tienes una cuenta?</p>
                                     {/**<a onClick={toSignup} className="t-signup">Registrate</a> */}
                                     <Link to='/'>Inicia sesion</Link>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="signup">
-                        <div className="content-heading">
-                            <div className="y-style">
-                                <div className="logo"><a href=""><span></span></a></div>
-                                <div className="welcome">
-                                    <h2>Registrate<br/>Ahora </h2>
-                                    <p>Estacionamiento QR para bicicletas</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="content-form">
-                            <div className="y-style">
-                                <form action="">
-                                    <p>
-                                        <label>Nombre completo</label>
-                                        <input type="text" placeholder="Ingresa tu nombre completo"/>
-                                    </p>
-                                    <p>
-                                        <label>Correo</label>
-                                        <input type="email" placeholder="Ingresa tu correo"/>
-                                    </p>
-                                    <p>
-                                        <label>Contraseña</label>
-                                        <input type="password" placeholder="Ingresa tu contraseña"/>
-                                    </p>
-                                    <p><button type="sumbit">Registrarse</button></p>
-                                </form>
-                                <div className="afterform">
-                                    <p>¿Ya tienes una cuenta?</p>
-                                    
-                                    {/*<a href="" className="t-login">Inicia Sesion</a>*/}
                                 </div>
                             </div>
                         </div>
