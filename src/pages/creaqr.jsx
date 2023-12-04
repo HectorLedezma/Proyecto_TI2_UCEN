@@ -22,7 +22,7 @@ function CreaQR(){
     const [QRv,setqr] = useState("");
 
     return(
-        <div>
+        <div className='bodyQR'>
             <div className="container">
                 <div className="wrapper">
                     <div className="login">
@@ -35,6 +35,12 @@ function CreaQR(){
                                             QR
                                         </h2>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="contentQR-form">
+                            <div className="y-style">
+                                <form action="">
                                     <div className="logo">
                                         <div className="userInput">
                                             <div className="userInputContent">
@@ -43,27 +49,19 @@ function CreaQR(){
                                                 </div>
                                                 <div className="InputSide centrado">
                                                     <input
-                                                        style={{
-                                                            backgroundColor:"#ffffff00"
-                                                        }}
+                                                        className="userInputText"
                                                         onChange={
                                                             ev => {
                                                                 ev.preventDefault();
                                                                 setqr(correo.current.value);
                                                             }
                                                         }
-                                                    ref={correo} className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                                    ref={correo} type="email" placeholder="Ingresa tu correo"/>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="content-form">
-                            <div className="y-style">
-                                <form action="">
-                                    <QRCode className='mgt-5em' value={traeUser(QRv)} size={280} bgColor="#002aff" fgColor="#fff" level="H" />
+                                    <QRCode className='' value={traeUser(QRv)} size={280} bgColor="#002aff" fgColor="#fff" level="H" />
                                 </form>
                             </div>
                         </div>
