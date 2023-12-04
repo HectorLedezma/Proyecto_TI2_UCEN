@@ -4,11 +4,16 @@ import LogoU from '../images/Logo UCEN_R.COQUIMBO_.png'
 import LogoCleta from '../images/QRcleta.png'
 //import Mail from '../images/mail.png'
 //import Pass from '../images/pass.png'
-import { Link, Outlet} from "react-router-dom";
+import { Link, Outlet, useNavigate} from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiShow, BiHide } from 'react-icons/bi'
 import CryptoJS from 'crypto-js';
 import Users from './users.json'
+
+//import { conexion } from "../ConectionSQL/read";
+
+
+
 
 function Login(){
     
@@ -41,30 +46,23 @@ function Login(){
         />
     );
 
-    const [Log,setLog] = useState('/')
     
+    const navigate = useNavigate();
+
     function verificar(mail,pass,obj){
-        let fin = '/';
-        let tokken = false;
         try{
             let Cpass = CryptoJS.SHA256(pass).toString();
-            console.log(pass+': '+Cpass)
+            
+            //let con = new conexion();
+
+            
             if(obj[mail].Pass === Cpass){
-                tokken = true;
-                fin = '/UserProf';
+                navigate("/UserProf")
             }else{
-                fin = '/';
-                tokken = false;
             }
         }catch(ex){
-            console.log('error: '+String(ex));
-            fin = '/';
-            tokken = false;
+            console.log('error en "Verificar()": '+String(ex));
         }
-        localStorage.setItem('Tokken',tokken);
-        console.log(fin)
-        console.log(localStorage.getItem('Tokken'))
-        return fin;
     }
     localStorage.setItem('Tokken',false);
     return(
@@ -92,25 +90,14 @@ function Login(){
                         <div className="content-form">
                             <div className="y-style">
                                 <h1>Bienvenido</h1>
-                                <form action="" 
-                                    onChange={
-                                        ev=>{
-                                            ev.preventDefault()
-                                            setLog(verificar(
-                                                mailRef.current.value,
-                                                passRef.current.value,
-                                                Users
-                                            ))
-                                        }
-                                    }
-                                >
+                                <form action="" >
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
                                                 <AiOutlineMail fontSize="30"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                                <input autoComplete="off" ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="Ingresa tu correo"/>
                                             </div>
                                         </div>
                                     </div>
@@ -132,12 +119,17 @@ function Login(){
                                         <input type="checkbox" id="remember"/>
                                         <label>Recuérdame</label>
                                     </p>
-                                    <p className="forgot">Recuperar contraseña</p>
-                                    <Link to={
-                                        Log
-                                    }>
-                                        <button id='BtnLogIn' className="Iniciar" type="sumbit">Iniciar sesión</button>
-                                    </Link>
+                                    <Link to='' className="forgot">Recuperar contraseña</Link>
+                                    <button onClick={
+                                        ev=>{
+                                            ev.preventDefault();
+                                            verificar(
+                                                mailRef.current.value,
+                                                passRef.current.value,
+                                                Users
+                                            )
+                                        }
+                                    } id='BtnLogIn' className="Iniciar" type="sumbit">Iniciar sesión</button>
                                 </form>
                                 <div className="afterform">
                                     <p>¿No tienes una cuenta?</p>

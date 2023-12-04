@@ -1,10 +1,11 @@
 import React, { useRef, useState } from "react";
 import "../styles/styleSignup.css";
-import { Link, Outlet} from "react-router-dom";
+import { Link, Outlet, useNavigate} from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiHide, BiShow, BiUser } from "react-icons/bi";
 import user from '../pages/users.json'
 import CryptoJS from 'crypto-js';
+
 
 function Signup(){
     const cambio = (ojo) => {
@@ -59,12 +60,11 @@ function Signup(){
     );
     localStorage.setItem('Tokken',false)
 
-    function revisa(nomb,apel,mail,pass,pess){
+    const navigate = useNavigate();
+
+    function Revisa(nomb,apel,mail,pass,pess){
         //chekear usuario
         const existe = mail in user;
-        if(existe){
-            alert('El usuario ya existe')
-        }
         //chekear pass
         const confir = revisapass(pass,pess);
         if(!existe && confir){
@@ -74,8 +74,18 @@ function Signup(){
                 "Pass":CryptoJS.SHA256(pass).toString(),
                 "Type":"0"
             }
-            alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito')
+            console.log(user[mail]);
+            alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
+            navigate("/");
+            
+            //console.log(his);
+
         }
+    }
+
+    function existeUs(mail){
+        const existe = mail in user;
+        return !existe;
     }
 
     function revisapass(pass1,pass2){
@@ -88,7 +98,11 @@ function Signup(){
     let passi1 = useRef();
     let passi2 = useRef();
 
-    let [samepass,setSamepass] = useState(true)
+    let [samepass,setSamepass] = useState(true);
+    let [newCorreo,SetNew] = useState(true);
+
+
+    
 
     return(
         <div id="page" className="site login-show">
@@ -133,13 +147,19 @@ function Signup(){
                                             </div>
                                         </div>
                                     </div>
+                                    <p className="badText" hidden={newCorreo}>Ese correo ya existe</p>
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
                                                 <AiOutlineMail fontSize='30'/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input ref={correo} className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                                <input onChange={
+                                                    ev=>{
+                                                        ev.preventDefault();
+                                                        SetNew(existeUs(correo.current.value));
+                                                    }
+                                                } ref={correo} className="userInputText" type="email" placeholder="Ingresa tu correo"/>
                                             </div>
                                         </div>
                                     </div>
@@ -172,13 +192,15 @@ function Signup(){
                                     <p className="badText" hidden={samepass}>las contraseñas no coinsiden</p>
                                     <button onClick={
                                         ev=>{
-                                            revisa(
+                                            ev.preventDefault();
+                                            Revisa(
                                                 nombre.current.value,
                                                 apelli.current.value,
                                                 correo.current.value,
                                                 passi1.current.value,
                                                 passi2.current.value
                                                 );
+
                                         }
                                     } className="Iniciar" type="sumbit">Crear cuenta</button>
                                 </form>
