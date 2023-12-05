@@ -10,7 +10,7 @@ import { BiShow, BiHide } from 'react-icons/bi'
 import CryptoJS from 'crypto-js';
 import Users from './users.json'
 
-//import { conexion } from "../ConectionSQL/read";
+import { conexion } from "../ConectionSQL/read";
 
 
 
@@ -53,13 +53,24 @@ function Login(){
         try{
             let Cpass = CryptoJS.SHA256(pass).toString();
             
-            //let con = new conexion();
+            let con = new conexion();
+
+            let dat = con.leer(mail);
+            dat.then(data => {
+                if(data[0].Mail === mail && data[0].Pass === Cpass){
+                    console.log('Correcto')
+                    navigate("/UserProf")
+                }else{
+                    console.log('Incorrecto')
+                }
+              })
+              .catch(error => {
+                console.error("Error al leer los datos:", error);
+              });
+            //console.log(dat)
 
             
-            if(obj[mail].Pass === Cpass){
-                navigate("/UserProf")
-            }else{
-            }
+            
         }catch(ex){
             console.log('error en "Verificar()": '+String(ex));
         }

@@ -136,6 +136,7 @@ form .check input{
 form .forgot {
     float: right;
     font-size: 12px;
+    cursor: pointer;
 }
 
 .content-form::before{
