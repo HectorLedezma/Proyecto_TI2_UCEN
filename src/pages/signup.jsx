@@ -68,13 +68,13 @@ function Signup(){
         //chekear pass
         const confir = revisapass(pass,pess);
         if(!existe && confir){
-            user[mail]={
+            let Nuser = {
+                "Mail":mail,
                 "Nombre":nomb,
                 "Apellido":apel,
                 "Pass":CryptoJS.SHA256(pass).toString(),
                 "Type":"0"
             }
-            console.log(user[mail]);
             alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
             navigate("/");
             

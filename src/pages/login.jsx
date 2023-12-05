@@ -11,6 +11,7 @@ import CryptoJS from 'crypto-js';
 import Users from './users.json'
 
 import { conexion } from "../ConectionSQL/read";
+import Heading from "./heading";
 
 
 
@@ -82,22 +83,14 @@ function Login(){
             <div className="container">
                 <div className="wrappr">
                     <div className="login">
-                        <div className="content-heading">
-                            <div className="y-style">
-                                <div className="logo">
-                                    <img className="ImgLogoU" src={LogoU} alt="Logo"></img>
-                                </div>
-                                <div className="welcome">
-                                    <h2>
-                                        Estacionamiento QR<br/> 
-                                        para bicicletas
-                                    </h2>
-                                </div>
-                                <div className="logo">
-                                    <img className="ImgLogoP" src={LogoCleta} alt="Logo"></img>
-                                </div>
-                            </div>
-                        </div>
+                        <Heading wel={
+                            (
+                                <h2 className="Titulo">
+                                    Estacionamiento QR<br/> 
+                                    para bicicletas
+                                </h2>
+                            )
+                        } logo1={LogoU} logo2={LogoCleta}/>
                         <div className="content-form">
                             <div className="y-style">
                                 <h1>Bienvenido</h1>
@@ -130,7 +123,7 @@ function Login(){
                                         <input type="checkbox" id="remember"/>
                                         <label>Recuérdame</label>
                                     </p>
-                                    <Link to='' className="forgot">Recuperar contraseña</Link>
+                                    <Link to='/recover' className="forgot">Recuperar contraseña</Link>
                                     <button onClick={
                                         ev=>{
                                             ev.preventDefault();
