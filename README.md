@@ -14,18 +14,18 @@ This is a responsive web app for the Sign Up service, where a user can register 
 * CSS
 * React Testing
 
-## To run this service in local / development environment
+## Para Levantar el servicio en local
 
-In the project directory, run:
+En la carpeta del proyecto, ejecuta:
 
-### `npm install`
-
-Installs all the dependencies that the project requires.
+### `npm install` 
+Eso instalará todas las dependencias que el proyecto requiere.
 
 ### `npm run start`
+Eso ejecuta el projecto en react.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+El proyecto se ejecuta en modo desarrollo en el sig enlace.\
+Abre [http://localhost:3000](http://localhost:3000) para verlo en tu navegador.
 
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
