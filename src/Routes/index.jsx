@@ -6,6 +6,7 @@ import Signup from '../pages/signup';
 import UserProfile from '../pages/user';
 import CreaQR from '../pages/creaqr';
 import Recupera from '../pages/recover';
+import Recuperado from '../pages/recoverOK';
 
 
 function Rutas(){
@@ -16,6 +17,7 @@ function Rutas(){
             <Route path='/UserProf' element={<UserProfile/>} />
             <Route path='/qrCode' element={<CreaQR/>} />
             <Route path='/recover' element={<Recupera/>} />
+            <Route path='/recoverOk' element={<Recuperado/>} />
         </Routes>
     )
 }

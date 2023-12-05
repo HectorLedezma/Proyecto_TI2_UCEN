@@ -8,6 +8,13 @@
 
 }
 
+.Mcolor{
+    color: var(--main-color);
+}
+.Dcolor{
+    color:var(--dark-color)
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -76,6 +83,29 @@ ul{
     display: flex;
     flex-direction: column;
 }
+
+.encabezado{
+    color: black;
+    font-weight: bolder;
+
+}
+
+.GoBack{
+    background-color:white;
+    color: var(--dark-color);
+    border-width: 2px;
+    border-style: groove;
+    border-color: var(--dark-color);
+    width: 15%;
+    margin-left: 42%;
+    border-radius: 100%;
+}
+
+.GoBack:hover{
+    background-color:var(--dark-color);
+    color: white;
+}
+
 .logo a{
     display: inline-block;
     font-size: 18px;
