@@ -9,11 +9,11 @@ export class conexion{
         this.uri = 'http://localhost:8000/base';
         this.blog = [];
     }
-    crear(){
+    crear(data){
 
     }
     async leer(mail){
-        console.log('buscando usuario: ',`${this.uri}/${mail}`)
+        console.log('buscando usuario: ',`${this.uri}/select/${mail}`)
         try{
             const res = await axios.get(`${this.uri}/select/${mail}`);
             this.blog = res.data;

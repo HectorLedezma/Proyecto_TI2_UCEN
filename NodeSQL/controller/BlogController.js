@@ -2,7 +2,8 @@ import BlogModel from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
     try{
-        blogs = await BlogModel.create(req.body);
+        console.log(req.body);
+        let blogs = await BlogModel.create(req.body);
         res.json({message:'Creado'});
     }catch(error){
         res.json({message:error.message})
@@ -34,7 +35,7 @@ export const ReadOne = async (req, res)=>{
 
 export const Update = async (req, res)=>{
     try{
-        blogs = await BlogModel.update(req.body,{
+        let blogs = await BlogModel.update(req.body,{
             where:{
                 'Mail':req.params.Mail
             }
@@ -47,7 +48,7 @@ export const Update = async (req, res)=>{
 
 export const Delete = async (req, res)=>{
     try{
-        blogs = await BlogModel.destroy({
+        let blogs = await BlogModel.destroy({
             where:{
                 'Mail':req.params.Mail
             }
