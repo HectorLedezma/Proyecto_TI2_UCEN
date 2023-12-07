@@ -1,26 +1,13 @@
-import {react, useRef, useState} from 'react';
+//import {useRef, useState} from 'react';
 import '../styles/styleSignup.css'
 import { Link, Outlet} from "react-router-dom";
-import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+//import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import QRCode from 'react-qr-code';
-import users from '../pages/users.json'
+//import users from '../pages/users.json'
 
-
-function traeUser(key){
-    let output = "";
-    if(key in users){
-        output = String('Bici de '+users[key].Nombre+' '+users[key].Apellido);
-    }else{
-        output = "www.google.cl"
-    }
-    return output;
-}
 
 function CreaQR(){
-    let correo = useRef();
-
-    const [QRv,setqr] = useState("");
-
+    
     return(
         <div className='bodyQR'>
             <div className="container">
@@ -42,26 +29,9 @@ function CreaQR(){
                             <div className="y-style">
                                 <form action="">
                                     <div className="logo">
-                                        <div className="userInput">
-                                            <div className="userInputContent">
-                                                <div className="IconSide centrado">
-                                                    <AiOutlineMail fontSize='30'/>
-                                                </div>
-                                                <div className="InputSide centrado">
-                                                    <input
-                                                        className="userInputText"
-                                                        onChange={
-                                                            ev => {
-                                                                ev.preventDefault();
-                                                                setqr(correo.current.value);
-                                                            }
-                                                        }
-                                                    ref={correo} type="email" placeholder="Ingresa tu correo"/>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
-                                    <QRCode className='' value={traeUser(QRv)} size={280} bgColor="#002aff" fgColor="#fff" level="H" />
+                                    <QRCode className='' value={sessionStorage.getItem('Mail')} size={280} bgColor="#002aff" fgColor="#fff" level="H" />
                                 </form>
                             </div>
                         </div>

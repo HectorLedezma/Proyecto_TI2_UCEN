@@ -61,6 +61,7 @@ function Login(){
                 if(data[0].Mail === mail && data[0].Pass === Cpass){
                     console.log('Correcto')
                     navigate("/UserProf")
+                    sessionStorage.setItem("Mail",data[0].Mail);
                 }else{
                     console.log('Incorrecto')
                 }
@@ -85,12 +86,14 @@ function Login(){
                     <div className="login">
                         <Heading wel={
                             (
-                                <h2 className="Titulo">
+                                <h2>
                                     Estacionamiento QR<br/> 
                                     para bicicletas
                                 </h2>
                             )
-                        } logo1={LogoU} logo2={LogoCleta}/>
+                        } 
+                        logo1={<img className="ImgLogoU" src={LogoU} alt="Logo"></img>} 
+                        logo2={<img className="ImgLogoU" src={LogoCleta} alt="Logo"></img>}/>
                         <div className="content-form">
                             <div className="y-style">
                                 <h1>Bienvenido</h1>
