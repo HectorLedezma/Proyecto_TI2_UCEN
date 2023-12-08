@@ -1,12 +1,17 @@
 import BlogModel from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
+    let op = {
+        raw:true,
+        silent:true,
+        fields:['Mail','Nombre','Apellido','Pass','Type']
+    };
     try{
-        console.log(req.body);
-        let blogs = await BlogModel.create(req.body);
+        await BlogModel.create(req.body,op);
         res.json({message:'Creado'});
     }catch(error){
         res.json({message:error.message})
+        //res.json()
     }
 }
 

@@ -5,6 +5,8 @@ import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiHide, BiShow, BiUser } from "react-icons/bi";
 import user from '../pages/users.json'
 import CryptoJS from 'crypto-js';
+import Heading from "./heading";
+import { conexion } from "../ConectionSQL/conexion";
 
 
 function Signup(){
@@ -63,8 +65,36 @@ function Signup(){
     const navigate = useNavigate();
 
     function Revisa(nomb,apel,mail,pass,pess){
+        let con = new conexion();
         //chekear usuario
-        const existe = mail in user;
+        con.leer('').then(data => {
+                //console.log(data)
+                let existe = false;
+                for(let i = 0; i < data.length; i++){
+                    if(data[i].Mail === mail){
+                        existe = true;
+                        break;
+                    }
+                }
+                console.log('Existe:'+String(existe));
+                const confir = revisapass(pass,pess);
+                if(!existe && confir){
+                    let Nuser = {
+                        "Mail":mail,
+                        "Nombre":nomb,
+                        "Apellido":apel,
+                        "Pass":CryptoJS.SHA256(pass).toString(),
+                        "Type":"0"
+                    }
+                    con.crear(Nuser);
+                    alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
+                    navigate("/");
+                }
+            })
+            .catch(error => {
+            console.error("Error al leer los datos:", error);
+        });
+        /*const existe = mail in user;
         //chekear pass
         const confir = revisapass(pass,pess);
         if(!existe && confir){
@@ -75,12 +105,15 @@ function Signup(){
                 "Pass":CryptoJS.SHA256(pass).toString(),
                 "Type":"0"
             }
+            
+            con.crear(Nuser);
             alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
             navigate("/");
             
             //console.log(his);
 
         }
+        */
     }
 
     function existeUs(mail){
@@ -109,21 +142,12 @@ function Signup(){
             <div className="container">
                 <div className="wrapper">
                     <div className="login">
-                        <div className="content-heading">
-                            <div className="y-style">
-                                <div className="welcome">
-                                    <div className="welcome">
-                                        <h2 className="Titulo">
-                                            Datos de<br/> 
-                                            la cuenta
-                                        </h2>
-                                    </div>
-                                    <div className="logo">
-                                        
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <Heading wel={
+                            (<h2 className="Titulo">
+                                Datos de<br/> 
+                                la cuenta
+                            </h2>)
+                        }/>
                         <div className="content-form">
                             <div className="y-style">
                                 <form action="">

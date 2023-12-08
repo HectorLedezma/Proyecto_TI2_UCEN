@@ -9,8 +9,8 @@ export class conexion{
         this.uri = 'http://localhost:8000/base';
         this.blog = [];
     }
-    crear(data){
-
+    async crear(data){
+        await axios.post(this.uri+'/create/',data);
     }
     async leer(mail){
         console.log('buscando usuario: ',`${this.uri}/select/${mail}`)

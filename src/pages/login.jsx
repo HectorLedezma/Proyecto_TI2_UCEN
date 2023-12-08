@@ -10,7 +10,7 @@ import { BiShow, BiHide } from 'react-icons/bi'
 import CryptoJS from 'crypto-js';
 import Users from './users.json'
 
-import { conexion } from "../ConectionSQL/read";
+import { conexion } from "../ConectionSQL/conexion";
 import Heading from "./heading";
 
 
@@ -50,7 +50,7 @@ function Login(){
     
     const navigate = useNavigate();
 
-    function verificar(mail,pass,obj){
+    function verificar(mail,pass){
         try{
             let Cpass = CryptoJS.SHA256(pass).toString();
             
@@ -58,6 +58,8 @@ function Login(){
 
             let dat = con.leer(mail);
             dat.then(data => {
+                console.log(data[0].Pass);
+                console.log(Cpass);
                 if(data[0].Mail === mail && data[0].Pass === Cpass){
                     console.log('Correcto')
                     navigate("/UserProf")
