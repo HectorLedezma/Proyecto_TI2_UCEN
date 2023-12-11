@@ -1,6 +1,11 @@
 import React, { useRef } from "react";
 import { useNavigate} from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
+import { MdPedalBike } from "react-icons/md";
+import { FaPaintbrush } from "react-icons/fa6";
+import Heading from "./heading";
+import { CiBarcode } from "react-icons/ci";
+import { LuSticker } from "react-icons/lu";
 
 const Sigbici = ({ onRegister }) => {
     const model = useRef(null);
@@ -15,53 +20,46 @@ return (
     <div className="container">
         <div className="wrapper">
         <div className="login">
-            <div className="content-heading">
-            <div className="y-style">
-                <div className="welcome">
-                    <h2 className="Titulo">
-                        Registrar <br/> 
-                        Bicicleta
-                    </h2>
-                    <div className="logo"></div>
-                </div>
-            </div>
-            </div>
+            <Heading
+                wel={
+                    (
+                        <h2 className="Titulo">
+                            Registrar <br/> 
+                            Bicicleta
+                        </h2>
+                    )
+                }
+                logo2={
+                    (
+                        <h2 className="welcome"><MdPedalBike size="150"/></h2>
+                    )
+                }
+            />
             <div className="content-form">
                 <div className="y-style">
                     <form action="">
                         <div className="userInput">
                             <div className="userInputContent">
                                 <div className="InputSide centrado">
-                        <input
-                            ref={model}
-                            className="userInputText"
-                            type="text"
-                            placeholder="Modelo"
-                        />
+                                    <MdPedalBike size="30"/>
+                                    <input
+                                        ref={model}
+                                        className="userInputText"
+                                        type="text"
+                                        placeholder="Modelo"
+                                    />
                                 </div>
                             </div>
                         </div>
             <div className="userInput">
                 <div className="userInputContent">
                     <div className="InputSide centrado">
+                        <FaPaintbrush size="30"/>
                         <input
                             ref={color}
                             className="userInputText"
-                            type="color"
+                            type="text"
                             placeholder="Color"
-                        />
-                    </div>
-                </div>
-            </div>
-
-            <div className="userInput">
-                <div className="userInputContent">
-                    <div className="InputSide centrado">
-                        <input
-                            ref={año}
-                            className="userInputText"
-                            type="date"
-                            placeholder="Año"
                         />
                     </div>
                 </div>
@@ -69,6 +67,7 @@ return (
                     <div className="userInput">
                         <div className="userInputContent">
                             <div className="InputSide centrado">
+                            <CiBarcode size={30}/>
                         <input
                             ref={serial}
                             className="userInputText"
@@ -78,10 +77,22 @@ return (
                             </div>
                         </div>
                     </div>
+                    <div className="userInput">
+                <div className="userInputContent">
+                    <div className="InputSide centrado">
+                        <LuSticker size={30}/>
+                        <textarea
+                            ref={año}
+                            className="userInputText"
+                            placeholder="Detalles"
+                        />
+                        </div>
+                    </div>
+                </div>
                     <button
                     onClick={(ev) => {
                         ev.preventDefault();
-                      // Revisa los valores de los campos y realiza las acciones necesarias
+                        console.log(color.current.value);
                         console.log("Formulario enviado");
                     }}
                     className="Guardar"

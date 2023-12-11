@@ -220,6 +220,7 @@ form .forgot {
     font-weight: bold;
     font-size: large;
     border: 0px solid var(--light-color);
+    background-color: #efefef00;
 }
 
 .userInputIcon{
