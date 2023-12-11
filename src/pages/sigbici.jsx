@@ -6,12 +6,13 @@ import { FaPaintbrush } from "react-icons/fa6";
 import Heading from "./heading";
 import { CiBarcode } from "react-icons/ci";
 import { LuSticker } from "react-icons/lu";
+import "../styles/styleSigbici.css"
 
 const Sigbici = ({ onRegister }) => {
     const model = useRef(null);
     const color = useRef(null);
-    const año = useRef(null);
     const serial = useRef(null);
+    const detalle = useRef(null);
     const navigate = useNavigate();
 
 
@@ -46,7 +47,7 @@ return (
                                         ref={model}
                                         className="userInputText"
                                         type="text"
-                                        placeholder="Modelo"
+                                        placeholder="  Modelo "
                                     />
                                 </div>
                             </div>
@@ -59,7 +60,7 @@ return (
                             ref={color}
                             className="userInputText"
                             type="text"
-                            placeholder="Color"
+                            placeholder="  Color "
                         />
                     </div>
                 </div>
@@ -72,7 +73,7 @@ return (
                             ref={serial}
                             className="userInputText"
                             type="text"
-                            placeholder="codigo de serie"
+                            placeholder="  Codigo de Serie "
                         />
                             </div>
                         </div>
@@ -82,9 +83,10 @@ return (
                     <div className="InputSide centrado">
                         <LuSticker size={30}/>
                         <textarea
-                            ref={año}
+                            ref={detalle}
                             className="userInputText"
-                            placeholder="Detalles"
+                            placeholder="  Detalles "
+                            style={{ fontFamily: 'poppins, sans-serif', fontSize: '16px' }}
                         />
                         </div>
                     </div>
