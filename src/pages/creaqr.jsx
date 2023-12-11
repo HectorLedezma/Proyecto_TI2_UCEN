@@ -31,7 +31,7 @@ function CreaQR(){
                                     <div className="logo">
                                         
                                     </div>
-                                    <QRCode className='' value={sessionStorage.getItem('Mail')} size={280} bgColor="#002aff" fgColor="#fff" level="H" />
+                                    <QRCode className='' value={sessionStorage.getItem('Rut')} size={280} bgColor="#002aff" fgColor="#fff" level="H" />
                                 </form>
                             </div>
                         </div>

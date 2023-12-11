@@ -4,7 +4,7 @@ import {Create, ReadOne, ReadAll,Update,Delete} from '../controller/BlogControll
 const router = express.Router();
 
 router.post('/create/',Create)
-router.get('/select/:Mail',ReadOne);
+router.get('/select/:rut',ReadOne);
 router.get('/select',ReadAll);
 router.put('/update',Update);
 router.delete('/delete',Delete);

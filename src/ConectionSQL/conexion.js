@@ -10,7 +10,13 @@ export class conexion{
         this.blog = [];
     }
     async crear(data){
-        await axios.post(this.uri+'/create/',data);
+        console.log(data)
+        try {
+            await axios.post(this.uri+'/create/',data);
+        } catch (error) {
+            console.log(error);
+        }
+        
     }
     async leer(mail){
         console.log('buscando usuario: ',`${this.uri}/select/${mail}`)

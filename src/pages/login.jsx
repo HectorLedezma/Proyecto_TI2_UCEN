@@ -13,7 +13,44 @@ import Users from './users.json'
 import { conexion } from "../ConectionSQL/conexion";
 import Heading from "./heading";
 
-
+function validaRut(rut){
+    let ok = false;
+    let spg = rut.replace(/[.-]/g, '');
+    let snd = spg.slice(0, -1);
+    let r_u_t = snd.split("")
+    let t_u_r = r_u_t.reverse();
+    let tur = t_u_r.join("");
+    
+    let multi = 2;
+    let sum = 0;
+    for(let i = 0;i<tur.length;i++){
+        if(multi > 7){
+            multi = 2;
+        }
+        //console.log(tur[i]);
+        sum = sum+parseInt(tur[i]*multi);
+        multi = multi+1;
+    }
+    
+    let dv = 11-(sum%11);
+    let dvu = rut[rut.length-1];
+    if(dvu === 'k' || dvu === 'K'){
+        dvu = dvu.toUpperCase();
+    }
+    //console.log('dvu: ',dvu);
+    if(dv===11){
+        dv = "0";
+    }else if(dv === 10){
+        dv="K";
+    }
+    //console.log('dv: ',dv);
+    if(String(dv) === dvu){
+        ok = true;
+    }else{
+        ok = false
+    }
+    return ok;
+}
 
 
 function Login(){
@@ -58,12 +95,12 @@ function Login(){
 
             let dat = con.leer(mail);
             dat.then(data => {
-                console.log(data[0].Pass);
-                console.log(Cpass);
-                if(data[0].Mail === mail && data[0].Pass === Cpass){
+                //console.log(data[0].Pass);
+                console.log(data[0]);
+                if(data[0].rut === mail && data[0].clave === Cpass){
                     console.log('Correcto')
+                    sessionStorage.setItem("Rut",data[0].rut);
                     navigate("/UserProf")
-                    sessionStorage.setItem("Mail",data[0].Mail);
                 }else{
                     console.log('Incorrecto')
                 }
@@ -79,7 +116,9 @@ function Login(){
             console.log('error en "Verificar()": '+String(ex));
         }
     }
-    localStorage.setItem('Tokken',false);
+    
+    const [rut,SetRut] = useState(false);
+
     return(
         <div id="page" className="site login-show">
             
@@ -100,16 +139,23 @@ function Login(){
                             <div className="y-style">
                                 <h1>Bienvenido</h1>
                                 <form action="" >
+                                    <p className="badText" hidden={rut}>Ingrede un rut valido</p>
                                     <div className="userInput">
-                                        <div className="userInputContent">
+                                        <div className="userInputContent" onChange={
+                                            ev=>{
+                                                ev.preventDefault();
+                                                SetRut(validaRut(mailRef.current.value))
+                                            }
+                                        }>
                                             <div className="IconSide centrado">
                                                 <AiOutlineMail fontSize="30"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input autoComplete="off" ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                                <input autoComplete="off" ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="Ingresa tu RUT"/>
                                             </div>
                                         </div>
                                     </div>
+                                    
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
@@ -132,11 +178,13 @@ function Login(){
                                     <button onClick={
                                         ev=>{
                                             ev.preventDefault();
-                                            verificar(
-                                                mailRef.current.value,
-                                                passRef.current.value,
-                                                Users
-                                            )
+                                            if(rut){
+                                                verificar(
+                                                    mailRef.current.value,
+                                                    passRef.current.value,
+                                                    Users
+                                                )
+                                            }
                                         }
                                     } id='BtnLogIn' className="Iniciar" type="sumbit">Iniciar sesión</button>
                                 </form>

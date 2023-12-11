@@ -1,13 +1,13 @@
-import BlogModel from "../models/BlogModels.js";
+import {UserModel} from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
     let op = {
         raw:true,
         silent:true,
-        fields:['Mail','Nombre','Apellido','Pass','Type']
+        fields:['rut','nombre','apellido','fono','correo','estado','clave']
     };
     try{
-        await BlogModel.create(req.body,op);
+        await UserModel.create(req.body,op);
         res.json({message:'Creado'});
     }catch(error){
         res.json({message:error.message})
@@ -17,7 +17,7 @@ export const Create = async (req, res)=>{
 
 export const ReadAll = async (req, res)=>{
     try{
-        let blogs = await BlogModel.findAll({attributes:['Mail']});
+        let blogs = await UserModel.findAll({attributes:['rut']});
         res.json(blogs);
     }catch(error){
         res.json({message:error.message})
@@ -26,10 +26,10 @@ export const ReadAll = async (req, res)=>{
 
 export const ReadOne = async (req, res)=>{
     try{
-        let blogs = await BlogModel.findAll({
-            attributes:['Mail','Nombre','Apellido','Pass','Type'],
+        let blogs = await UserModel.findAll({
+            attributes:['rut','nombre','apellido','fono','correo','estado','clave'],
             where:{
-                'Mail':req.params.Mail
+                'rut':req.params.rut
             }
         });
         res.json(blogs);
@@ -40,7 +40,7 @@ export const ReadOne = async (req, res)=>{
 
 export const Update = async (req, res)=>{
     try{
-        let blogs = await BlogModel.update(req.body,{
+        let blogs = await UserModel.update(req.body,{
             where:{
                 'Mail':req.params.Mail
             }
@@ -53,7 +53,7 @@ export const Update = async (req, res)=>{
 
 export const Delete = async (req, res)=>{
     try{
-        let blogs = await BlogModel.destroy({
+        let blogs = await UserModel.destroy({
             where:{
                 'Mail':req.params.Mail
             }

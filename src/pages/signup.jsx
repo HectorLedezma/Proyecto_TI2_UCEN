@@ -7,7 +7,7 @@ import user from '../pages/users.json'
 import CryptoJS from 'crypto-js';
 import Heading from "./heading";
 import { conexion } from "../ConectionSQL/conexion";
-
+import { FaPhoneAlt } from "react-icons/fa";
 
 function Signup(){
     const cambio = (ojo) => {
@@ -60,35 +60,77 @@ function Signup(){
             onClick={()=>cambio2(eye.type.name)}
         />
     );
-    localStorage.setItem('Tokken',false)
 
     const navigate = useNavigate();
 
-    function Revisa(nomb,apel,mail,pass,pess){
+    function validaRut(rut){
+        let ok = false;
+        let spg = rut.replace(/[.-]/g, '');
+        let snd = spg.slice(0, -1);
+        let r_u_t = snd.split("")
+        let t_u_r = r_u_t.reverse();
+        let tur = t_u_r.join("");
+        
+        let multi = 2;
+        let sum = 0;
+        for(let i = 0;i<tur.length;i++){
+            if(multi > 7){
+                multi = 2;
+            }
+            //console.log(tur[i]);
+            sum = sum+parseInt(tur[i]*multi);
+            multi = multi+1;
+        }
+        
+        let dv = 11-(sum%11);
+        let dvu = rut[rut.length-1];
+        if(dvu === 'k' || dvu === 'K'){
+            dvu = dvu.toUpperCase();
+        }
+        //console.log('dvu: ',dvu);
+        if(dv===11){
+            dv = "0";
+        }else if(dv === 10){
+            dv="K";
+        }
+        //console.log('dv: ',dv);
+        if(String(dv) === dvu){
+            ok = true;
+        }else{
+            ok = false
+        }
+        return ok;
+    }
+    
+
+    function Revisa(rut,nomb,apel,fono,mail,pass,pess){
         let con = new conexion();
         //chekear usuario
         con.leer('').then(data => {
                 //console.log(data)
                 let existe = false;
                 for(let i = 0; i < data.length; i++){
-                    if(data[i].Mail === mail){
+                    //console.log(data[i].rut);
+                    if(data[i].rut === rut){
                         existe = true;
                         break;
                     }
                 }
-                console.log('Existe:'+String(existe));
+                //console.log('Existe:'+String(existe));
                 const confir = revisapass(pass,pess);
                 if(!existe && confir){
                     let Nuser = {
-                        "Mail":mail,
-                        "Nombre":nomb,
-                        "Apellido":apel,
-                        "Pass":CryptoJS.SHA256(pass).toString(),
-                        "Type":"0"
-                    }
+                        "rut": rut,
+                        "nombre":nomb,
+                        "apellido":apel,
+                        "fono": parseInt(fono),//ese tiene que ser String, no Int
+                        "correo":mail,
+                        "estado": 0,
+                        "clave":CryptoJS.SHA256(pass).toString()
+                      }
                     con.crear(Nuser);
                     alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
-                    navigate("/");
+                    navigate("/");  
                 }
             })
             .catch(error => {
@@ -125,8 +167,10 @@ function Signup(){
         return pass1 === pass2;
     }
 
+    let numrut = useRef();
     let nombre = useRef();
     let apelli = useRef();
+    let nofono = useRef();
     let correo = useRef();
     let passi1 = useRef();
     let passi2 = useRef();
@@ -136,7 +180,7 @@ function Signup(){
 
 
     
-
+    const [rut,SetRut] = useState(false);
     return(
         <div id="page" className="site login-show">
             <div className="container">
@@ -151,6 +195,22 @@ function Signup(){
                         <div className="content-form">
                             <div className="y-style">
                                 <form action="">
+                                    <p className="badText" hidden={rut}>Ingrede un rut valido</p>
+                                    <div className="userInput" onChange={
+                                            ev=>{
+                                                ev.preventDefault();
+                                                SetRut(validaRut(numrut.current.value))
+                                            }
+                                        }>
+                                        <div className="userInputContent">
+                                            <div className="IconSide centrado">
+                                                <BiUser fontSize='30'/>
+                                            </div>
+                                            <div className="InputSide centrado">
+                                                <input ref={numrut} className="userInputText" type="text" placeholder="Ingresa tu RUT"/>
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
@@ -168,6 +228,16 @@ function Signup(){
                                             </div>
                                             <div className="InputSide centrado">
                                                 <input ref={apelli} className="userInputText" type="text" placeholder="Ingresa tu apellido"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="userInput">
+                                        <div className="userInputContent">
+                                            <div className="IconSide centrado">
+                                                <FaPhoneAlt fontSize='30'/>
+                                            </div>
+                                            <div className="InputSide centrado">
+                                                <input ref={nofono} className="userInputText" type="text" placeholder="Ingresa tu N° de telefono"/>
                                             </div>
                                         </div>
                                     </div>
@@ -218,8 +288,10 @@ function Signup(){
                                         ev=>{
                                             ev.preventDefault();
                                             Revisa(
+                                                numrut.current.value,
                                                 nombre.current.value,
                                                 apelli.current.value,
+                                                nofono.current.value,
                                                 correo.current.value,
                                                 passi1.current.value,
                                                 passi2.current.value
