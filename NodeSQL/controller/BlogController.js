@@ -1,4 +1,4 @@
-import {UserModel} from "../models/BlogModels.js";
+import {UserModel, BikeModel} from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
     let op = {
@@ -14,6 +14,22 @@ export const Create = async (req, res)=>{
         //res.json()
     }
 }
+
+export const CreateBike = async (req, res)=>{
+    let op = {
+        raw:true,
+        silent:true,
+        fields:['id_t','marca','modelo','color','tipo','rut_e']
+    };
+    try{
+        await BikeModel.create(req.body,op);
+        res.json({message:'Creado'});
+    }catch(error){
+        res.json({message:error.message})
+        //res.json()
+    }
+}
+
 
 export const ReadAll = async (req, res)=>{
     try{
