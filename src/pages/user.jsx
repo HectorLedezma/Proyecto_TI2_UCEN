@@ -8,8 +8,19 @@ import UserMenu from './UserMenu';
 
 function UserProfile() {
     const navigate = useNavigate();
-    const userData = {
-    };
+
+    function traeData(){
+        let con = new conexion();
+        con.leer(sessionStorage.getItem('Rut')).then(
+            data => {
+                //console.log(data);
+                
+                return (<UserMenu userData={data}/>)
+            }       
+        ).catch(error => {
+            console.error("Error al leer los datos:", error);
+          });
+    }
 
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
@@ -60,7 +71,9 @@ function UserProfile() {
                                 <div>
                                 <h1>Perfil de Usuario</h1>
                                 {/* Contenido del perfil del usuario */}
-                                    <UserMenu userData={userData} />
+                                    {
+                                        traeData
+                                    }
                                 </div>
                             )
                         } 
