@@ -39,7 +39,7 @@ function Recupera(){
                                     </h2>
                                     <form action="" >
                                         <h2 className='encabezado'>
-                                            Solo inrgesa tu correo
+                                            Solo ingresa tu correo
                                         </h2>
                                         <div className="userInput">
                                             <div className="userInputContent">
@@ -47,7 +47,7 @@ function Recupera(){
                                                     <AiOutlineMail fontSize="30"/>
                                                 </div>
                                                 <div className="InputSide centrado">
-                                                    <input autoComplete="off" ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                                    <input autoComplete="off" ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="  Ingresa tu correo"/>
                                                 </div>
                                             </div>
                                         </div>

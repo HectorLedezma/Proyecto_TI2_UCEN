@@ -8,6 +8,7 @@ import CryptoJS from 'crypto-js';
 import Heading from "./heading";
 import { conexion } from "../ConectionSQL/conexion";
 import { FaPhoneAlt,FaUniversity } from "react-icons/fa";
+import { FaUserGraduate } from "react-icons/fa";
 
 function Signup(){
     const cambio = (ojo) => {
@@ -186,16 +187,25 @@ function Signup(){
             <div className="container">
                 <div className="wrapper">
                     <div className="login">
-                        <Heading wel={
-                            (<h2 className="Titulo">
-                                Datos de<br/> 
-                                la cuenta
-                            </h2>)
-                        }/>
+                        <Heading   
+                            wel={
+                            (   
+                                <h2 className="Titulo">
+                                    Datos de<br/> 
+                                    la cuenta
+                                </h2>
+                            )
+                        }
+                        logo2={
+                            (
+                                <h2 className="welcome"><FaUserGraduate size="150" /></h2>
+                            )
+                        }
+                        />    
                         <div className="content-form">
                             <div className="y-style">
                                 <form action="">
-                                    <p className="badText" hidden={rut}>Ingrede un rut valido</p>
+                                    <p className="badText" hidden={rut}>Ingrese un rut valido</p>
                                     <div className="userInput" onChange={
                                             ev=>{
                                                 ev.preventDefault();
@@ -204,40 +214,40 @@ function Signup(){
                                         }>
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <BiUser fontSize='30'/>
+                                                <BiUser fontSize='25'/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input ref={numrut} className="userInputText" type="text" placeholder="Ingresa tu RUT"/>
+                                                <input ref={numrut} className="userInputText" type="text" placeholder=" Ingresa tu RUT"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <BiUser fontSize='30'/>
+                                                <BiUser fontSize='25'/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input ref={nombre} className="userInputText" type="text" placeholder="Ingresa tu nombre"/>
+                                                <input ref={nombre} className="userInputText" type="text" placeholder=" Ingresa tu nombre"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <BiUser fontSize='30'/>
+                                                <BiUser fontSize='25'/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input ref={apelli} className="userInputText" type="text" placeholder="Ingresa tu apellido"/>
+                                                <input ref={apelli} className="userInputText" type="text" placeholder=" Ingresa tu apellido"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <FaPhoneAlt fontSize='30'/>
+                                                <FaPhoneAlt fontSize='20'/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input ref={nofono} className="userInputText" type="text" placeholder="Ingresa tu N° de telefono"/>
+                                                <input ref={nofono} className="userInputText" type="text" placeholder=" Ingresa tu N° de telefono"/>
                                             </div>
                                         </div>
                                     </div>
@@ -245,7 +255,7 @@ function Signup(){
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <AiOutlineMail fontSize='30'/>
+                                                <AiOutlineMail fontSize='25'/>
                                             </div>
                                             <div className="InputSide centrado">
                                                 <input onChange={
@@ -253,17 +263,17 @@ function Signup(){
                                                         ev.preventDefault();
                                                         SetNew(existeUs(correo.current.value));
                                                     }
-                                                } ref={correo} className="userInputText" type="email" placeholder="Ingresa tu correo"/>
+                                                } ref={correo} className="userInputText" type="email" placeholder=" Ingresa tu correo"/>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <AiOutlineLock fontSize="30"/>
+                                                <AiOutlineLock fontSize="25"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input ref={passi1} className="userInputText" type={pass} placeholder="Ingresa tu contraseña"/>
+                                                <input ref={passi1} className="userInputText" type={pass} placeholder=" Ingresa tu contraseña"/>
                                             </div>
                                             <div className="IconSide centrado">
                                                 {eye}
@@ -273,10 +283,10 @@ function Signup(){
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <AiOutlineLock fontSize="30"/>
+                                                <AiOutlineLock fontSize="25"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input onChange={ev=>{setSamepass(revisapass(passi1.current.value,passi2.current.value))}} ref={passi2} className="userInputText" type={pass2} placeholder="Repite tu contraseña"/>
+                                                <input onChange={ev=>{setSamepass(revisapass(passi1.current.value,passi2.current.value))}} ref={passi2} className="userInputText" type={pass2} placeholder=" Repite tu contraseña"/>
                                             </div>
                                             <div className="IconSide centrado">
                                                 {eye2}
@@ -286,7 +296,7 @@ function Signup(){
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <FaUniversity fontSize='30'/>
+                                                <FaUniversity fontSize='25'/>
                                             </div>
                                             <div className="InputSide centrado">
                                                 <input onChange={
@@ -294,7 +304,7 @@ function Signup(){
                                                         ev.preventDefault();
                                                         SetNew(existeUs(correo.current.value));
                                                     }
-                                                } ref={correo} className="userInputText" type="email" placeholder="Ingresa tu carrera"/>
+                                                } ref={correo} className="userInputText" type="email" placeholder=" Ingresa tu carrera"/>
                                             </div>
                                         </div>
                                     </div>
