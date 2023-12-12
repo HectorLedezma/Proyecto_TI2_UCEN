@@ -47,7 +47,8 @@ function UserProfile(){
     const [claseH,setClaseH] = useState(inicio)
     //console.log(localStorage.getItem('Tokken'))
     try {
-        if(sessionStorage.getItem('Rut') !== ''){
+        console.log('RUT: ',sessionStorage.getItem('Rut'));
+        if(sessionStorage.getItem('Rut') !== null){
             return(
                 <div id="page" className="site login-show">
                     <div className="container">
