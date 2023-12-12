@@ -29,6 +29,7 @@
     "stream": "^0.0.2",
     "timers": "^0.1.1",
     "tls": "^0.0.1",
+    "universal-cookie": "^6.1.1",
     "url": "^0.11.3",
     "web-vitals": "^2.1.4"
   },

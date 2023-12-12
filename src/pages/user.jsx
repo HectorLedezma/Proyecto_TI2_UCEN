@@ -10,10 +10,12 @@ import { IoSchoolOutline } from "react-icons/io5";
 import { TbWorldHeart } from "react-icons/tb";
 import { TbCalendarTime } from "react-icons/tb";
 import { FaUniversity } from "react-icons/fa";
+import Cookies from 'universal-cookie';
+import { MdPedalBike } from 'react-icons/md';
 
 function UserProfile() {
     const navigate = useNavigate();
-
+    let cock = new Cookies();
     return(
         <div id="page" className="site login-show">
             
@@ -25,7 +27,7 @@ function UserProfile() {
                                 <div>
                                 <h1>Perfil de<br/>Usuario</h1>
                                     {/* Contenido del perfil del usuario */}
-                                    <UserMenu userData={JSON.parse(sessionStorage.getItem('dataUser'))}/>
+                                    <UserMenu userData={cock.get("Datos")}/>
                                 </div>
                             )
                         } 
@@ -34,14 +36,18 @@ function UserProfile() {
                         <div className="content-form">
                             <div className="y-style">
                                 {/*Espacio para componentes */}
-                                <form action="" >
-                                    {/*Espacio para Inputs */}
-                                </form>
-                                {/*Espacio para componentes */}
                                 <div className="afterform">
                                 <div className='welcome'>
-
+                                <button onClick={
+                                                ev=>{
+                                                    ev.preventDefault();
+                                                    console.log('PRess')
+                                                }
+                                            } id='BtnLogIn' className="centrado Iniciar InputSide izq">
+                                                <MdPedalBike size={25} style={{ margin: '10px' }}/> Ver bicis
+                                            </button>
                                 <div className="linksContainer">
+                                    
                                     <div className='userInput'>
                                         <div className="userInputContent">
                                             <div className="InputSide centrado">
@@ -50,6 +56,7 @@ function UserProfile() {
                                                 href="https://aula2023.ucentral.cl/"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
+                                                className='fill izq'
                                             >
                                                 Aula Virtual Ucen 2023
                                             </a>
@@ -64,6 +71,7 @@ function UserProfile() {
                                         href="https://miucen.ucentral.cl/"
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        className='fill izq'
                                         >
                                         Portal Ucen
                                         </a>
@@ -78,6 +86,7 @@ function UserProfile() {
                                         href="http://servicios.ucentral.cl/horarioAlumno/"
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        className='fill izq'
                                         >
                                         Horario Alumnos Ucen
                                         </a>
@@ -92,6 +101,7 @@ function UserProfile() {
                                         href="https://www.ucentral.cl/"
                                         target="_blank"
                                         rel="noopener noreferrer"
+                                        className='fill izq'
                                         >
                                         Pagina Oficial Universidad Central
                                         </a>
@@ -105,7 +115,7 @@ function UserProfile() {
                                                 ev=>{
                                                     /*Boton para volver*/
                                                     ev.preventDefault();
-                                                    sessionStorage.clear();
+                                                    cock.remove('Datos');
                                                     navigate('/');//eso redirige a la ruta especificada
                                                 }
                                             }

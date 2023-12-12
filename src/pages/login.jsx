@@ -11,6 +11,8 @@ import CryptoJS from 'crypto-js';
 import Users from './users.json'
 
 import { conexion } from "../ConectionSQL/conexion";
+import Cookies from "universal-cookie";
+
 import Heading from "./heading";
 
 function validaRut(rut){
@@ -99,10 +101,9 @@ function Login(){
                 console.log(data[0]);
                 if(data[0].rut === mail && data[0].clave === Cpass){
                     console.log('Correcto')
-                    sessionStorage.setItem("Rut",data[0].rut);
-                    let datos = JSON.stringify(data[0]);
-                    console.log(datos);
-                    sessionStorage.setItem("dataUser",datos);
+                    //let datos = JSON.stringify(data[0]);
+                    let cock = new Cookies();
+                    cock.set('Datos',data[0],{path:'/'})
                     navigate("/UserProf")
                 }else{
                     console.log('Incorrecto')
@@ -190,8 +191,8 @@ function Login(){
                                             }
                                         }
                                     } id='BtnLogIn' className="Iniciar" type="submit">
-                                    <Link to='/UserProf'>Iniciar Sesión</Link>
-                                </button>
+                                        Iniciar Sesión
+                                    </button>
                                 </form>
                                 <div className="afterform">
                                     <p>¿No tienes una cuenta?</p>
