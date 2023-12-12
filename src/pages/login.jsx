@@ -186,7 +186,9 @@ function Login(){
                                                 )
                                             }
                                         }
-                                    } id='BtnLogIn' className="Iniciar" type="sumbit">Iniciar sesión</button>
+                                    } id='BtnLogIn' className="Iniciar" type="submit">
+                                    <Link to='/UserProf'>Iniciar Sesión</Link>
+                                </button>
                                 </form>
                                 <div className="afterform">
                                     <p>¿No tienes una cuenta?</p>

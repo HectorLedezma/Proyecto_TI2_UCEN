@@ -4,8 +4,12 @@ import { conexion } from "../ConectionSQL/conexion";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Heading from "./heading";
 import '../styles/profile.css'
-function UserProfile(){
+import UserMenu from './UserMenu';
+
+function UserProfile() {
     const navigate = useNavigate();
+    const userData = {
+    };
 
     const [windowSize, setWindowSize] = useState({
         width: window.innerWidth,
@@ -14,20 +18,20 @@ function UserProfile(){
 
     const handleResize = () => {
         setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
+            width: window.innerWidth,
+            height: window.innerHeight,
         });
-      };
+    };
 
-      useEffect(() => {
+    useEffect(() => {
         // Suscribirse al evento de cambio de tamaño de la ventana
         window.addEventListener('resize', handleResize);
     
         // Limpiar la suscripción al desmontar el componente
         return () => {
-          window.removeEventListener('resize', handleResize);
+        window.removeEventListener('resize', handleResize);
         };
-      }, []);
+    }, []);
 
 
     const responsivo = (w,h,donde) => {
@@ -54,10 +58,11 @@ function UserProfile(){
                     <div className="login">
                         <Heading wel={
                             (
-                                <h2>
-                                    Hola<br/> 
-                                    {"[Nombre de usuario]"}
-                                </h2>
+                                <div>
+                                <h1>Perfil de Usuario</h1>
+                                {/* Contenido del perfil del usuario */}
+                                    <UserMenu userData={userData} />
+                                </div>
                             )
                         } 
                         logo1={<div/>} 
