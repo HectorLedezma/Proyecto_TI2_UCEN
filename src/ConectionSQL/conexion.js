@@ -18,6 +18,17 @@ export class conexion{
         }
         
     }
+
+    async crearB(data){
+        console.log(data)
+        try {
+            await axios.post(this.uri+'/createB/',data);
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
+
     async leer(mail){
         console.log('buscando usuario: ',`${this.uri}/select/${mail}`)
         try{

@@ -7,7 +7,7 @@ import user from '../pages/users.json'
 import CryptoJS from 'crypto-js';
 import Heading from "./heading";
 import { conexion } from "../ConectionSQL/conexion";
-import { FaPhoneAlt } from "react-icons/fa";
+import { FaPhoneAlt,FaUniversity } from "react-icons/fa";
 
 function Signup(){
     const cambio = (ojo) => {
@@ -180,7 +180,7 @@ function Signup(){
 
 
     
-    const [rut,SetRut] = useState(false);
+    const [rut,SetRut] = useState(true);
     return(
         <div id="page" className="site login-show">
             <div className="container">
@@ -280,6 +280,21 @@ function Signup(){
                                             </div>
                                             <div className="IconSide centrado">
                                                 {eye2}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="userInput">
+                                        <div className="userInputContent">
+                                            <div className="IconSide centrado">
+                                                <FaUniversity fontSize='30'/>
+                                            </div>
+                                            <div className="InputSide centrado">
+                                                <input onChange={
+                                                    ev=>{
+                                                        ev.preventDefault();
+                                                        SetNew(existeUs(correo.current.value));
+                                                    }
+                                                } ref={correo} className="userInputText" type="email" placeholder="Ingresa tu carrera"/>
                                             </div>
                                         </div>
                                     </div>

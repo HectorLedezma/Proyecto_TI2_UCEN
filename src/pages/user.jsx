@@ -18,8 +18,8 @@ function UserProfile() {
 
     const handleResize = () => {
         setWindowSize({
-            width: window.innerWidth,
-            height: window.innerHeight,
+        width: window.innerWidth,
+        height: window.innerHeight,
         });
     };
 
@@ -29,7 +29,7 @@ function UserProfile() {
     
         // Limpiar la suscripción al desmontar el componente
         return () => {
-        window.removeEventListener('resize', handleResize);
+            window.removeEventListener('resize', handleResize);
         };
     }, []);
 
@@ -52,7 +52,6 @@ function UserProfile() {
     //console.log(localStorage.getItem('Tokken'))
     return(
         <div id="page" className="site login-show">
-            
             <div className="container">
                 <div className="wrappr">
                     <div className="login">
@@ -100,6 +99,7 @@ function UserProfile() {
             <Outlet/>
         </div>
     );
+    
 }
 
 export default UserProfile;
