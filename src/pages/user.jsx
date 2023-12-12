@@ -46,55 +46,63 @@ function UserProfile(){
     const inicio = responsivo(windowSize.width,windowSize.height,'useState');
     const [claseH,setClaseH] = useState(inicio)
     //console.log(localStorage.getItem('Tokken'))
-    return(
-        <div id="page" className="site login-show">
-            
-            <div className="container">
-                <div className="wrappr">
-                    <div className="login">
-                        <Heading wel={
-                            (
-                                <h2>
-                                    Hola<br/> 
-                                    {"[Nombre de usuario]"}
-                                </h2>
-                            )
-                        } 
-                        logo1={<div/>} 
-                        logo2={<div/>}/>
-                        <div className="content-form">
-                            <div className="y-style">
-                                {/*Espacio para componentes */}
-                                <form action="" >
-                                    {/*Espacio para Inputs */}
-                                </form>
-                                {/*Espacio para componentes */}
-                                <div className="afterform">
-                                <div className='welcome'>
-                                        
-                                        <button 
-                                            onClick={
-                                                ev=>{
-                                                    /*Boton para volver*/
-                                                    ev.preventDefault();
-                                                    navigate('/');//eso redirige a la ruta especificada
-                                                }
-                                            }
-                                            onMouseOver={(e) => e.target.title = 'Volver'} 
-                                        id='BtnLogIn' className="GoBack centrado" type="sumbit">
-                                            <IoMdArrowRoundBack size={60}/>
-                                        </button>
+    try {
+        if(sessionStorage.getItem('Rut') !== ''){
+            return(
+                <div id="page" className="site login-show">
+                    <div className="container">
+                        <div className="wrappr">
+                            <div className="login">
+                                <Heading wel={
+                                    (
+                                        <h2>
+                                            Hola<br/> 
+                                            {"[Nombre de usuario]"}
+                                        </h2>
+                                    )
+                                } 
+                                logo1={<div/>} 
+                                logo2={<div/>}/>
+                                <div className="content-form">
+                                    <div className="y-style">
+                                        {/*Espacio para componentes */}
+                                        <form action="" >
+                                            {/*Espacio para Inputs */}
+                                        </form>
+                                        {/*Espacio para componentes */}
+                                        <div className="afterform">
+                                        <div className='welcome'>
+                                                
+                                                <button 
+                                                    onClick={
+                                                        ev=>{
+                                                            /*Boton para volver*/
+                                                            ev.preventDefault();
+                                                            navigate('/');//eso redirige a la ruta especificada
+                                                        }
+                                                    }
+                                                    onMouseOver={(e) => e.target.title = 'Volver'} 
+                                                id='BtnLogIn' className="GoBack centrado" type="sumbit">
+                                                    <IoMdArrowRoundBack size={60}/>
+                                                </button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            
                         </div>
                     </div>
-                    
+                    <Outlet/>
                 </div>
-            </div>
-            <Outlet/>
-        </div>
-    );
+            );
+        }else{
+            return navigate('/');
+        }
+    } catch {
+        return navigate('/');
+    }
+    
 }
 
 export default UserProfile;

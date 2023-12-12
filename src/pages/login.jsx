@@ -117,7 +117,7 @@ function Login(){
         }
     }
     
-    const [rut,SetRut] = useState(false);
+    const [rut,SetRut] = useState(true);
 
     return(
         <div id="page" className="site login-show">
