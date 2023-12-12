@@ -6,6 +6,7 @@ import UserMenu from './UserMenu';
 import "../styles/styleUser.css"
 import Cookies from 'universal-cookie';
 import { MdPedalBike } from 'react-icons/md';
+import { useState } from "react";
 
 function TraeData(Nav){
     let cock = new Cookies();
@@ -52,6 +53,7 @@ function TraeData(Nav){
 function BikeMenu() {
     const navigate = useNavigate();
     let cock = new Cookies();
+    const [bicis,setBicis] = useState(TraeData(navigate));
     return(
         <div id="page" className="site login-show">
             
@@ -72,17 +74,8 @@ function BikeMenu() {
                             <div className="y-style">
                                 {/*Espacio para componentes */}
                                 <div>
-                                    {TraeData(navigate)}
+                                    {bicis}
                                 </div>
-                                <button onClick={
-                                    ev=>{
-                                        ev.preventDefault();
-                                        cock.get('Bicidata');
-                                    }
-                                } id='BtnLogIn' className="Iniciar InputSide">
-                                    Ver bicis
-                                </button>
-
                                 <button onClick={
                                     ev=>{
                                         ev.preventDefault();
