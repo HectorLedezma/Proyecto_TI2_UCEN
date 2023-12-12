@@ -104,7 +104,7 @@ function Signup(){
     }
     
 
-    function Revisa(rut,nomb,apel,fono,mail,pass,pess){
+    function Revisa(rut,nomb,apel,fono,mail,pass,pess,carr){
         let con = new conexion();
         //chekear usuario
         con.leer('').then(data => {
@@ -130,6 +130,11 @@ function Signup(){
                         "clave":CryptoJS.SHA256(pass).toString()
                       }
                     con.crear(Nuser);
+                    let Nest ={
+                        "rut_e": rut,
+                        "carrera":carr
+                    }
+                    con.crearEst(Nest);
                     alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
                     navigate("/");  
                 }
@@ -175,6 +180,7 @@ function Signup(){
     let correo = useRef();
     let passi1 = useRef();
     let passi2 = useRef();
+    let carrer = useRef();
 
     let [samepass,setSamepass] = useState(true);
     let [newCorreo,SetNew] = useState(true);
@@ -304,7 +310,7 @@ function Signup(){
                                                         ev.preventDefault();
                                                         SetNew(existeUs(correo.current.value));
                                                     }
-                                                } ref={correo} className="userInputText" type="email" placeholder=" Ingresa tu carrera"/>
+                                                } ref={carrer} className="userInputText" type="email" placeholder=" Ingresa tu carrera"/>
                                             </div>
                                         </div>
                                     </div>
@@ -319,7 +325,8 @@ function Signup(){
                                                 nofono.current.value,
                                                 correo.current.value,
                                                 passi1.current.value,
-                                                passi2.current.value
+                                                passi2.current.value,
+                                                carrer.current.value
                                                 );
 
                                         }

@@ -100,6 +100,9 @@ function Login(){
                 if(data[0].rut === mail && data[0].clave === Cpass){
                     console.log('Correcto')
                     sessionStorage.setItem("Rut",data[0].rut);
+                    let datos = JSON.stringify(data[0]);
+                    console.log(datos);
+                    sessionStorage.setItem("dataUser",datos);
                     navigate("/UserProf")
                 }else{
                     console.log('Incorrecto')

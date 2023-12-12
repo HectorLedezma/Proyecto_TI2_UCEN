@@ -1,4 +1,4 @@
-import {UserModel, BikeModel} from "../models/BlogModels.js";
+import {UserModel,UserEsModel, BikeModel} from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
     let op = {
@@ -12,6 +12,20 @@ export const Create = async (req, res)=>{
     }catch(error){
         res.json({message:error.message})
         //res.json()
+    }
+}
+
+export const CreateEst = async (req, res)=>{
+    let op = {
+        raw:true,
+        silent:true,
+        fields:['rut_e','carrera']
+    };
+    try{
+        await UserEsModel.create(req.body,op);
+        res.json({message:'Creado'});
+    }catch(error){
+        res.json({message:error.message})
     }
 }
 
@@ -53,7 +67,7 @@ export const ReadOne = async (req, res)=>{
         res.json({message:error.message})
     }
 }
-
+/*
 export const Update = async (req, res)=>{
     try{
         let blogs = await UserModel.update(req.body,{
@@ -79,3 +93,4 @@ export const Delete = async (req, res)=>{
         res.json({message:error.message})
     }
 }
+*/

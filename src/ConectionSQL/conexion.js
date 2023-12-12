@@ -19,6 +19,16 @@ export class conexion{
         
     }
 
+    async crearEst(data){
+        console.log(data)
+        try {
+            await axios.post(this.uri+'/createE/',data);
+        } catch (error) {
+            console.log(error);
+        }
+        
+    }
+
     async crearB(data){
         console.log(data)
         try {
@@ -30,7 +40,7 @@ export class conexion{
     }
 
     async leer(mail){
-        console.log('buscando usuario: ',`${this.uri}/select/${mail}`)
+        //console.log('buscando usuario: ',`${this.uri}/select/${mail}`)
         try{
             const res = await axios.get(`${this.uri}/select/${mail}`);
             this.blog = res.data;

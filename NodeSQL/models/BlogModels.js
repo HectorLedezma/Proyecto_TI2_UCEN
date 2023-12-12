@@ -1,6 +1,6 @@
 import db from '../database/db.js';
 
-import {DataTypes} from 'sequelize';
+//import {DataTypes} from 'sequelize';
 
 export const BikeModel = db.define('transporte',
     {},{
@@ -9,6 +9,7 @@ export const BikeModel = db.define('transporte',
     }
 )
 
+
 export const UserModel = db.define('usuario',
     {},{
         timestamps: false,
@@ -16,3 +17,9 @@ export const UserModel = db.define('usuario',
     }
 )
 
+export const UserEsModel = db.define('estudiante',
+    {},{
+        timestamps: false,
+        tableName: 'estudiante'
+    }
+)

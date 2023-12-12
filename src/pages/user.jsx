@@ -14,58 +14,6 @@ import { FaUniversity } from "react-icons/fa";
 function UserProfile() {
     const navigate = useNavigate();
 
-    function traeData(){
-        let con = new conexion();
-        con.leer(sessionStorage.getItem('Rut')).then(
-            data => {
-                //console.log(data);
-                
-                return (<UserMenu userData={data}/>)
-            }       
-        ).catch(error => {
-            console.error("Error al leer los datos:", error);
-          });
-    }
-
-    const [windowSize, setWindowSize] = useState({
-        width: window.innerWidth,
-        height: window.innerHeight,
-    });
-
-    const handleResize = () => {
-        setWindowSize({
-            width: window.innerWidth,
-            height: window.innerHeight,
-        });
-    };
-
-    useEffect(() => {
-        // Suscribirse al evento de cambio de tamaño de la ventana
-        window.addEventListener('resize', handleResize);
-    
-        // Limpiar la suscripción al desmontar el componente
-        return () => {
-            window.removeEventListener('resize', handleResize);
-        };
-        }, []);
-
-
-    const responsivo = (w,h,donde) => {
-        let clase = 'UserHead'
-        let consulta = (Number(h)>(Number(w)-20));
-        console.log(donde+'->'+w+' x '+h);
-        if(consulta){
-            clase = ['Perfil','UserHead','NombreUs'];
-        }else{
-            clase = ['PerfilNR','UserHeadNR','NombreUsNR'];
-        }
-        return clase;
-//
-    }
-
-    const inicio = responsivo(windowSize.width,windowSize.height,'useState');
-    const [claseH,setClaseH] = useState(inicio)
-    //console.log(localStorage.getItem('Tokken'))
     return(
         <div id="page" className="site login-show">
             
@@ -75,11 +23,9 @@ function UserProfile() {
                         <Heading wel={
                             (
                                 <div>
-                                <h1>Perfil de Usuario</h1>
-                                {/* Contenido del perfil del usuario */}
-                                    {
-                                        traeData
-                                    }
+                                <h1>Perfil de<br/>Usuario</h1>
+                                    {/* Contenido del perfil del usuario */}
+                                    <UserMenu userData={JSON.parse(sessionStorage.getItem('dataUser'))}/>
                                 </div>
                             )
                         } 
@@ -159,6 +105,7 @@ function UserProfile() {
                                                 ev=>{
                                                     /*Boton para volver*/
                                                     ev.preventDefault();
+                                                    sessionStorage.clear();
                                                     navigate('/');//eso redirige a la ruta especificada
                                                 }
                                             }
