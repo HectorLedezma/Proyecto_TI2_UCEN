@@ -62,14 +62,14 @@ function Login(){
     const cambio = (ojo) => {
         if(ojo === 'BiShow'){
             setEye(
-                <BiHide className="clickeable" fontSize='30'
+                <BiHide className="clickeable" fontSize='25'
                     onClick={()=>cambio('BiHide')}
                 />);
             setPass('text');
             
         }else{
             setEye(
-                <BiShow id='show' className="clickeable" fontSize='30'
+                <BiShow id='show' className="clickeable" fontSize='25'
                     onClick={()=>cambio('BiShow')}
                 />
             );
@@ -139,7 +139,7 @@ function Login(){
                             <div className="y-style">
                                 <h1>Bienvenido</h1>
                                 <form action="" >
-                                    <p className="badText" hidden={rut}>Ingrede un rut valido</p>
+                                    <p className="badText" hidden={rut}>Ingrese un rut valido</p>
                                     <div className="userInput">
                                         <div className="userInputContent" onChange={
                                             ev=>{
@@ -148,10 +148,10 @@ function Login(){
                                             }
                                         }>
                                             <div className="IconSide centrado">
-                                                <AiOutlineMail fontSize="30"/>
+                                                <AiOutlineMail fontSize="25"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input autoComplete="off" ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="Ingresa tu RUT"/>
+                                                <input autoComplete="off" ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="  Ingresa tu RUT"/>
                                             </div>
                                         </div>
                                     </div>
@@ -159,10 +159,10 @@ function Login(){
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
-                                                <AiOutlineLock fontSize="30"/>
+                                                <AiOutlineLock fontSize="25"/>
                                             </div>
                                             <div className="InputSide centrado">
-                                                <input ref={passRef} id="InputPassword" className="userInputText" type={pass} placeholder="Ingresa tu contraseña"/>
+                                                <input ref={passRef} id="InputPassword" className="userInputText" type={pass} placeholder="  Ingresa tu contraseña"/>
                                             </div>
                                             <div className="IconSide centrado">
                                                 {eye}
