@@ -9,7 +9,7 @@ import Recupera from '../pages/recover';
 import Recuperado from '../pages/recoverOK';
 import Sigbici from '../pages/sigbici';
 import Crud from '../pages/crud';
-
+import BikeMenu from '../pages/menuBici';
 function Rutas(){
     return(
         <Routes>
@@ -21,6 +21,7 @@ function Rutas(){
             <Route path='/recoverOk' element={<Recuperado/>} />
             <Route path='/sigbici' element={<Sigbici/>} />
             <Route path='/crud' element={<Crud/>} />
+            <Route path='/bicis' element={<BikeMenu/>} />
         </Routes>
     )
 }

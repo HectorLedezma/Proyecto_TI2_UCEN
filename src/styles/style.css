@@ -55,7 +55,7 @@ ul{
     width: 100%;
     max-width: 500px;
     min-height: 550px;
-    margin: 3em auto;
+    /*margin: 3em auto;*/
     background-color: var(--main-color);
     /*background-color: var(--dark-color);*/
     overflow: hidden;

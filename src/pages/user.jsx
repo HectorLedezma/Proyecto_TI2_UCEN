@@ -1,6 +1,5 @@
-import {react, useRef, useState, useEffect} from 'react';
-import { Link, Outlet, useNavigate} from "react-router-dom";
-import { conexion } from "../ConectionSQL/conexion";
+import { Outlet, useNavigate} from "react-router-dom";
+//import { conexion } from "../ConectionSQL/conexion";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Heading from "./heading";
 import '../styles/profile.css'
@@ -12,6 +11,22 @@ import { TbCalendarTime } from "react-icons/tb";
 import { FaUniversity } from "react-icons/fa";
 import Cookies from 'universal-cookie';
 import { MdPedalBike } from 'react-icons/md';
+import { conexion } from "../ConectionSQL/conexion";
+
+
+function TraeData(nav){
+    let cock = new Cookies();
+    let datos = cock.get("Datos");
+    let con = new conexion();
+    con.leerB(datos.rut).then(data =>{
+        cock.set('BiciData',data,{path:'/'});
+        //console.log(cock.get('BiciData'));
+        nav('/bicis');
+    }).catch(error => {
+        console.error("Error al leer los datos:", error);
+    });
+    
+}
 
 function UserProfile() {
     const navigate = useNavigate();
@@ -27,25 +42,25 @@ function UserProfile() {
                                 <div>
                                 <h1>Perfil de<br/>Usuario</h1>
                                     {/* Contenido del perfil del usuario */}
-                                    <UserMenu userData={cock.get("Datos")}/>
+                                    
                                 </div>
                             )
                         } 
                         logo1={<div/>} 
-                        logo2={<div/>}/>
+                        logo2={<UserMenu userData={cock.get("Datos")}/>}/>
                         <div className="content-form">
                             <div className="y-style">
                                 {/*Espacio para componentes */}
                                 <div className="afterform">
                                 <div className='welcome'>
                                 <button onClick={
-                                                ev=>{
-                                                    ev.preventDefault();
-                                                    console.log('PRess')
-                                                }
-                                            } id='BtnLogIn' className="centrado Iniciar InputSide izq">
-                                                <MdPedalBike size={25} style={{ margin: '10px' }}/> Ver bicis
-                                            </button>
+                                    ev=>{
+                                        ev.preventDefault();
+                                        TraeData(navigate);
+                                    }
+                                } id='BtnLogIn' className="centrado Iniciar InputSide izq">
+                                    <MdPedalBike size={25} style={{ margin: '10px' }}/> Ver bicis
+                                </button>
                                 <div className="linksContainer">
                                     
                                     <div className='userInput'>

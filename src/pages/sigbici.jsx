@@ -7,17 +7,20 @@ import Heading from "./heading";
 import { AiFillStar,AiOutlineHeatMap } from "react-icons/ai";
 import "../styles/styleSigbici.css"
 import { conexion } from "../ConectionSQL/conexion";
+import Cookies from "universal-cookie";
 
 
 function Registrar(ser,mar,mod,col,tip){
+    
     if(ser !== ''){
+        let cok = new Cookies();
         let newBici = {
             "id_t":ser,
             "marca":mar,
             "modelo":mod,
             "color":col,
             "tipo":tip,
-            "rut_e":sessionStorage.getItem("Rut")
+            "rut_e":cok.get('Datos').rut
         }
         let con = new conexion();
         con.crearB(newBici);
@@ -159,7 +162,7 @@ return (
                                     onClick={
                                     ev=>{
                                     ev.preventDefault();
-                                    navigate('/')
+                                    navigate('/UserProf')
                                     }
                                     }
                                         onMouseOver={(e) => e.target.title = 'Volver'} 

@@ -15,6 +15,10 @@
     color:var(--dark-color)
 }
 
+.QR{
+    margin-top: -55px;
+}
+
 *{
     margin: 0;
     padding: 0;
@@ -96,7 +100,8 @@ ul{
     border-width: 2px;
     border-style: groove;
     border-color: var(--dark-color);
-    width: 15%;
+    width: 60px;
+    height: 60px;
     margin-left: 42%;
     border-radius: 100%;
 }

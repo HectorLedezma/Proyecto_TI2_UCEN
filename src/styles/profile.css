@@ -13,6 +13,29 @@
     
 }
 
+.BikeBox{
+    background-color: #fd5000;
+    margin-bottom: 8px;
+    display:flex;
+    align-content: center;
+    width: 100%;
+    border-radius: 10px;
+}
+.BikeBox:hover{
+    background-color: #002affb2;
+}
+
+.BikeBoxCont{
+    color: white;
+    margin: 4px;
+    width: 100%;
+}
+.BikeBoxCont h3{
+    font-size: small;
+}
+.BikeBoxCont p{
+    font-size: x-small;
+}
 .Perfil{
     display: block;
 }

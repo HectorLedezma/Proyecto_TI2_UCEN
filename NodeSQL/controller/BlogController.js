@@ -54,6 +54,20 @@ export const ReadAll = async (req, res)=>{
     }
 }
 
+export const ReadAllB = async (req, res)=>{
+    try{
+        let blogs = await BikeModel.findAll({
+            attributes:['id_t','marca','modelo','color','tipo'],
+            where:{
+                'rut_e':req.params.rut_e
+            }
+        });
+        res.json(blogs);
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
 export const ReadOne = async (req, res)=>{
     try{
         let blogs = await UserModel.findAll({

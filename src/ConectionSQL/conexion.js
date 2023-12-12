@@ -10,7 +10,7 @@ export class conexion{
         this.blog = [];
     }
     async crear(data){
-        console.log(data)
+        
         try {
             await axios.post(this.uri+'/create/',data);
         } catch (error) {
@@ -20,7 +20,7 @@ export class conexion{
     }
 
     async crearEst(data){
-        console.log(data)
+        
         try {
             await axios.post(this.uri+'/createE/',data);
         } catch (error) {
@@ -30,7 +30,7 @@ export class conexion{
     }
 
     async crearB(data){
-        console.log(data)
+        
         try {
             await axios.post(this.uri+'/createB/',data);
         } catch (error) {
@@ -40,7 +40,7 @@ export class conexion{
     }
 
     async leer(mail){
-        //console.log('buscando usuario: ',`${this.uri}/select/${mail}`)
+        
         try{
             const res = await axios.get(`${this.uri}/select/${mail}`);
             this.blog = res.data;
@@ -50,8 +50,19 @@ export class conexion{
         return this.blog;
     }
 
+    async leerB(rut){
+        
+        try{
+            const res = await axios.get(`${this.uri}/selectB/${rut}`);
+            this.blog = res.data;
+        }catch(error){
+            this.blog = [];
+        }
+        return this.blog;
+    }
+
     setblog(blo){
-        //console.log(blo);
+        
         this.blog = blo;
     }
 

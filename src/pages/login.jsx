@@ -98,7 +98,7 @@ function Login(){
             let dat = con.leer(mail);
             dat.then(data => {
                 //console.log(data[0].Pass);
-                console.log(data[0]);
+                //console.log(data[0]);
                 if(data[0].rut === mail && data[0].clave === Cpass){
                     console.log('Correcto')
                     //let datos = JSON.stringify(data[0]);

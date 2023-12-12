@@ -50,6 +50,10 @@ a:hover{
     text-align: left;
 }
 
+.med{
+    text-align: center;
+}
+
 .InputSide:hover{
     background-color: #002aff;
     color: white;
