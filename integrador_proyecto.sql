@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2023 a las 06:00:17
--- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Servidor: localhost
+-- Tiempo de generación: 16-12-2023 a las 04:37:54
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `admin` (
-  `rut_adm` varchar(20) NOT NULL,
-  `cargo` varchar(20) DEFAULT NULL
+  `rut_adm` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `cargo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
@@ -43,12 +43,39 @@ INSERT INTO `admin` (`rut_adm`, `cargo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `Carrera`
+--
+
+CREATE TABLE `Carrera` (
+  `ID` int(11) NOT NULL,
+  `Nombre` varchar(64) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `Carrera`
+--
+
+INSERT INTO `Carrera` (`ID`, `Nombre`) VALUES
+(1, 'I.C.C.I'),
+(2, 'I.C.I'),
+(3, 'I.C.O.C'),
+(4, 'I.C'),
+(5, 'I.C.M'),
+(6, 'Geología'),
+(7, 'Lic. Astronomia'),
+(8, 'Arquitectura'),
+(9, 'Arquitectura P.'),
+(10, 'Derecho');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `estudiante`
 --
 
 CREATE TABLE `estudiante` (
-  `rut_e` varchar(20) NOT NULL,
-  `carrera` varchar(20) DEFAULT NULL
+  `rut_e` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `carrera` int(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
@@ -56,9 +83,13 @@ CREATE TABLE `estudiante` (
 --
 
 INSERT INTO `estudiante` (`rut_e`, `carrera`) VALUES
-('10', 'bailarin'),
-('18778296-1', 'economia'),
-('9999999-9', 'economia');
+('18742080-6', 1),
+('20406920-4', 1),
+('20600701-k', 1),
+('5453479-5', 2),
+('85.841.679-5', 2),
+('18778296-1', 3),
+('9999999-9', 3);
 
 -- --------------------------------------------------------
 
@@ -67,7 +98,7 @@ INSERT INTO `estudiante` (`rut_e`, `carrera`) VALUES
 --
 
 CREATE TABLE `guardia` (
-  `rut_g` varchar(20) NOT NULL,
+  `rut_g` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `inicio` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
@@ -89,12 +120,12 @@ INSERT INTO `guardia` (`rut_g`, `inicio`) VALUES
 
 CREATE TABLE `ingreso_egreso` (
   `id_ie` int(11) NOT NULL,
-  `rut_e` varchar(20) DEFAULT NULL,
-  `rut_g` varchar(20) DEFAULT NULL,
+  `rut_e` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `rut_g` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `hora` time DEFAULT NULL,
-  `edificio` varchar(1) DEFAULT NULL,
-  `tipo` varchar(20) DEFAULT NULL
+  `edificio` varchar(1) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `tipo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
@@ -125,8 +156,8 @@ INSERT INTO `ingreso_egreso` (`id_ie`, `rut_e`, `rut_g`, `fecha`, `hora`, `edifi
 
 CREATE TABLE `passwords` (
   `id` int(11) NOT NULL,
-  `correo` varchar(100) NOT NULL,
-  `token` varchar(200) NOT NULL,
+  `correo` varchar(100) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `token` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `codigo` int(11) NOT NULL,
   `fecha` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
@@ -165,12 +196,12 @@ INSERT INTO `passwords` (`id`, `correo`, `token`, `codigo`, `fecha`) VALUES
 --
 
 CREATE TABLE `transporte` (
-  `id_t` varchar(20) NOT NULL,
-  `marca` varchar(20) DEFAULT NULL,
-  `modelo` varchar(20) DEFAULT NULL,
-  `color` varchar(20) DEFAULT NULL,
-  `tipo` varchar(20) DEFAULT NULL,
-  `rut_e` varchar(20) DEFAULT NULL
+  `id_t` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `marca` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `modelo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `color` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `tipo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `rut_e` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
@@ -178,8 +209,15 @@ CREATE TABLE `transporte` (
 --
 
 INSERT INTO `transporte` (`id_t`, `marca`, `modelo`, `color`, `tipo`, `rut_e`) VALUES
-('1', 'oxford', 'rd1', 'negro', 'bicicleta', '9999999-9'),
-('2', 'oxford', 'rd1', 'negro', 'bicicleta', '18778296-1');
+('234r3rfhw23e', 'EEEEEEEE', 'XD', 'humilde', 'avion', '85.841.679-5'),
+('37f834rf47e6y', 'Oxford', 'Montaña', 'Rojo', 'Biciclta', '18742080-6'),
+('asasdaaasfskjsd', 'sdksdksdkldfkjsd', 'ksdksdklsdlk', 'lmsdmckslk', 'sdlsemsdlksd', '85.841.679-5'),
+('dfh7326fg43g7', 'Xaomi', 'e-6059', 'Negro', 'Scooter', '18742080-6'),
+('e3hsj3f4sfre4', 'mar', 'mod', 'col', 'tip', '85.841.679-5'),
+('fsdfsdfsdfsdfs', 'bici\'nt', 'ferrari', 'negro', 'Lapras', '5453479-5'),
+('nueva', 'vija', 'XD', 'amalliro', 'scotter', '85.841.679-5'),
+('XDXDXDXD', 'marcada', 'no se XD', 'galaxia', 'Bicicleta', '85.841.679-5'),
+('zxcfkjcgfxdcghbm', 'Oxford', 'PorSport', 'galaxia', 'Bici', '20406920-4');
 
 -- --------------------------------------------------------
 
@@ -188,13 +226,13 @@ INSERT INTO `transporte` (`id_t`, `marca`, `modelo`, `color`, `tipo`, `rut_e`) V
 --
 
 CREATE TABLE `usuario` (
-  `rut` varchar(20) NOT NULL,
-  `nombre` varchar(20) DEFAULT NULL,
-  `apellido` varchar(20) DEFAULT NULL,
+  `rut` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
+  `nombre` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `apellido` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `fono` int(20) DEFAULT NULL,
-  `correo` varchar(20) DEFAULT NULL,
+  `correo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `estado` int(11) DEFAULT 0,
-  `clave` varchar(200) NOT NULL
+  `clave` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
@@ -202,12 +240,21 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`rut`, `nombre`, `apellido`, `fono`, `correo`, `estado`, `clave`) VALUES
+('', '', '', NULL, '', 0, 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'),
 ('1', '123', '123', 123, '123', 1, '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a'),
 ('10', 'alumnoprueba', 'alumnoprueba', 1111111, 'a@a.cl', 0, 'notienejejeje'),
 ('123', 'gua', 'ardia', 123, 'guardia@guardia.com', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
+('16406911-7', 'dsfsd', 'fsfsd', 878787876, 'mail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
+('18742080-6', 'vane', 'casanga', 29834287, 'vane@gmail.com', 0, '07123e1f482356c415f684407a3b8723e10b2cbbc0b8fcd6282c49d37c9c1abc'),
 ('18778296-1', 'da', 'niel', 1111111, 'a@a.cl', 0, 'jejej'),
+('20406920-4', 'Vanessa', 'Zamora', 3456789, 'Vanevane@gmail.com', 0, '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5'),
+('20600701-k', 'Hector', 'Ledezma', 4567898, 'correo@gmail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
+('21312312312', 'waLuigi', 'ardia', 123, 'asd@XD.com', 0, 'C1C224B03CD9BC7B6A86D77F5DACE40191766C485CD55DC48CAF9AC873335D6F'),
+('5453479-5', 'AAAAAA', 'EEEEEEE', 12312324, 'AAAAA@gmail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
 ('64867030-3', 'Juanita', 'DelFuturo', 123, 'a@a.cl', 1, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
+('85.841.679-5', 'admini', 'asdas', NULL, 'asfsdads', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
 ('987', 'admin', 'administrador', 123, 'a@a.cl', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
+('987654321', 'wario', 'ardia', 123, 'asd@XD.com', 0, 'C1C224B03CD9BC7B6A86D77F5DACE40191766C485CD55DC48CAF9AC873335D6F'),
 ('9999999-9', 'estudiante', 'prueba', 1, 'a@a.cl', 0, ''),
 ('admin', 'admin', 'admin', 123, 'admin@admin.cl', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
 ('guardia2', 'guardia2', 'pepe', 123, 'guardi2a@guardia.com', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2');
@@ -223,10 +270,17 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`rut_adm`);
 
 --
+-- Indices de la tabla `Carrera`
+--
+ALTER TABLE `Carrera`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indices de la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  ADD PRIMARY KEY (`rut_e`);
+  ADD PRIMARY KEY (`rut_e`),
+  ADD KEY `carrera_estudiante` (`carrera`);
 
 --
 -- Indices de la tabla `guardia`
@@ -266,6 +320,12 @@ ALTER TABLE `usuario`
 --
 
 --
+-- AUTO_INCREMENT de la tabla `Carrera`
+--
+ALTER TABLE `Carrera`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT de la tabla `ingreso_egreso`
 --
 ALTER TABLE `ingreso_egreso`
@@ -291,6 +351,7 @@ ALTER TABLE `admin`
 -- Filtros para la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
+  ADD CONSTRAINT `carrera_estudiante` FOREIGN KEY (`carrera`) REFERENCES `Carrera` (`ID`),
   ADD CONSTRAINT `estudiante_ibfk_1` FOREIGN KEY (`rut_e`) REFERENCES `usuario` (`rut`);
 
 --

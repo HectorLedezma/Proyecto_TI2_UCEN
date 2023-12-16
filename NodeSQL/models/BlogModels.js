@@ -23,3 +23,10 @@ export const UserEsModel = db.define('estudiante',
         tableName: 'estudiante'
     }
 )
+
+export const CarreraModel = db.define('Carrera',
+    {},{
+        timestamps: false,
+        tableName: 'Carrera'
+    }
+)

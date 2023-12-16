@@ -1,4 +1,4 @@
-import {UserModel,UserEsModel, BikeModel} from "../models/BlogModels.js";
+import {UserModel,UserEsModel, BikeModel, CarreraModel} from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
     let op = {
@@ -67,6 +67,18 @@ export const ReadAllB = async (req, res)=>{
         res.json({message:error.message})
     }
 }
+
+export const ReadCarr = async (req, res)=>{
+    try{
+        let blogs = await CarreraModel.findAll({
+            attributes:['Nombre']
+        });
+        res.json(blogs);
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
 
 export const ReadOne = async (req, res)=>{
     try{

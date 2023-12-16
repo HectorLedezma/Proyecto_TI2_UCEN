@@ -1,18 +1,19 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
+import DropD from "../Componentes/dropdown";
 //import {React} from "react";
 //import { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
 
-
+const uri = 'http://localhost:8000/base';
 export class conexion{
     constructor(){
-        this.uri = 'http://localhost:8000/base';
         this.blog = [];
     }
     async crear(data){
         
         try {
-            await axios.post(this.uri+'/create/',data);
+            await axios.post(uri+'/create/',data);
         } catch (error) {
             console.log(error);
         }
@@ -22,7 +23,7 @@ export class conexion{
     async crearEst(data){
         
         try {
-            await axios.post(this.uri+'/createE/',data);
+            await axios.post(uri+'/createE/',data);
         } catch (error) {
             console.log(error);
         }
@@ -32,7 +33,7 @@ export class conexion{
     async crearB(data){
         
         try {
-            await axios.post(this.uri+'/createB/',data);
+            await axios.post(uri+'/createB/',data);
         } catch (error) {
             console.log(error);
         }
@@ -42,7 +43,8 @@ export class conexion{
     async leer(mail){
         
         try{
-            const res = await axios.get(`${this.uri}/select/${mail}`);
+            const res = await axios.get(`${uri}/select/${mail}`);
+            //console.log(`${uri}/select/${mail}`)
             this.blog = res.data;
         }catch(error){
             this.blog = [];
@@ -53,13 +55,15 @@ export class conexion{
     async leerB(rut){
         
         try{
-            const res = await axios.get(`${this.uri}/selectB/${rut}`);
+            const res = await axios.get(`${uri}/selectB/${rut}`);
             this.blog = res.data;
         }catch(error){
             this.blog = [];
         }
         return this.blog;
     }
+
+    
 
     setblog(blo){
         
@@ -77,23 +81,20 @@ export class conexion{
 
     }
 }
-/*
 
-const CompoRead = ()=>{
-    const [blog,setBlog] = useState([]);
+export const ListaCarrera = ()=>{
+    const [lis,setLis] = useState([]);
     useEffect(()=>{
-        getBolg()
-    },[])
-    const getBolg = async ()=> {
-
+        Traelista();
+    });
+    const Traelista = async()=>{
+        const res = await axios.get(`${uri}/selectC/`);
+        setLis(res.data);
     }
-    const delBolg = async ()=> {
-        
+    let list = [];
+    
+    for(let i = 0;i<lis.length;i++){
+        list.push(lis[i].Nombre)
     }
-    return(
-        <div>
-
-        </div>
-    )
+    return(<DropD titulo="Carrera" items={list}/>);
 }
-*/
