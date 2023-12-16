@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-12-2023 a las 04:37:54
+-- Tiempo de generación: 16-12-2023 a las 04:48:42
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -201,6 +201,7 @@ CREATE TABLE `transporte` (
   `modelo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `color` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `tipo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `est_trans` int(1) NOT NULL,
   `rut_e` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
@@ -208,16 +209,10 @@ CREATE TABLE `transporte` (
 -- Volcado de datos para la tabla `transporte`
 --
 
-INSERT INTO `transporte` (`id_t`, `marca`, `modelo`, `color`, `tipo`, `rut_e`) VALUES
-('234r3rfhw23e', 'EEEEEEEE', 'XD', 'humilde', 'avion', '85.841.679-5'),
-('37f834rf47e6y', 'Oxford', 'Montaña', 'Rojo', 'Biciclta', '18742080-6'),
-('asasdaaasfskjsd', 'sdksdksdkldfkjsd', 'ksdksdklsdlk', 'lmsdmckslk', 'sdlsemsdlksd', '85.841.679-5'),
-('dfh7326fg43g7', 'Xaomi', 'e-6059', 'Negro', 'Scooter', '18742080-6'),
-('e3hsj3f4sfre4', 'mar', 'mod', 'col', 'tip', '85.841.679-5'),
-('fsdfsdfsdfsdfs', 'bici\'nt', 'ferrari', 'negro', 'Lapras', '5453479-5'),
-('nueva', 'vija', 'XD', 'amalliro', 'scotter', '85.841.679-5'),
-('XDXDXDXD', 'marcada', 'no se XD', 'galaxia', 'Bicicleta', '85.841.679-5'),
-('zxcfkjcgfxdcghbm', 'Oxford', 'PorSport', 'galaxia', 'Bici', '20406920-4');
+INSERT INTO `transporte` (`id_t`, `marca`, `modelo`, `color`, `tipo`, `est_trans`, `rut_e`) VALUES
+('1', 'oxford', 'rd1', 'negro', 'bicicleta', 0, '9999999-9'),
+('2', 'oxford', 'rd1', 'negro', 'bicicleta', 1, '18778296-1'),
+('3', 'chinito', 'infunable', 'rojo', 'scooter', 1, '9999999-9');
 
 -- --------------------------------------------------------
 
