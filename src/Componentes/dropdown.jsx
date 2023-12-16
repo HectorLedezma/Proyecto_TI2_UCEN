@@ -23,7 +23,7 @@ function DropD(props){
         for(let i = 0;i<items.length;i++){
             //console.log(items[i]);
             arr.push(
-                <DropdownItem className="DrpDwnMenuItem centrado2 welcome" key={i}
+                <DropdownItem className="DrpDwnMenuItem centrado2" key={i}
                     onClick={
                         ev=>{
                             ev.preventDefault();

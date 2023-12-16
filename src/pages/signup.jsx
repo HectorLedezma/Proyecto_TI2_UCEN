@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
 import "../styles/styleSignup.css";
-import { Link, Outlet, useNavigate} from "react-router-dom";
+import { Outlet, useNavigate} from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiHide, BiShow, BiUser } from "react-icons/bi";
 import user from '../pages/users.json'
 import CryptoJS from 'crypto-js';
 import Heading from "../Componentes/heading";
-import { ListaCarrera, conexion } from "../ConectionSQL/conexion";
+import {conexion } from "../ConectionSQL/conexion";
 import { FaPhoneAlt,FaUniversity } from "react-icons/fa";
 import { FaUserGraduate } from "react-icons/fa";
+import DropD from "../Componentes/dropdown";
+import Cookies from "universal-cookie";
 //import DropD from "../Componentes/dropdown";
 
 
@@ -174,7 +176,7 @@ function Signup(){
     let [samepass,setSamepass] = useState(true);
     let [newCorreo,SetNew] = useState(true);
 
-
+    let cock = new Cookies();
     
     const [rut,SetRut] = useState(true);
     
@@ -293,7 +295,7 @@ function Signup(){
                                     <div className="userInput">
                                         <div className="userInputContent" ref={carrer}>
                                             <FaUniversity fontSize='25'/>
-                                            <ListaCarrera/>
+                                            <DropD titulo="Carrera" items={cock.get('Carreras')}/>
                                         </div>
                                     </div>
                                     <p className="badText" hidden={samepass}>las contraseñas no coinsiden</p>
@@ -316,8 +318,14 @@ function Signup(){
                                 </form>
                                 <div className="afterform">
                                     <p>¿Ya tienes una cuenta?</p>
-                                    {/**<a onClick={toSignup} className="t-signup">Registrate</a> */}
-                                    <Link to='/'>Inicia sesion</Link>
+                                    {/*cock.remove('Carreras');*/}
+                                    <p className="clickeable" onClick={
+                                        ev=>{
+                                            ev.preventDefault();
+                                            cock.remove('Carreras');
+                                            navigate('/');
+                                        }
+                                    }>Inicia sesion</p>
                                 </div>
                             </div>
                         </div>
