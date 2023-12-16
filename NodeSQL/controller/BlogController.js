@@ -33,7 +33,7 @@ export const CreateBike = async (req, res)=>{
     let op = {
         raw:true,
         silent:true,
-        fields:['id_t','marca','modelo','color','tipo','rut_e']
+        fields:['id_t','marca','modelo','color','tipo','est_trans','rut_e']
     };
     try{
         await BikeModel.create(req.body,op);
@@ -59,7 +59,8 @@ export const ReadAllB = async (req, res)=>{
         let blogs = await BikeModel.findAll({
             attributes:['id_t','marca','modelo','color','tipo'],
             where:{
-                'rut_e':req.params.rut_e
+                'rut_e':req.params.rut_e,
+                'est_trans':0
             }
         });
         res.json(blogs);

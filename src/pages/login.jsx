@@ -56,7 +56,10 @@ function validaRut(rut){
 
 
 function Login(){
-    
+    let cock = new Cookies();
+    cock.remove('Carreras');
+    cock.remove('Datos');
+    //'Carreras'
     let mailRef = useRef();
     let passRef = useRef();
     //let iconRef = useRef();
@@ -197,7 +200,20 @@ function Login(){
                                 <div className="afterform">
                                     <p>¿No tienes una cuenta?</p>
                                     {/**<a onClick={toSignup} className="t-signup">Registrate</a> */}
-                                    <Link to='/signup'>Registrate</Link>
+                                    <p className="clickeable" onClick={
+                                        ev=>{
+                                            ev.preventDefault();
+                                            
+                                            let cone = new conexion();
+                                            cone.listaCarrera().then(dat=>{
+                                                cock.set('Carreras',dat,{path:'/',sameSite:'strict'});
+                                                console.log('cuckeado')
+                                                navigate('/signup');
+                                            });
+                                            //
+                                            
+                                        }
+                                    }>Registrate</p>
                                 </div>
                             </div>
                         </div>

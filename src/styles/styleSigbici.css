@@ -1,6 +1,7 @@
-.userInputText::placeholder {
-    color: white;
+.userInputText{
+    margin-left: 5px;
 }
 .userInputText::placeholder {
+    color: white;
     font-size: 16px;
 }

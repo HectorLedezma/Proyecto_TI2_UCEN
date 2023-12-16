@@ -8,10 +8,11 @@ import { AiFillStar,AiOutlineHeatMap } from "react-icons/ai";
 import "../styles/styleSigbici.css"
 import { conexion } from "../ConectionSQL/conexion";
 import Cookies from "universal-cookie";
+import DropD from "../Componentes/dropdown";
 
 
 function Registrar(ser,mar,mod,col,tip){
-    
+    console.log(tip);
     if(ser !== ''){
         let cok = new Cookies();
         let newBici = {
@@ -20,12 +21,19 @@ function Registrar(ser,mar,mod,col,tip){
             "modelo":mod,
             "color":col,
             "tipo":tip,
+            "est_trans":0,
             "rut_e":cok.get('Datos').rut
         }
         let con = new conexion();
-        con.crearB(newBici);
-        alert("Medio de transporte registrado");
-        return true;
+        try {
+            con.crearB(newBici);
+            alert("Medio de transporte registrado");
+            return true;    
+        } catch (error) {
+            console.log(error);
+            return false;
+        }
+        
     }else{
         return false;
     }
@@ -70,7 +78,7 @@ return (
                                 <div className="userInput">
                                     <div className="userInputContent">
                                         <div className="InputSide centrado">
-                                        <IoMdBarcode size={30}/>
+                                            <IoMdBarcode  size={30}/>
                                             <input
                                                 ref={serie}
                                                 className="userInputText"
@@ -127,14 +135,9 @@ return (
                                 </div>
                                 <div className="userInput">
                                     <div className="userInputContent">
-                                        <div className="InputSide centrado">
+                                        <div className="InputSide centrado" ref={tipo}>
                                             <MdPedalBike size="30"/>
-                                            <input
-                                                ref={tipo}
-                                                className="userInputText"
-                                                type="text"
-                                                placeholder="  Tipo de transporte "
-                                            />
+                                            <DropD titulo="Tipo de transporte" items={['Bicicleta', 'Scooter','Moto']}/>
                                         </div>
                                     </div>
                                 </div>
@@ -146,7 +149,7 @@ return (
                                             marca.current.value,
                                             model.current.value,
                                             color.current.value,
-                                            tipo.current.value
+                                            tipo.current.childNodes[1].childNodes[0].childNodes[0].childNodes[0].nodeValue
                                         );
                                         if(ok){
                                             navigate('/UserProf');

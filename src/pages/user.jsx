@@ -19,7 +19,7 @@ function TraeData(nav){
     let datos = cock.get("Datos");
     let con = new conexion();
     con.leerB(datos.rut).then(data =>{
-        cock.set('BiciData',data,{path:'/'});
+        //cock.set('BiciData',data,{path:'/'});
         nav('/bicis');
     }).catch(error => {
         console.error("Error al leer los datos:", error);

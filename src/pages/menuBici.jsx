@@ -5,55 +5,15 @@ import Heading from "../Componentes/heading";
 import UserMenu from '../Componentes/UserMenu';
 import "../styles/styleUser.css"
 import Cookies from 'universal-cookie';
+import { ListaBici } from "../ConectionSQL/conexion";
 //import { MdPedalBike } from 'react-icons/md';
 //import { useState } from "react";
 
-function TraeData(Nav){
-    let cock = new Cookies();
-    let data = cock.get('BiciData');
-    let arr = [];
-    for(let i = 0;i<data.length;i++){
-        arr.push(
-            <div className="BikeBox clickeable" key={i}
-                onClick={
-                    ev=>{
-                        ev.preventDefault();
-                        let datQR = {
-                            'id_t':data[i].id_t,
-                            'rut_e':cock.get('Datos').rut
-                        };
-                        //console.log(datQR)
-                        cock.set(
-                            'qrbici',
-                            datQR,
-                            {path:'/'}
-                        );
-                        Nav('/qrCode');
-                    }
-                }
-            >
-                <div className="BikeBoxCont">
-                    <h3>N° serie</h3>
-                    <p>{data[i].id_t}</p>
-                </div>
-                <div className="BikeBoxCont">
-                    <h3>Trasporte</h3>
-                    <p>{data[i].tipo}{' '}{data[i].marca}</p>
-                </div>
-                <div className="BikeBoxCont">
-                    <h3>Modelo</h3>
-                    <p>{data[i].modelo}</p>
-                </div>
-            </div>
-        )
-    }
-    return arr;
-}
 
 function BikeMenu() {
     const navigate = useNavigate();
     let cock = new Cookies();
-    const bicis = TraeData(navigate);
+    //const bicis = TraeData(navigate);
     return(
         <div id="page" className="site login-show">
             
@@ -74,7 +34,7 @@ function BikeMenu() {
                             <div className="y-style">
                                 {/*Espacio para componentes */}
                                 <div>
-                                    {bicis}
+                                    <ListaBici rut={cock.get('Datos').rut}/>
                                 </div>
                                 <button onClick={
                                     ev=>{
