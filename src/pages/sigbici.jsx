@@ -9,6 +9,7 @@ import "../styles/styleSigbici.css"
 import { conexion } from "../ConectionSQL/conexion";
 import Cookies from "universal-cookie";
 import DropD from "../Componentes/dropdown";
+import { toast } from "react-toastify";
 
 
 function Registrar(ser,mar,mod,col,tip){
@@ -27,7 +28,10 @@ function Registrar(ser,mar,mod,col,tip){
         let con = new conexion();
         try {
             con.crearB(newBici);
-            alert("Medio de transporte registrado");
+            toast.success("Medio de transporte registrado",{
+                position:toast.POSITION.TOP_CENTER,
+                autoClose: 5000
+            });
             return true;    
         } catch (error) {
             console.log(error);

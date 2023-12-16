@@ -11,6 +11,8 @@ import { FaPhoneAlt,FaUniversity } from "react-icons/fa";
 import { FaUserGraduate } from "react-icons/fa";
 import DropD from "../Componentes/dropdown";
 import Cookies from "universal-cookie";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 //import DropD from "../Componentes/dropdown";
 
 
@@ -111,6 +113,9 @@ function Signup(){
 
     function Revisa(rut,nomb,apel,fono,mail,pass,pess,carr){
         let con = new conexion();
+        //toast.success('Funciona', {
+        //    position:toast.POSITION.TOP_CENTER
+        //});
         //console.log('Carrera: ',carr);
         //chekear usuario
         con.leer('').then(data => {
@@ -125,12 +130,12 @@ function Signup(){
                 }
                 //console.log('Existe:'+String(existe));
                 const confir = revisapass(pass,pess);
-                if(!existe && confir){
+                if((!existe && confir) && validaRut(rut)){
                     let Nuser = {
                         "rut": rut,
                         "nombre":nomb,
                         "apellido":apel,
-                        "fono": parseInt(fono),//ese tiene que ser String, no Int
+                        "fono": fono,//ese tiene que ser String, no Int
                         "correo":mail,
                         "estado": 0,
                         "clave":CryptoJS.SHA256(pass).toString()
@@ -142,8 +147,20 @@ function Signup(){
                     }
                     try {
                         con.crearEst(Nest);
-                        alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
-                        navigate("/");    
+                        const mensaje = 'Usuario '+nomb+' '+apel+'\nse ha creado con exito';
+                        
+                        toast.success(mensaje, {
+                            position:toast.POSITION.TOP_CENTER,
+                            autoClose: 5000,
+                            onClose:()=>{
+                                setTimeout(() => {
+                                    navigate("/");
+                                }, 5000);
+                            }
+                        });
+                        //setTimeout(navigate("/"), 5000);
+                        //alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
+                        //navigate("/");    
                     } catch (error) {
                         console.log('Error')
                     }
@@ -314,12 +331,14 @@ function Signup(){
                                                 );
 
                                         }
-                                    } className="Iniciar" type="sumbit">Crear cuenta</button>
+                                    } className="Iniciar" type="sumbit">Crear cuenta
+                                        
+                                    </button>
                                 </form>
                                 <div className="afterform">
                                     <p>¿Ya tienes una cuenta?</p>
                                     {/*cock.remove('Carreras');*/}
-                                    <p className="clickeable" onClick={
+                                    <p className="clickeable enlace" onClick={
                                         ev=>{
                                             ev.preventDefault();
                                             cock.remove('Carreras');
@@ -332,6 +351,7 @@ function Signup(){
                     </div>
                 </div>
             </div>
+            <ToastContainer/>
             <Outlet/>
         </div>
     )

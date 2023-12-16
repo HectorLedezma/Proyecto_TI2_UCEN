@@ -123,6 +123,18 @@ ul{
     text-align: center;
 }
 
+.enlace{
+    text-decoration: underline;
+}
+
+.enlace:hover{
+    color: var(--main-color);
+}
+
+.Toastify__close-button{
+    width: min-content;
+}
+
 form input:not(#remember) {
     font-family: inherit;
     outline: 0;

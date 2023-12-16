@@ -4,7 +4,7 @@ import LogoU from '../images/Logo UCEN_R.COQUIMBO_.png'
 import LogoCleta from '../images/QRcleta.png'
 //import Mail from '../images/mail.png'
 //import Pass from '../images/pass.png'
-import { Link, Outlet, useNavigate} from "react-router-dom";
+import { Outlet, useNavigate} from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiShow, BiHide } from 'react-icons/bi'
 import CryptoJS from 'crypto-js';
@@ -181,7 +181,12 @@ function Login(){
                                         <input type="checkbox" id="remember"/>
                                         <label>Recuérdame</label>
                                     </p>
-                                    <Link to='/recover' className="forgot">Recuperar contraseña</Link>
+                                    <p className="forgot clickeable enlace" onClick={
+                                        ev=>{
+                                            navigate('/recover');
+                                        }}>
+                                        Recuperar contraseña
+                                    </p>
                                     <button onClick={
                                         ev=>{
                                             ev.preventDefault();
@@ -199,8 +204,7 @@ function Login(){
                                 </form>
                                 <div className="afterform">
                                     <p>¿No tienes una cuenta?</p>
-                                    {/**<a onClick={toSignup} className="t-signup">Registrate</a> */}
-                                    <p className="clickeable" onClick={
+                                    <p className="clickeable enlace" onClick={
                                         ev=>{
                                             ev.preventDefault();
                                             
