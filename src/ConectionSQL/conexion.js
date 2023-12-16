@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import BiciList from "../Componentes/BiciList";
+import TraeHist from "../Componentes/RegHis";
 //import {React} from "react";
 //import { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
@@ -57,6 +58,17 @@ export class conexion{
         return this.blog;
     }
 
+    async leerH(rut){
+        
+        try{
+            const res = await axios.get(`${uri}/selectH/${rut}`);
+            this.blog = res.data;
+        }catch(error){
+            this.blog = [];
+        }
+        return this.blog;
+    }
+
     async listaCarrera(){
         const res = await axios.get(`${uri}/selectC/`);
         let list = [];
@@ -98,4 +110,25 @@ export const ListaBici = (props)=>{
         }
     }
     return(<BiciList rut={props.rut} data={lis}/>);
+}
+
+export const Historial = (props)=>{
+    const [lis,setLis] = useState([]);
+    useEffect(()=>{
+        Traelista();
+    });
+    const Traelista = async()=>{
+        try{
+            const res = await axios.get(`${uri}/selectH/${props.rut}`);
+            setLis(res.data);
+        }catch(error){
+            console.log(error)
+        }
+    }
+    if(lis.length===0){
+        return(<h1>No hay entradas o salidas registradas a tu nombre</h1>);
+    }else{
+        return(<TraeHist data={lis}/>);
+    }
+    
 }

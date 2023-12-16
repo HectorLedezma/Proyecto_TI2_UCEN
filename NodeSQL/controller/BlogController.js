@@ -1,4 +1,4 @@
-import {UserModel,UserEsModel, BikeModel, CarreraModel} from "../models/BlogModels.js";
+import {UserModel,UserEsModel, BikeModel, CarreraModel, HistModel} from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
     let op = {
@@ -68,6 +68,21 @@ export const ReadAllB = async (req, res)=>{
         res.json({message:error.message})
     }
 }
+
+export const ReadAllHist = async (req, res)=>{
+    try{
+        let blogs = await HistModel.findAll({
+            attributes:['fecha','hora','edificio','tipo'],
+            where:{
+                'rut_e':req.params.rut_e
+            }
+        });
+        res.json(blogs);
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
 
 export const ReadCarr = async (req, res)=>{
     try{

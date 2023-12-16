@@ -10,6 +10,7 @@ import Recuperado from '../pages/recoverOK';
 import Sigbici from '../pages/sigbici';
 import Crud from '../pages/crud';
 import BikeMenu from '../pages/menuBici';
+import HistMenu from '../pages/historial';
 function Rutas(){
     return(
         <Routes>
@@ -22,6 +23,7 @@ function Rutas(){
             <Route path='/sigbici' element={<Sigbici/>} />
             <Route path='/crud' element={<Crud/>} />
             <Route path='/bicis' element={<BikeMenu/>} />
+            <Route path='/history' element={<HistMenu/>} />
         </Routes>
     )
 }

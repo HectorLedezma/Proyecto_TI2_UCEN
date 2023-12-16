@@ -6,7 +6,8 @@ import {
     CreateBike,
     CreateEst,
     ReadAllB,
-    ReadCarr
+    ReadCarr,
+    ReadAllHist
 } from '../controller/BlogController.js';
 
 const router = express.Router();
@@ -15,7 +16,8 @@ router.post('/create/',Create)
 router.get('/select/:rut',ReadOne);
 router.get('/select',ReadAll);
 router.get('/selectB/:rut_e',ReadAllB);
-router.get('/selectC',ReadCarr)
+router.get('/selectC',ReadCarr);
+router.get('/selectH/:rut_e',ReadAllHist);
 //router.put('/update',Update);
 //router.delete('/delete',Delete);
 router.post('/createE/',CreateEst);

@@ -30,3 +30,10 @@ export const CarreraModel = db.define('Carrera',
         tableName: 'Carrera'
     }
 )
+
+export const HistModel = db.define('ingreso_egreso',
+    {},{
+        timestamps: false,
+        tableName: 'ingreso_egreso'
+    }
+)
