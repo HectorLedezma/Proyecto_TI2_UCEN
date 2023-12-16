@@ -5,10 +5,13 @@ import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiHide, BiShow, BiUser } from "react-icons/bi";
 import user from '../pages/users.json'
 import CryptoJS from 'crypto-js';
-import Heading from "./heading";
-import { conexion } from "../ConectionSQL/conexion";
+import Heading from "../Componentes/heading";
+import { ListaCarrera, conexion } from "../ConectionSQL/conexion";
 import { FaPhoneAlt,FaUniversity } from "react-icons/fa";
 import { FaUserGraduate } from "react-icons/fa";
+//import DropD from "../Componentes/dropdown";
+
+
 
 function Signup(){
     const cambio = (ojo) => {
@@ -106,6 +109,7 @@ function Signup(){
 
     function Revisa(rut,nomb,apel,fono,mail,pass,pess,carr){
         let con = new conexion();
+        //console.log('Carrera: ',carr);
         //chekear usuario
         con.leer('').then(data => {
                 //console.log(data)
@@ -134,34 +138,19 @@ function Signup(){
                         "rut_e": rut,
                         "carrera":carr
                     }
-                    con.crearEst(Nest);
-                    alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
-                    navigate("/");  
+                    try {
+                        con.crearEst(Nest);
+                        alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
+                        navigate("/");    
+                    } catch (error) {
+                        console.log('Error')
+                    }
+                      
                 }
             })
             .catch(error => {
             console.error("Error al leer los datos:", error);
         });
-        /*const existe = mail in user;
-        //chekear pass
-        const confir = revisapass(pass,pess);
-        if(!existe && confir){
-            let Nuser = {
-                "Mail":mail,
-                "Nombre":nomb,
-                "Apellido":apel,
-                "Pass":CryptoJS.SHA256(pass).toString(),
-                "Type":"0"
-            }
-            
-            con.crear(Nuser);
-            alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
-            navigate("/");
-            
-            //console.log(his);
-
-        }
-        */
     }
 
     function existeUs(mail){
@@ -188,6 +177,8 @@ function Signup(){
 
     
     const [rut,SetRut] = useState(true);
+    
+
     return(
         <div id="page" className="site login-show">
             <div className="container">
@@ -300,18 +291,9 @@ function Signup(){
                                         </div>
                                     </div>
                                     <div className="userInput">
-                                        <div className="userInputContent">
-                                            <div className="IconSide centrado">
-                                                <FaUniversity fontSize='25'/>
-                                            </div>
-                                            <div className="InputSide centrado">
-                                                <input onChange={
-                                                    ev=>{
-                                                        ev.preventDefault();
-                                                        SetNew(existeUs(correo.current.value));
-                                                    }
-                                                } ref={carrer} className="userInputText" type="email" placeholder=" Ingresa tu carrera"/>
-                                            </div>
+                                        <div className="userInputContent" ref={carrer}>
+                                            <FaUniversity fontSize='25'/>
+                                            <ListaCarrera/>
                                         </div>
                                     </div>
                                     <p className="badText" hidden={samepass}>las contraseñas no coinsiden</p>
@@ -326,7 +308,7 @@ function Signup(){
                                                 correo.current.value,
                                                 passi1.current.value,
                                                 passi2.current.value,
-                                                carrer.current.value
+                                                parseInt(carrer.current.childNodes[1].childNodes[0].childNodes[0].id)
                                                 );
 
                                         }

@@ -27,6 +27,36 @@ body{
     background-color: #efefef;
 }
 
+.dropdown{
+    height: 30px;
+}
+
+.dropdown-toggle{
+    background-color: #ff730000;
+    margin: 0px;
+    height: 30px;
+}
+
+.DrpDwn{
+    width: 100%;
+}
+
+.DrpDwnMenu{
+    background-color: white;
+    border-radius: 10px;
+    border-style: groove;
+    border-width: 2px;
+    width: 71.5%;
+    max-width: 402.2px;
+}
+
+.DrpDwnMenuItem{
+    color: white;
+    margin-bottom: 2.5px;
+    margin-top: 2.5px;
+    
+}
+
 .t-signup{
     cursor: pointer;
 }
@@ -53,11 +83,9 @@ ul{
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: 500px;
+    max-width: auto;
     min-height: 550px;
-    /*margin: 3em auto;*/
     background-color: var(--main-color);
-    /*background-color: var(--dark-color);*/
     overflow: hidden;
     box-shadow: rgba(0, 0, 0, 0.45) 0 25px 20px -20px;
 }
@@ -201,6 +229,7 @@ form .forgot {
     border-radius: 20px;
     margin: 0 0 10px;
     text-align: right;
+    height: 40px;
 }
 
 .userInputContent{
@@ -212,7 +241,6 @@ form .forgot {
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 .clickeable{
     cursor: pointer;
@@ -237,8 +265,12 @@ form .forgot {
 .InputSide{
     width: 90%;
 }
-
+/*No responsive*/
 @media screen and (min-width: 768px) {
+    .DrpDwnMenu{
+        width: 30%;
+        max-width: 300px;
+    }
     h2{
         font-size: 1.7em;
         font-weight: 400;
@@ -259,6 +291,7 @@ form .forgot {
     .wrappr>div {
         flex-direction: row;
         max-width: 800px;
+        margin: 3em auto;
     }
     .signup .content-heading .y-style {
         height: 100%;

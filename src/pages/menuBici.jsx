@@ -1,12 +1,12 @@
-import { Navigate, Outlet, useNavigate} from "react-router-dom";
+import {/*Navigate,*/ Outlet, useNavigate} from "react-router-dom";
 //import { conexion } from "../ConectionSQL/conexion";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import Heading from "./heading";
-import UserMenu from './UserMenu';
+import Heading from "../Componentes/heading";
+import UserMenu from '../Componentes/UserMenu';
 import "../styles/styleUser.css"
 import Cookies from 'universal-cookie';
-import { MdPedalBike } from 'react-icons/md';
-import { useState } from "react";
+//import { MdPedalBike } from 'react-icons/md';
+//import { useState } from "react";
 
 function TraeData(Nav){
     let cock = new Cookies();
@@ -53,7 +53,7 @@ function TraeData(Nav){
 function BikeMenu() {
     const navigate = useNavigate();
     let cock = new Cookies();
-    const [bicis,setBicis] = useState(TraeData(navigate));
+    const bicis = TraeData(navigate);
     return(
         <div id="page" className="site login-show">
             
@@ -63,7 +63,7 @@ function BikeMenu() {
                         <Heading wel={
                             (
                                 <div>
-                                <h1>Bicis de<br/>Usuario</h1>
+                                    <h1 className="clrWhite">Bicis de<br/>Usuario</h1>
                                     {/* Contenido del perfil del usuario */}
                                 </div>
                             )
@@ -81,7 +81,7 @@ function BikeMenu() {
                                         ev.preventDefault();
                                         navigate('/sigbici')
                                     }
-                                } id='BtnLogIn' className="Iniciar InputSide">
+                                } id='BtnLogIn' className="clrWhite Iniciar InputSide">
                                     Registrar Bici
                                 </button>
 

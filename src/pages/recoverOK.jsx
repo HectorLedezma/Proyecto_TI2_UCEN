@@ -1,6 +1,6 @@
 import { Outlet, useNavigate} from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import Heading from './heading';
+import Heading from '../Componentes/heading';
 import { FaQuestionCircle } from "react-icons/fa";
 import '../styles/styleSignup.css';
 

@@ -2,7 +2,7 @@ import { useRef} from 'react';
 import { Outlet, useNavigate} from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import Heading from './heading';
+import Heading from '../Componentes/heading';
 import { FaQuestionCircle } from "react-icons/fa";
 import '../styles/styleSignup.css';
 

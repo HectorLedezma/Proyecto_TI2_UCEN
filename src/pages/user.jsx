@@ -1,9 +1,9 @@
 import { Outlet, useNavigate} from "react-router-dom";
 //import { conexion } from "../ConectionSQL/conexion";
 import { IoMdArrowRoundBack } from "react-icons/io";
-import Heading from "./heading";
+import Heading from "../Componentes/heading";
 import '../styles/profile.css'
-import UserMenu from './UserMenu';
+import UserMenu from '../Componentes/UserMenu';
 import "../styles/styleUser.css"
 import { IoSchoolOutline } from "react-icons/io5";
 import { TbWorldHeart } from "react-icons/tb";
@@ -20,7 +20,6 @@ function TraeData(nav){
     let con = new conexion();
     con.leerB(datos.rut).then(data =>{
         cock.set('BiciData',data,{path:'/'});
-        //console.log(cock.get('BiciData'));
         nav('/bicis');
     }).catch(error => {
         console.error("Error al leer los datos:", error);
@@ -40,7 +39,7 @@ function UserProfile() {
                         <Heading wel={
                             (
                                 <div>
-                                <h1>Perfil de<br/>Usuario</h1>
+                                <h1 className="clrWhite">Perfil de Usuario</h1>
                                     {/* Contenido del perfil del usuario */}
                                     
                                 </div>
@@ -58,8 +57,9 @@ function UserProfile() {
                                         ev.preventDefault();
                                         TraeData(navigate);
                                     }
-                                } id='BtnLogIn' className="centrado Iniciar InputSide izq">
-                                    <MdPedalBike size={25} style={{ margin: '10px' }}/> Ver bicis
+                                } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
+                                    <MdPedalBike size={25} style={{ margin: '10px' }}/>
+                                    Ver bicis
                                 </button>
                                 <div className="linksContainer">
                                     
@@ -71,7 +71,7 @@ function UserProfile() {
                                                 href="https://aula2023.ucentral.cl/"
                                                 target="_blank"
                                                 rel="noopener noreferrer"
-                                                className='fill izq'
+                                                className='userOp fill izq'
                                             >
                                                 Aula Virtual Ucen 2023
                                             </a>

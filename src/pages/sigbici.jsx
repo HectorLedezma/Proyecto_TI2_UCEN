@@ -3,7 +3,7 @@ import { useNavigate} from "react-router-dom";
 import { IoMdArrowRoundBack,IoMdBarcode } from "react-icons/io";
 import { MdPedalBike } from "react-icons/md";
 import { FaPaintbrush } from "react-icons/fa6";
-import Heading from "./heading";
+import Heading from "../Componentes/heading";
 import { AiFillStar,AiOutlineHeatMap } from "react-icons/ai";
 import "../styles/styleSigbici.css"
 import { conexion } from "../ConectionSQL/conexion";
@@ -162,7 +162,7 @@ return (
                                     onClick={
                                     ev=>{
                                     ev.preventDefault();
-                                    navigate('/UserProf')
+                                    navigate('/bicis')
                                     }
                                     }
                                         onMouseOver={(e) => e.target.title = 'Volver'} 

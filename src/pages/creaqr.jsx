@@ -1,6 +1,6 @@
 //import {useRef, useState} from 'react';
 import '../styles/styleSignup.css'
-import { Link, Outlet, useNavigate} from "react-router-dom";
+import {Outlet, useNavigate} from "react-router-dom";
 //import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import QRCode from 'react-qr-code';
 import Cookies from 'universal-cookie';
