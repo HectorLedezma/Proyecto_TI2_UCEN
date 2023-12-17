@@ -8,7 +8,7 @@ import "../styles/styleUser.css"
 import { IoSchoolOutline } from "react-icons/io5";
 import { TbWorldHeart } from "react-icons/tb";
 import { TbCalendarTime } from "react-icons/tb";
-import { FaUniversity } from "react-icons/fa";
+import { FaClock, FaUniversity } from "react-icons/fa";
 import Cookies from 'universal-cookie';
 import { MdPedalBike } from 'react-icons/md';
 import { conexion } from "../ConectionSQL/conexion";
@@ -65,7 +65,17 @@ function UserProfile() {
                                             Ver bicis
                                         </button>
                                     </div>
-                                    
+                                    <div className='userInput'>
+                                        <button onClick={
+                                            ev=>{
+                                                ev.preventDefault();
+                                                navigate('/history')
+                                            }
+                                        } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
+                                            <FaClock size={25} style={{ margin: '10px' }}/>
+                                            Historial de accesos
+                                        </button>
+                                    </div>
                                     <div className='userInput'>
                                         <div className="userInputContent">
                                             <div className="InputSide centrado">

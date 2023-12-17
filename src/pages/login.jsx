@@ -5,7 +5,7 @@ import LogoCleta from '../images/QRcleta.png'
 //import Mail from '../images/mail.png'
 //import Pass from '../images/pass.png'
 import { Outlet, useNavigate} from "react-router-dom";
-import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
+import { AiOutlineLock } from "react-icons/ai";
 import { BiShow, BiHide, BiUser } from 'react-icons/bi'
 import CryptoJS from 'crypto-js';
 import Users from './users.json'
