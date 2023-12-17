@@ -1,5 +1,5 @@
 import { useRef} from 'react';
-import { Navigate, Outlet, useNavigate} from "react-router-dom";
+import { Outlet, useNavigate} from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Heading from '../Componentes/heading';
@@ -108,15 +108,16 @@ function Send(rut,mail,val,nav){//Funcion Para enviar correo
                 console.log('Nueva Clave: ',npas);
                 const CryptoNpas = CryptoJS.SHA256(npas).toString();
                 const NM = new Nodocorreo();
+                toast.loading("Procesando tu solicitud...",{position:toast.POSITION.TOP_CENTER});
                 NM.enviar(mail,npas)
                 con.cambiaClave(rut,CryptoNpas);
+                nav("/recoverOk");
+                /*
                 toast.success('Se envió un correo con la nueva contraseña',{position:toast.POSITION.TOP_CENTER,
                     autoClose: 5000,
                     onClose:()=>{
-                        setTimeout(() => {
-                            nav("/");
-                        }, 5000);
-                    }});
+                        
+                    }});*/
             }
         }).catch((error)=>{
             toast.error('Error',{position:toast.POSITION.TOP_CENTER})

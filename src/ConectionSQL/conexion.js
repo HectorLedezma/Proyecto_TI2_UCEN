@@ -61,7 +61,7 @@ export class conexion{
 
     async cambiaClave(rut,newpass){
         try {
-            await axios.put(`${uri}/updateP/${rut}`,{"clave":String(newpass)})
+            await axios.put(`${uri}/updateP/${rut}`,{"clave":newpass})
         } catch (error) {
             console.log(error);
         }

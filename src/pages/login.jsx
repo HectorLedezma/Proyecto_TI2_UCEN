@@ -6,7 +6,7 @@ import LogoCleta from '../images/QRcleta.png'
 //import Pass from '../images/pass.png'
 import { Outlet, useNavigate} from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
-import { BiShow, BiHide } from 'react-icons/bi'
+import { BiShow, BiHide, BiUser } from 'react-icons/bi'
 import CryptoJS from 'crypto-js';
 import Users from './users.json'
 
@@ -151,7 +151,7 @@ function Login(){
                                             }
                                         }>
                                             <div className="IconSide centrado">
-                                                <AiOutlineMail fontSize="25"/>
+                                                <BiUser fontSize="25"/>
                                             </div>
                                             <div className="InputSide centrado">
                                                 <input autoComplete="off" ref={mailRef} id="InputCorreo" className="userInputText" type="email" placeholder="  Ingresa tu RUT"/>

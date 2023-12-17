@@ -1,45 +1,49 @@
+const cors = require('cors');
 const express = require('express');
 const nodemailer = require('nodemailer');
+const bodyParser = require('body-parser'); // Importa el módulo body-parser
 
 const app = express();
-app.post('/send-email/:mail/:newpass',(req,res)=>{
+
+// Usa body-parser para parsear el cuerpo de la solicitud
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.post('/send-email', (req, res) => {
     const config = {
-        host:'smtp.gmail.com',
-        port:465,
-        secure:true,
-        auth:{
-            user:'qrcleta.ucentral@gmail.com',
-            pass:'hnga jbij wnpd haih'
+        host: 'smtp.gmail.com',
+        port: 465,
+        secure: true,
+        auth: {
+            user: 'qrcleta.ucentral@gmail.com',
+            pass: 'hnga jbij wnpd haih'
         }
-    }
-    let trasp = nodemailer.createTransport(config)
+    };
+
+    let trasp = nodemailer.createTransport(config);
+
     const mensaje = {
-        from:'qrcleta.ucentral@gmail.com',
-        to:req.params.mail,
-        subject:'Recuperación de contraseña',
-        text:'Nueva contraseña: '+req.params.newpass
-    }
-    trasp.sendMail(mensaje,(err,inf)=>{
-        if(err){
+        from: 'qrcleta.ucentral@gmail.com',
+        to: req.body.mail, // Accede al valor desde el cuerpo de la solicitud (req.body)
+        subject: 'Recuperación de contraseña',
+        text: 'Nueva contraseña: ' + req.body.newpass // Accede al valor desde el cuerpo de la solicitud (req.body)
+    };
+    console.log('Body');
+    console.log(req.body);
+    trasp.sendMail(mensaje, (err, inf) => {
+        
+        if (err) {
             res.status(500).send(err.message);
-        }else{
+            console.log(err)
+        } else {
+            res.status(200).send('Correo enviado correctamente');
             console.log('Enviado');
-            res.status(200).jsonp(req.body);
         }
     });
-})
-
-const port = 3001; // Puedes usar cualquier puerto que desees
-app.listen(port, () => {
-    console.log(`Servidor Node.js en http://localhost:${port}`);
-  });
-/*
-
-
-app.get('/api/data', (req, res) => {
-  // Lógica para manejar las solicitudes API
-  res.json({ message: 'Datos desde el servidor Node.js' });
 });
 
-
-*/
+const port = 3001;
+app.listen(port, () => {
+    console.log(`Servidor Node.js en http://localhost:${port}`);
+});

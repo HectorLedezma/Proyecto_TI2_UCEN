@@ -52,16 +52,19 @@ function UserProfile() {
                                 {/*Espacio para componentes */}
                                 <div className="afterform">
                                 <div className='welcome'>
-                                <button onClick={
-                                    ev=>{
-                                        ev.preventDefault();
-                                        TraeData(navigate);
-                                    }
-                                } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
-                                    <MdPedalBike size={25} style={{ margin: '10px' }}/>
-                                    Ver bicis
-                                </button>
+                                
                                 <div className="linksContainer">
+                                    <div className='userInput'>
+                                        <button onClick={
+                                            ev=>{
+                                                ev.preventDefault();
+                                                TraeData(navigate);
+                                            }
+                                        } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
+                                            <MdPedalBike size={25} style={{ margin: '10px' }}/>
+                                            Ver bicis
+                                        </button>
+                                    </div>
                                     
                                     <div className='userInput'>
                                         <div className="userInputContent">
