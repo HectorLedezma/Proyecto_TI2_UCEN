@@ -261,7 +261,7 @@ form .forgot {
     width: 100%;
     color: white;
     font-weight: bold;
-    font-size: large;
+    font-size: small;
     border: 0px solid var(--light-color);
     background-color: #efefef00;
 }
@@ -305,8 +305,14 @@ form .forgot {
         max-width: 800px;
         margin: 3em auto;
     }
+    .content-form{
+        width: 130%;
+        
+    }
     .signup .content-heading .y-style {
-        height: 100%;
+        width: 130%;
+        
+        height: 90%;
         justify-content: space-between;
     }
     .content-form::before{

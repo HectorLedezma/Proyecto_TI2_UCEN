@@ -104,7 +104,6 @@ ul{
     height: 40px;
     margin-left: 45%;
     border-radius: 100%;
-    margin-top: -15px;
 }
 
 .GoBack:hover{
@@ -280,7 +279,7 @@ form .forgot {
     width: 100%;
     color: white;
     font-weight: bold;
-    font-size: large;
+    font-size: small;
     border: 0px solid var(--light-color);
 }
 
@@ -302,9 +301,8 @@ form .forgot {
 }
 
 @media screen and (min-width: 768px) {
-    .GoBack{
-        margin-top: -75px;
-    }
+    
+    
     h2{
         font-size: 1.7em;
         font-weight: 400;
@@ -327,8 +325,11 @@ form .forgot {
         margin: 3em auto;
         max-width: 800px;
     }
+    .content-form{
+        width: 130%;
+    }
     .signup .content-heading .y-style {
-        height: 100%;
+        height: 90%;
         justify-content: space-between;
     }
     .content-form::before{
