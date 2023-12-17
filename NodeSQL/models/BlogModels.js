@@ -1,3 +1,4 @@
+import { DataTypes } from 'sequelize';
 import db from '../database/db.js';
 
 //import {DataTypes} from 'sequelize';
@@ -11,7 +12,18 @@ export const BikeModel = db.define('transporte',
 
 
 export const UserModel = db.define('usuario',
-    {},{
+    {
+        'rut':{
+            type:DataTypes.STRING,
+            allowNull:false,
+            primaryKey:true
+        },
+        'clave':{
+            type:DataTypes.STRING,
+            allowNull:false,
+            primaryKey:false
+        }
+    },{
         timestamps: false,
         tableName: 'usuario'
     }

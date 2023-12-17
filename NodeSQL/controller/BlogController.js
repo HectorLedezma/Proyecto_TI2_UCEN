@@ -15,6 +15,25 @@ export const Create = async (req, res)=>{
     }
 }
 
+export const Update = async (req, res)=>{
+    try{
+        console.log(UserModel);
+        const [count, updatedRows] = await UserModel.update(req.body, {
+            where: { "rut": req.params.rut }
+          });
+        console.log(`Filas actualizadas: ${count}`);
+        // Verifica si se actualizaron filas antes de enviar la respuesta
+        if (count > 0) {
+            res.json({ success: true, message: `Se actualizaron ${count} filas.` });
+        } else {
+            res.json({ success: false, message: 'No se encontraron filas para actualizar.' });
+        }
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
+
 export const CreateEst = async (req, res)=>{
     let op = {
         raw:true,
@@ -98,7 +117,7 @@ export const ReadCarr = async (req, res)=>{
 
 export const ReadOne = async (req, res)=>{
     try{
-        let blogs = await UserModel.findAll({
+        let blogs = await UserModel.findOne({
             attributes:['rut','nombre','apellido','fono','correo','estado','clave'],
             where:{
                 'rut':req.params.rut
@@ -110,18 +129,7 @@ export const ReadOne = async (req, res)=>{
     }
 }
 /*
-export const Update = async (req, res)=>{
-    try{
-        let blogs = await UserModel.update(req.body,{
-            where:{
-                'Mail':req.params.Mail
-            }
-        });
-        res.json({message:'Actualizado'});
-    }catch(error){
-        res.json({message:error.message})
-    }
-}
+
 
 export const Delete = async (req, res)=>{
     try{
