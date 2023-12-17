@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 16-12-2023 a las 04:48:42
+-- Tiempo de generación: 17-12-2023 a las 19:22:04
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -86,10 +86,11 @@ INSERT INTO `estudiante` (`rut_e`, `carrera`) VALUES
 ('18742080-6', 1),
 ('20406920-4', 1),
 ('20600701-k', 1),
-('5453479-5', 2),
 ('85.841.679-5', 2),
 ('18778296-1', 3),
-('9999999-9', 3);
+('9999999-9', 3),
+('20600715-k', 4),
+('213', 6);
 
 -- --------------------------------------------------------
 
@@ -146,7 +147,8 @@ INSERT INTO `ingreso_egreso` (`id_ie`, `rut_e`, `rut_g`, `fecha`, `hora`, `edifi
 (15, '9999999-9', '123', '2023-12-10', '03:13:55', 'A', 'ingreso'),
 (16, '9999999-9', '123', '2023-12-10', '03:14:00', 'A', 'egreso'),
 (17, '9999999-9', '123', '2023-12-10', '03:17:06', 'A', 'ingreso'),
-(18, '9999999-9', '123', '2023-12-10', '03:17:12', 'B', 'egreso');
+(18, '9999999-9', '123', '2023-12-10', '03:17:12', 'B', 'egreso'),
+(19, '20600701-k', '64867030-3', '2023-12-20', '13:40:00', 'B', 'ingreso');
 
 -- --------------------------------------------------------
 
@@ -212,7 +214,9 @@ CREATE TABLE `transporte` (
 INSERT INTO `transporte` (`id_t`, `marca`, `modelo`, `color`, `tipo`, `est_trans`, `rut_e`) VALUES
 ('1', 'oxford', 'rd1', 'negro', 'bicicleta', 0, '9999999-9'),
 ('2', 'oxford', 'rd1', 'negro', 'bicicleta', 1, '18778296-1'),
-('3', 'chinito', 'infunable', 'rojo', 'scooter', 1, '9999999-9');
+('MK-Ultra', 'Cleta', 'AAA', 'Negro', 'Bicicleta', 0, '20600701-k'),
+('sdsssddsds', 'dss', 'XDXD', 'Galaxia', 'Bicicleta', 0, '20600701-k'),
+('XDXXD', 'Honda', 'SCP-235', 'Blanco', 'Moto', 0, '20600701-k');
 
 -- --------------------------------------------------------
 
@@ -224,8 +228,8 @@ CREATE TABLE `usuario` (
   `rut` varchar(20) COLLATE utf8mb4_spanish2_ci NOT NULL,
   `nombre` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `apellido` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
-  `fono` int(20) DEFAULT NULL,
-  `correo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `fono` varchar(64) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `correo` varchar(64) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `estado` int(11) DEFAULT 0,
   `clave` varchar(200) COLLATE utf8mb4_spanish2_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
@@ -235,24 +239,21 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`rut`, `nombre`, `apellido`, `fono`, `correo`, `estado`, `clave`) VALUES
-('', '', '', NULL, '', 0, 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'),
-('1', '123', '123', 123, '123', 1, '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a'),
-('10', 'alumnoprueba', 'alumnoprueba', 1111111, 'a@a.cl', 0, 'notienejejeje'),
-('123', 'gua', 'ardia', 123, 'guardia@guardia.com', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
-('16406911-7', 'dsfsd', 'fsfsd', 878787876, 'mail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
-('18742080-6', 'vane', 'casanga', 29834287, 'vane@gmail.com', 0, '07123e1f482356c415f684407a3b8723e10b2cbbc0b8fcd6282c49d37c9c1abc'),
-('18778296-1', 'da', 'niel', 1111111, 'a@a.cl', 0, 'jejej'),
-('20406920-4', 'Vanessa', 'Zamora', 3456789, 'Vanevane@gmail.com', 0, '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5'),
-('20600701-k', 'Hector', 'Ledezma', 4567898, 'correo@gmail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
-('21312312312', 'waLuigi', 'ardia', 123, 'asd@XD.com', 0, 'C1C224B03CD9BC7B6A86D77F5DACE40191766C485CD55DC48CAF9AC873335D6F'),
-('5453479-5', 'AAAAAA', 'EEEEEEE', 12312324, 'AAAAA@gmail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
-('64867030-3', 'Juanita', 'DelFuturo', 123, 'a@a.cl', 1, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
+('1', '123', '123', '123', '123', 1, '4dff4ea340f0a823f15d3f4f01ab62eae0e5da579ccb851f8db9dfe84c58b2b37b89903a740e1ee172da793a6e79d560e5f7f9bd058a12a280433ed6fa46510a'),
+('123', 'gua', 'ardia', '123', 'guardia@guardia.com', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
+('16406911-7', 'dsfsd', 'fsfsd', '878787876', 'mail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
+('18742080-6', 'vane', 'casanga', '29834287', 'vane@gmail.com', 0, '07123e1f482356c415f684407a3b8723e10b2cbbc0b8fcd6282c49d37c9c1abc'),
+('18778296-1', 'da', 'niel', '1111111', 'a@a.cl', 0, 'AJAJAJAJAJAJ'),
+('20406920-4', 'Vanessa', 'Zamora', '3456789', 'Vanevane@gmail.com', 0, '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5'),
+('20600701-k', 'Hector', 'Ledezma', '4567898', 'hectorledezmar@gmail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
+('20600715-k', 'wersd', 'qwretsd', '3242r2rer23', '3ewfsdfsdc', 0, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+('213', 'sfdsfs', 'wds', 'asdaf', 'asdfsa', 0, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
+('64867030-3', 'Juanita', 'DelFuturo', '123', 'a@a.cl', 1, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
 ('85.841.679-5', 'admini', 'asdas', NULL, 'asfsdads', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
-('987', 'admin', 'administrador', 123, 'a@a.cl', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
-('987654321', 'wario', 'ardia', 123, 'asd@XD.com', 0, 'C1C224B03CD9BC7B6A86D77F5DACE40191766C485CD55DC48CAF9AC873335D6F'),
-('9999999-9', 'estudiante', 'prueba', 1, 'a@a.cl', 0, ''),
-('admin', 'admin', 'admin', 123, 'admin@admin.cl', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
-('guardia2', 'guardia2', 'pepe', 123, 'guardi2a@guardia.com', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2');
+('987', 'admin', 'administrador', '123', 'a@a.cl', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
+('9999999-9', 'estudiante', 'prueba', '1', 'a@a.cl', 0, ''),
+('admin', 'admin', 'admin', '123', 'admin@admin.cl', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
+('guardia2', 'guardia2', 'pepe', '123', 'guardi2a@guardia.com', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2');
 
 --
 -- Índices para tablas volcadas
@@ -324,7 +325,7 @@ ALTER TABLE `Carrera`
 -- AUTO_INCREMENT de la tabla `ingreso_egreso`
 --
 ALTER TABLE `ingreso_egreso`
-  MODIFY `id_ie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_ie` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT de la tabla `passwords`
@@ -346,8 +347,8 @@ ALTER TABLE `admin`
 -- Filtros para la tabla `estudiante`
 --
 ALTER TABLE `estudiante`
-  ADD CONSTRAINT `carrera_estudiante` FOREIGN KEY (`carrera`) REFERENCES `Carrera` (`ID`),
-  ADD CONSTRAINT `estudiante_ibfk_1` FOREIGN KEY (`rut_e`) REFERENCES `usuario` (`rut`);
+  ADD CONSTRAINT `carrera_estudiante` FOREIGN KEY (`carrera`) REFERENCES `Carrera` (`ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `estudiante_ibfk_1` FOREIGN KEY (`rut_e`) REFERENCES `usuario` (`rut`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `guardia`
