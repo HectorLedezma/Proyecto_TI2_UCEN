@@ -283,6 +283,7 @@ form .forgot {
     border: 0px solid var(--light-color);
 }
 
+
 .userInputIcon{
     width: 20px;
 }
@@ -301,7 +302,13 @@ form .forgot {
 }
 
 @media screen and (min-width: 768px) {
-    
+    .userInput{
+        width: 146%;
+        margin-left: -23%;
+    }
+    .userInputText::placeholder{
+        font-size: x-small;
+    }
     
     h2{
         font-size: 1.7em;

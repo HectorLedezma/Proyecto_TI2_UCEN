@@ -266,6 +266,7 @@ form .forgot {
     background-color: #efefef00;
 }
 
+
 .userInputIcon{
     width: 20px;
 }
@@ -290,7 +291,9 @@ form .forgot {
         color: white;
         margin-bottom: 20px;
     }
-
+    .userInputText::placeholder{
+        font-size: x-small;
+    }
     .ImgLogoU{
         max-height: 100px;
         margin-right: 60px;
