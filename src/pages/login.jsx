@@ -102,11 +102,11 @@ function Login(){
             dat.then(data => {
                 //console.log(data[0].Pass);
                 //console.log(data);
-                if(data[0].rut === mail && data[0].clave === Cpass){
+                if(data.rut === mail && data.clave === Cpass){
                     console.log('Correcto')
                     //let datos = JSON.stringify(data[0]);
                     let cock = new Cookies();
-                    cock.set('Datos',data[0],{path:'/'})
+                    cock.set('Datos',data,{path:'/'})
                     navigate("/UserProf")
                 }else{
                     console.log('Incorrecto')
@@ -115,10 +115,6 @@ function Login(){
               .catch(error => {
                 console.error("Error al leer los datos:", error);
               });
-            //console.log(dat)
-
-            
-            
         }catch(ex){
             console.log('error en "Verificar()": '+String(ex));
         }

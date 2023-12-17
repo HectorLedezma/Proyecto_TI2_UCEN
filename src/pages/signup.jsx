@@ -118,34 +118,37 @@ function Signup(){
         //});
         //console.log('Carrera: ',carr);
         //chekear usuario
-        con.leer('').then(data => {
+        con.leerT().then(data => {
                 //console.log(data)
                 let existe = false;
                 for(let i = 0; i < data.length; i++){
                     //console.log(data[i].rut);
                     if(data[i].rut === rut){
                         existe = true;
+                     //   console.log('Ya existe');
+                        toast.error('El RUT ingresado ya existe',{position:toast.POSITION.TOP_CENTER});
                         break;
                     }
                 }
                 //console.log('Existe:'+String(existe));
                 const confir = revisapass(pass,pess);
                 if((!existe && confir) && validaRut(rut)){
-                    let Nuser = {
-                        "rut": rut,
-                        "nombre":nomb,
-                        "apellido":apel,
-                        "fono": fono,//ese tiene que ser String, no Int
-                        "correo":mail,
-                        "estado": 0,
-                        "clave":CryptoJS.SHA256(pass).toString()
-                      }
-                    con.crear(Nuser);
-                    let Nest ={
-                        "rut_e": rut,
-                        "carrera":carr
-                    }
                     try {
+                        let Nuser = {
+                            "rut": rut,
+                            "nombre":nomb,
+                            "apellido":apel,
+                            "fono": fono,//ese tiene que ser String, no Int
+                            "correo":mail,
+                            "estado": 0,
+                            "clave":CryptoJS.SHA256(pass).toString()
+                        }
+                        con.crear(Nuser);
+                        let Nest ={
+                            "rut_e": rut,
+                            "carrera":carr
+                        }
+                    
                         con.crearEst(Nest);
                         const mensaje = 'Usuario '+nomb+' '+apel+'\nse ha creado con exito';
                         
