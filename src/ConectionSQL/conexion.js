@@ -35,16 +35,36 @@ export class conexion{
         await axios.post(uri+'/createB/',data);
     }
 
-    async leer(mail){
+    async leer(rut){
         
         try{
-            const res = await axios.get(`${uri}/select/${mail}`);
-            //console.log(`${uri}/select/${mail}`)
+            const res = await axios.get(`${uri}/select/${rut}`);
+            //console.log(`${uri}/select/${rut}`)
+            this.blog = res.data;
+        }catch(error){
+            this.blog = {};
+        }
+        return this.blog;
+    }
+
+    async leerT(){
+        
+        try{
+            const res = await axios.get(`${uri}/selectT/`);
+            //console.log(`${uri}/select/${rut}`)
             this.blog = res.data;
         }catch(error){
             this.blog = [];
         }
         return this.blog;
+    }
+
+    async cambiaClave(rut,newpass){
+        try {
+            await axios.put(`${uri}/updateP/${rut}`,{"clave":String(newpass)})
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async leerB(rut){

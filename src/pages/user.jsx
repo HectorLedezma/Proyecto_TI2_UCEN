@@ -118,7 +118,7 @@ function UserProfile() {
                                         rel="noopener noreferrer"
                                         className='fill izq'
                                         >
-                                        Pagina Oficial Universidad Central
+                                        Sitio Oficial U. central
                                         </a>
                                     </div>
                                     </div>
