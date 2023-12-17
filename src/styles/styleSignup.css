@@ -80,7 +80,7 @@ ul{
 :is(.login, .signup)>div{
     position: relative;
     flex: 1 0 50%;
-    padding: 30px;
+    padding: 70px;
 }
 
 .content-heading .y-style {
@@ -100,10 +100,11 @@ ul{
     border-width: 2px;
     border-style: groove;
     border-color: var(--dark-color);
-    width: 60px;
-    height: 60px;
-    margin-left: 42%;
+    width: 40px;
+    height: 40px;
+    margin-left: 45%;
     border-radius: 100%;
+    margin-top: -15px;
 }
 
 .GoBack:hover{
@@ -301,6 +302,9 @@ form .forgot {
 }
 
 @media screen and (min-width: 768px) {
+    .GoBack{
+        margin-top: -75px;
+    }
     h2{
         font-size: 1.7em;
         font-weight: 400;
