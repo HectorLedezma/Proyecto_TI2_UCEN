@@ -11,6 +11,7 @@ import { FaUserGraduate } from "react-icons/fa";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import Cookies from "universal-cookie";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 function UpUser(){
     const cambio = (ojo) => {
@@ -244,12 +245,32 @@ function UpUser(){
                                                 passi2.current.value,
                                                 parseInt(carrer.current.childNodes[1].childNodes[0].childNodes[0].id)
                                                 );
-
+                                            toast.success('La modificacion fué exitosa', {
+                                                position:toast.POSITION.TOP_CENTER,
+                                                autoClose: 5000,
+                                                onClose:()=>{
+                                                    setTimeout(() => {
+                                                        navigate("/UserProf");
+                                                    }, 5200);
+                                                }
+                                            });
                                         }
                                     } className="Iniciar" type="sumbit">Confirmar cambios
                                         
                                     </button>
                                 </form>
+                                <button 
+                                    onClick={
+                                        ev=>{
+                                            /*Boton para volver*/
+                                            ev.preventDefault();
+                                            navigate('/UserProf');//eso redirige a la ruta especificada
+                                        }
+                                    }
+                                    onMouseOver={(e) => e.target.title = 'Volver'} 
+                                    id='BtnLogIn' className="GoBack centrado" type="sumbit">
+                                    <IoMdArrowRoundBack size={60}/>
+                                </button>
                             </div>
                         </div>
                     </div>
