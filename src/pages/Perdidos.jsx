@@ -1,17 +1,14 @@
-import {/*Navigate,*/ Outlet, useNavigate} from "react-router-dom";
-//import { conexion } from "../ConectionSQL/conexion";
+import {Outlet, useNavigate} from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import Heading from "../Componentes/heading";
 import UserMenu from '../Componentes/UserMenu';
 import "../styles/styleUser.css"
 import Cookies from 'universal-cookie';
-import { ListaBici } from "../ConectionSQL/conexion";
 import MenuOpci from "../Componentes/MenuOp";
-//import { MdPedalBike } from 'react-icons/md';
-//import { useState } from "react";
+import { ObjPerdido } from "../ConectionSQL/conexion";
 
 
-function BikeMenu() {
+function LostMenu() {
     const navigate = useNavigate();
     let cock = new Cookies();
     //const bicis = TraeData(navigate);
@@ -24,8 +21,7 @@ function BikeMenu() {
                         <Heading wel={
                             (
                                 <div>
-                                    <h1 className="clrWhite">Bicis de<br/>Usuario</h1>
-                                    {/* Contenido del perfil del usuario */}
+                                    <h1 className="clrWhite">Objetos<br/>Perdidos</h1>
                                 </div>
                             )
                         } 
@@ -35,23 +31,13 @@ function BikeMenu() {
                             <div className="y-style">
                                 {/*Espacio para componentes */}
                                 <div>
-                                    <ListaBici rut={cock.get('Datos').rut}/>
+                                    <ObjPerdido/>
                                 </div>
-                                <button onClick={
-                                    ev=>{
-                                        ev.preventDefault();
-                                        navigate('/sigbici')
-                                    }
-                                } id='BtnLogIn' className="clrWhite Iniciar InputSide">
-                                    Registrar Bici
-                                </button>
-
                                 <button 
                                     onClick={
                                         ev=>{
                                             /*Boton para volver*/
                                             ev.preventDefault();
-                                            cock.remove('BiciData');
                                             navigate('/UserProf');//eso redirige a la ruta especificada
                                         }
                                     }
@@ -70,4 +56,4 @@ function BikeMenu() {
     );
 }
 
-export default BikeMenu;
+export default LostMenu;

@@ -12,7 +12,8 @@ import {
     UpdateBici,
     UpdateBici2,
     ReadOneB,
-    ReadOnePB
+    ReadOnePB,
+    ReadLost
 } from '../controller/BlogController.js';
 
 const router = express.Router();
@@ -32,6 +33,7 @@ router.get('/selectH/:rut_e',ReadAllHist);
 //router.delete('/delete',Delete);
 router.post('/createE/',CreateEst);
 router.post('/createB/',CreateBike);
+router.get('/selectLost/',ReadLost);
 
 
 export default router

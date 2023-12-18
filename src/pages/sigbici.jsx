@@ -10,6 +10,7 @@ import { conexion } from "../ConectionSQL/conexion";
 import Cookies from "universal-cookie";
 import DropD from "../Componentes/dropdown";
 import { toast } from "react-toastify";
+import MenuOpci from "../Componentes/MenuOp";
 
 
 function Registrar(ser,mar,mod,col,tip){
@@ -23,7 +24,8 @@ function Registrar(ser,mar,mod,col,tip){
             "color":col,
             "tipo":tip,
             "est_trans":0,
-            "rut_e":cok.get('Datos').rut
+            "rut_e":cok.get('Datos').rut,
+            "principal":0
         }
         let con = new conexion();
         try {
@@ -181,6 +183,7 @@ return (
                     </div>
                 </div>
             </div>
+            <MenuOpci/>
         </div>
     </div>
 );

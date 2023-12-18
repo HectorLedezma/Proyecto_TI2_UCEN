@@ -5,6 +5,7 @@ import UserMenu from '../Componentes/UserMenu';
 import "../styles/styleUser.css"
 import Cookies from 'universal-cookie';
 import { Historial } from "../ConectionSQL/conexion";
+import MenuOpci from "../Componentes/MenuOp";
 
 function HistMenu() {
     const navigate = useNavigate();
@@ -48,6 +49,7 @@ function HistMenu() {
                         </div>
                     </div>
                 </div>
+                <MenuOpci/>
             </div>
             <Outlet/>
         </div>

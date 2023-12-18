@@ -61,7 +61,7 @@ export const CarreraModel = db.define('Carrera',
     {},{
         timestamps: false,
         tableName: 'Carrera'
-    }
+    } 
 )
 
 export const HistModel = db.define('ingreso_egreso',
@@ -70,3 +70,26 @@ export const HistModel = db.define('ingreso_egreso',
         tableName: 'ingreso_egreso'
     }
 )
+
+export const LostModel = db.define('Perdido',
+{
+    'Objeto':{
+        type:DataTypes.STRING,
+        allowNull:true,
+        primaryKey:false
+    },
+    'FecEncontrado':{
+        type:DataTypes.DATE,
+        allowNull:true,
+        primaryKey:false
+    },
+    'HrEncontrado':{
+        type:DataTypes.TIME,
+        allowNull:true,
+        primaryKey:false
+    }
+
+},{
+    timestamps: false,
+    tableName: 'Perdido'
+})

@@ -8,11 +8,12 @@ import "../styles/styleUser.css"
 import { IoSchoolOutline } from "react-icons/io5";
 import { TbWorldHeart } from "react-icons/tb";
 import { TbCalendarTime } from "react-icons/tb";
-import { FaClock, FaUniversity } from "react-icons/fa";
+import { FaClock, FaQuestion, FaUniversity} from "react-icons/fa";
 import Cookies from 'universal-cookie';
 import { MdPedalBike } from 'react-icons/md';
 import { conexion } from "../ConectionSQL/conexion";
 import { FaHeartCircleCheck } from "react-icons/fa6";
+import MenuOpci from "../Componentes/MenuOp";
 
 
 function TraeData(nav){
@@ -37,119 +38,98 @@ function UserProfile() {
             <div className="container">
                 <div className="wrappr">
                     <div className="login">
-                        <Heading wel={
-                            (
-                                <div>
+                        <Heading wel={(
+                            <div>
                                 <h1 className="clrWhite">Perfil de Usuario</h1>
-                                    {/* Contenido del perfil del usuario */}
-                                    
-                                </div>
-                            )
-                        } 
-                        logo1={<div/>} 
-                        logo2={<UserMenu userData={cock.get("Datos")}/>}/>
+                            </div>
+                        )} logo1={<div/>} logo2={<UserMenu userData={cock.get("Datos")}/>}/>
+                        
                         <div className="content-form">
                             <div className="y-style">
                                 {/*Espacio para componentes */}
                                 <div className="afterform">
-                                <div className='welcome'>
+                                    <div className='welcome'>
                                 
-                                <div className="linksContainer">
-                                    <div className='userInput'>
-                                        <button onClick={
-                                            ev=>{
-                                                ev.preventDefault();
-                                                TraeData(navigate);
-                                            }
-                                        } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
-                                            <MdPedalBike size={25} style={{ margin: '10px' }}/>
-                                            Ver bicis
-                                        </button>
-                                    </div>
-                                    <div className='userInput'>
-                                        <button onClick={
-                                            ev=>{
-                                                ev.preventDefault();
-                                                navigate('/qrCodeP')
-                                                //TraeData(navigate);
-                                            }
-                                        } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
-                                            <FaHeartCircleCheck size={25} style={{ margin: '10px' }}/>
-                                            Ver bici principal
-                                        </button>
-                                    </div>
-                                    <div className='userInput'>
-                                        <button onClick={
-                                            ev=>{
-                                                ev.preventDefault();
-                                                navigate('/history')
-                                            }
-                                        } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
-                                            <FaClock size={25} style={{ margin: '10px' }}/>
-                                            Historial de accesos
-                                        </button>
-                                    </div>
-                                    <div className='userInput'>
-                                        <div className="userInputContent">
-                                            <div className="InputSide centrado">
-                                            <IoSchoolOutline size={25} style={{ marginRight: '10px' }}/>
-                                            <a
-                                                href="https://aula2023.ucentral.cl/"
-                                                target="_blank"
-                                                rel="noopener noreferrer"
-                                                className='userOp fill izq'
-                                            >
-                                                Aula Virtual Ucen 2023
-                                            </a>
+                                        <div className="linksContainer">
+                                            
+                                            <div className="Sitios">
+                                                <div className="SitioItem clickeable" onClick={ev=>{
+                                                    ev.preventDefault();
+                                                    TraeData(navigate);
+                                                }}>
+                                                    <MdPedalBike className="SitioIcon" size={20}/>
+                                                    <p className="SitioText">Bicis</p>
+                                                </div>
+
+                                                <div className="SitioItem clickeable" onClick={ev=>{
+                                                    ev.preventDefault();
+                                                    navigate('/qrCodeP')
+                                                }}>
+                                                    <FaHeartCircleCheck className="SitioIcon" size={20}/>
+                                                    <p className="SitioText">Bici principal</p>
+                                                </div>
+
+                                                
+                                            </div>
+
+                                            <div className="Sitios">
+                                                <div className="SitioItem clickeable" onClick={ev=>{
+                                                    ev.preventDefault();
+                                                    navigate('/history')
+                                                }}>
+                                                    <FaClock className="SitioIcon" size={20}/>
+                                                    <p className="SitioText">Accesos</p>
+                                                </div>
+
+                                                <div className="SitioItem clickeable" onClick={ev=>{
+                                                    ev.preventDefault();
+                                                    navigate('/lost')
+                                                }}>
+                                                    <FaQuestion className="SitioIcon" size={20}/>
+                                                    <p className="SitioText">Obj. perdidos</p>
+                                                </div>
+
+                                                
+                                            </div>
+
+                                            <div className="Sitios">
+                                                <div className="SitioItem clickeable" onClick={ev=>{
+                                                    ev.preventDefault();
+                                                    window.location.href = 'https://aula2023.ucentral.cl/';
+                                                }}>
+                                                    <IoSchoolOutline className="SitioIcon" size={20}/>
+                                                    <p className="SitioText">Aula Virtual</p>
+                                                </div>
+
+                                                <div className="SitioItem clickeable" onClick={ev=>{
+                                                    ev.preventDefault();
+                                                    window.location.href = "https://miucen.ucentral.cl/";
+                                                }}>
+                                                    <TbWorldHeart className="SitioIcon" size={20}/>
+                                                    <p className="SitioText">Portal Ucen</p>
+                                                </div>
+
+                                                
+                                            </div>
+
+                                            <div className="Sitios">
+                                                <div className="SitioItem clickeable" onClick={ev=>{
+                                                    ev.preventDefault();
+                                                    window.location.href = "http://servicios.ucentral.cl/horarioAlumno/";
+                                                }}>
+                                                    <TbCalendarTime className="SitioIcon" size={20}/>
+                                                    <p className="SitioText">Horario</p>
+                                                </div>
+
+                                                <div className="SitioItem clickeable" onClick={ev=>{
+                                                    ev.preventDefault();
+                                                    window.location.href = "https://www.ucentral.cl/";
+                                                }}>
+                                                    <FaUniversity className="SitioIcon" size={20}/>
+                                                    <p className="SitioText">ucentral.cl</p>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className='userInput'>
-                                    <div className="userInputContent">
-                                    <div className="InputSide centrado">
-                                    <TbWorldHeart size={25} style={{ marginRight: '10px' }} />
-                                        <a
-                                        href="https://miucen.ucentral.cl/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className='fill izq'
-                                        >
-                                        Portal Ucen
-                                        </a>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className="userInput">
-                                    <div className="userInputContent">
-                                    <div className="InputSide centrado">
-                                    <TbCalendarTime size={25} style={{ marginRight: '10px' }} />
-                                        <a
-                                        href="http://servicios.ucentral.cl/horarioAlumno/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className='fill izq'
-                                        >
-                                        Horario Alumnos Ucen
-                                        </a>
-                                    </div>
-                                    </div>
-                                </div>
-                                <div className="userInput">
-                                    <div className="userInputContent">
-                                    <div className="InputSide centrado">
-                                    <FaUniversity size={25} style={{ marginRight: '10px' }} />
-                                        <a
-                                        href="https://www.ucentral.cl/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className='fill izq'
-                                        >
-                                        Sitio Oficial U. central
-                                        </a>
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
 
                                         <button 
                                             onClick={
@@ -165,11 +145,12 @@ function UserProfile() {
                                             <IoMdArrowRoundBack size={60}/>
                                         </button>
                                     </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
                 </div>
+                <MenuOpci/>
             </div>
             <Outlet/>
         </div>

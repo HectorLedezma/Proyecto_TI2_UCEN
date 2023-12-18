@@ -1,5 +1,5 @@
 import { Op } from "sequelize";
-import {UserModel,UserEsModel, BikeModel, CarreraModel, HistModel} from "../models/BlogModels.js";
+import {UserModel,UserEsModel, BikeModel, CarreraModel, HistModel, LostModel} from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
     let op = {
@@ -191,6 +191,16 @@ export const ReadOne = async (req, res)=>{
                 'rut':req.params.rut
             }
         });
+        res.json(blogs);
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
+
+export const ReadLost = async (req,res)=>{
+    try {
+        let blogs = await LostModel.findAll({attributes:['Objeto','FecEncontrado','HrEncontrado']});
         res.json(blogs);
     }catch(error){
         res.json({message:error.message})

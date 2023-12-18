@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import BiciList from "../Componentes/BiciList";
 import TraeHist from "../Componentes/RegHis";
 import QRCode from "react-qr-code";
+import { Navigate, useNavigate } from "react-router-dom";
+import TraeObjs from "../Componentes/LostList";
 //import {React} from "react";
 //import { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
@@ -180,9 +182,14 @@ export const TraeQRP = (props)=>{
             console.log(error)
         }
     }
-    return(<QRCode className='QRcode' value={
-        props.rut+"=="+lis.id_t
-    } size={230} bgColor="#002aff" fgColor="#fff" level="H" />)
+    try {
+        return(<QRCode className='QRcode' value={
+            props.rut+"=="+lis.id_t
+        } size={230} bgColor="#002aff" fgColor="#fff" level="H" />)
+    } catch (error) {
+        return(<h4 >No tienes asignada ningun veiculo como principal</h4>)
+    }
+    
 }
 
 export const TraeQR = (props)=>{
@@ -221,6 +228,37 @@ export const Historial = (props)=>{
         return(<h1>No hay entradas o salidas registradas a tu nombre</h1>);
     }else{
         return(<TraeHist data={lis}/>);
+    }
+    
+}
+
+export const ObjPerdido = ()=>{
+    const [lis,setLis] = useState([]);
+    const [time,setTime] = useState(250);
+    useEffect(()=>{
+        Traelista();
+    });
+
+    function esperar(tiempo) {
+        setTime(30000);
+        return new Promise(resolve => {
+            setTimeout(resolve, tiempo);
+        });
+    }
+
+    const Traelista = async()=>{
+        try{
+            const res = await axios.get(`${uri}/selectLost/`);
+            await esperar(time);
+            setLis(res.data);
+        }catch(error){
+            console.log(error)
+        }
+    }
+    if(lis.length===0){
+        return(<h1>No se han reportado objetos perdidos</h1>);
+    }else{
+        return(<TraeObjs data={lis}/>);
     }
     
 }

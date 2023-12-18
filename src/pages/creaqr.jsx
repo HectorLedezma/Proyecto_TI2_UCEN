@@ -5,6 +5,7 @@ import {Outlet, useNavigate} from "react-router-dom";
 import QRCode from 'react-qr-code';
 import Cookies from 'universal-cookie';
 import { IoMdArrowRoundBack } from 'react-icons/io';
+import MenuOpci from '../Componentes/MenuOp';
 //import { TraeQR } from '../ConectionSQL/conexion';
 //import users from '../pages/users.json'
 //<TraeQR rut={cock.get('Data').rut}/>
@@ -54,6 +55,7 @@ function CreaQR(){
                         </div>
                     </div>
                 </div>
+                <MenuOpci/>
             </div>
             <Outlet/>
         </div>

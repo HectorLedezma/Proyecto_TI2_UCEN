@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 17-12-2023 a las 19:22:04
+-- Tiempo de generación: 18-12-2023 a las 11:08:47
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -194,6 +194,27 @@ INSERT INTO `passwords` (`id`, `correo`, `token`, `codigo`, `fecha`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `Perdido`
+--
+
+CREATE TABLE `Perdido` (
+  `ID` int(11) NOT NULL,
+  `Objeto` varchar(64) DEFAULT NULL,
+  `FecEncontrado` date DEFAULT NULL,
+  `HrEncontrado` time DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `Perdido`
+--
+
+INSERT INTO `Perdido` (`ID`, `Objeto`, `FecEncontrado`, `HrEncontrado`) VALUES
+(1, 'Dignidad', '2023-12-23', '16:30:00'),
+(2, 'Ganas de vivir', '2023-12-18', '06:08:00');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `transporte`
 --
 
@@ -203,20 +224,22 @@ CREATE TABLE `transporte` (
   `modelo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `color` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
   `tipo` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
-  `est_trans` int(1) NOT NULL,
-  `rut_e` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL
+  `est_trans` tinyint(1) NOT NULL,
+  `rut_e` varchar(20) COLLATE utf8mb4_spanish2_ci DEFAULT NULL,
+  `principal` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish2_ci;
 
 --
 -- Volcado de datos para la tabla `transporte`
 --
 
-INSERT INTO `transporte` (`id_t`, `marca`, `modelo`, `color`, `tipo`, `est_trans`, `rut_e`) VALUES
-('1', 'oxford', 'rd1', 'negro', 'bicicleta', 0, '9999999-9'),
-('2', 'oxford', 'rd1', 'negro', 'bicicleta', 1, '18778296-1'),
-('MK-Ultra', 'Cleta', 'AAA', 'Negro', 'Bicicleta', 0, '20600701-k'),
-('sdsssddsds', 'dss', 'XDXD', 'Galaxia', 'Bicicleta', 0, '20600701-k'),
-('XDXXD', 'Honda', 'SCP-235', 'Blanco', 'Moto', 0, '20600701-k');
+INSERT INTO `transporte` (`id_t`, `marca`, `modelo`, `color`, `tipo`, `est_trans`, `rut_e`, `principal`) VALUES
+('1', 'oxford', 'rd1', 'negro', 'bicicleta', 0, '9999999-9', 0),
+('2', 'oxford', 'rd1', 'negro', 'bicicleta', 1, '18778296-1', 0),
+('MK-Ultra', 'Cleta', 'AAA', 'Negro', 'Bicicleta', 0, '20600701-k', 0),
+('sdsssddsds', 'dss', 'XDXD', 'Galaxia', 'Bicicleta', 0, '20600701-k', 0),
+('SSS0000123SM', 'Xaomi', 'Titan', 'Negro', 'Scooter', 0, '20600701-k', 1),
+('XDXXD', 'Honda', 'SCP-235', 'Blanco', 'Moto', 0, '20600701-k', 0);
 
 -- --------------------------------------------------------
 
@@ -243,9 +266,9 @@ INSERT INTO `usuario` (`rut`, `nombre`, `apellido`, `fono`, `correo`, `estado`, 
 ('123', 'gua', 'ardia', '123', 'guardia@guardia.com', 0, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
 ('16406911-7', 'dsfsd', 'fsfsd', '878787876', 'mail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
 ('18742080-6', 'vane', 'casanga', '29834287', 'vane@gmail.com', 0, '07123e1f482356c415f684407a3b8723e10b2cbbc0b8fcd6282c49d37c9c1abc'),
-('18778296-1', 'da', 'niel', '1111111', 'a@a.cl', 0, 'AJAJAJAJAJAJ'),
+('18778296-1', 'da', 'niel', '1111111', 'a@a.cl', 0, 'AJAJAAJ'),
 ('20406920-4', 'Vanessa', 'Zamora', '3456789', 'Vanevane@gmail.com', 0, '5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5'),
-('20600701-k', 'Hector', 'Ledezma', '4567898', 'hectorledezmar@gmail.com', 0, '8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918'),
+('20600701-k', 'Hector', 'Ledezma', '4567898', 'hectorledezmar@gmail.com', 0, 'c9bb7f8c32bc58278a83db27d4950628310f76b06a17807c4fbd6203a3ae2ea8'),
 ('20600715-k', 'wersd', 'qwretsd', '3242r2rer23', '3ewfsdfsdc', 0, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
 ('213', 'sfdsfs', 'wds', 'asdaf', 'asdfsa', 0, '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4'),
 ('64867030-3', 'Juanita', 'DelFuturo', '123', 'a@a.cl', 1, '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2'),
@@ -299,6 +322,12 @@ ALTER TABLE `passwords`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `Perdido`
+--
+ALTER TABLE `Perdido`
+  ADD PRIMARY KEY (`ID`);
+
+--
 -- Indices de la tabla `transporte`
 --
 ALTER TABLE `transporte`
@@ -332,6 +361,12 @@ ALTER TABLE `ingreso_egreso`
 --
 ALTER TABLE `passwords`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+
+--
+-- AUTO_INCREMENT de la tabla `Perdido`
+--
+ALTER TABLE `Perdido`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

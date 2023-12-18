@@ -266,6 +266,31 @@ form .forgot {
     background-color: #efefef00;
 }
 
+.mrg-r-10px{
+    margin-right: 10px;
+}
+
+.menuUsIconItem{
+    text-align: center;
+}
+
+.menuUsIconItem:hover{
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 10px;
+    
+}
+
+
+
+.menuUsIconText{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.mrg-l-10px{
+    margin-left: 10px;
+}
 
 .userInputIcon{
     width: 20px;
@@ -278,8 +303,51 @@ form .forgot {
 .InputSide{
     width: 90%;
 }
+
+.menuUsIcons{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.Sitios{
+    display:flex;
+    margin-top: -6em;
+    margin-bottom: 6em;
+}
+.SitioItem{
+    margin: 5px;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+.SitioItem:hover{
+    background-color: var(--dark-color);
+}
+
+.SitioText{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.SitioIcon{
+    margin-top: 5px;
+}
 /*No responsive*/
 @media screen and (min-width: 768px) {
+    .Sitios{
+        width: 120%;
+        margin-left: -15%;
+    }
+    .menuUsIconItem{
+        text-align: center;
+    }
+    .menuUsIcons{
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }   
     .DrpDwnMenu{
         width: 30%;
         max-width: 300px;
@@ -299,6 +367,8 @@ form .forgot {
         margin-right: 60px;
     }
     
+    
+
     .ImgLogoP{
         max-height: 168px;
     }

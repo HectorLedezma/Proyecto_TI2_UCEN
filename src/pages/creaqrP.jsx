@@ -6,6 +6,7 @@ import {Outlet, useNavigate} from "react-router-dom";
 import Cookies from 'universal-cookie';
 import { IoMdArrowRoundBack } from 'react-icons/io';
 import { TraeQRP } from '../ConectionSQL/conexion';
+import MenuOpci from '../Componentes/MenuOp';
 //import users from '../pages/users.json'
 //
 
@@ -54,6 +55,7 @@ function CreaQRP(){
                         </div>
                     </div>
                 </div>
+                <MenuOpci/>
             </div>
             <Outlet/>
         </div>
