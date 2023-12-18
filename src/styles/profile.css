@@ -18,11 +18,17 @@
     margin-bottom: 8px;
     display:flex;
     align-content: center;
-    width: 100%;
+    width: 130%;
+    margin-left: -15%;
     border-radius: 10px;
 }
-.BikeBox:hover{
-    background-color: #002affb2;
+
+.verde{
+    color: rgb(1, 180, 1);
+}
+
+.iconBike:hover{
+    color:  #002aff;
 }
 
 .BikeBoxCont{
@@ -30,6 +36,9 @@
     margin: 4px;
     width: 100%;
 }
+
+
+
 .BikeBoxCont h3{
     font-size: small;
 }

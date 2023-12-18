@@ -2,18 +2,18 @@
 import '../styles/styleSignup.css'
 import {Outlet, useNavigate} from "react-router-dom";
 //import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
-import QRCode from 'react-qr-code';
+
 import Cookies from 'universal-cookie';
 import { IoMdArrowRoundBack } from 'react-icons/io';
-//import { TraeQR } from '../ConectionSQL/conexion';
+import { TraeQRP } from '../ConectionSQL/conexion';
 //import users from '../pages/users.json'
-//<TraeQR rut={cock.get('Data').rut}/>
+//
 
 
-function CreaQR(){
+function CreaQRP(){
     let cock = new Cookies();
     const navigate = useNavigate();
-    const datos = cock.get('qrbici');
+    const user = cock.get("Datos");
     return(
         <div className='bodyQR'>
             <div className="container">
@@ -34,8 +34,8 @@ function CreaQR(){
                         <div className="contentQR-form">
                             <div className="y-style">
                                 <div className='QR'>
-                                    
-                                    <QRCode className='QRcode' value={datos.rut_e+"=="+datos.id_t} size={230} bgColor="#002aff" fgColor="#fff" level="H" />
+                                    <TraeQRP rut={user.rut}/>
+                                    {/*<QRCode className='QRcode' value={JSON.stringify(cock.get('qrbici'))} size={230} bgColor="#002aff" fgColor="#fff" level="H" />*/}
                                 </div>
                                 <button 
                                     onClick={
@@ -43,7 +43,7 @@ function CreaQR(){
                                             /*Boton para volver*/
                                             ev.preventDefault();
                                             cock.remove('qrbici');
-                                            navigate('/bicis');//eso redirige a la ruta especificada
+                                            navigate('/UserProf');//eso redirige a la ruta especificada
                                         }
                                     }
                                     onMouseOver={(e) => e.target.title = 'Volver'} 
@@ -60,4 +60,4 @@ function CreaQR(){
     );
 }
 
-export default CreaQR;
+export default CreaQRP;

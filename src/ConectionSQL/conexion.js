@@ -1,7 +1,8 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BiciList from "../Componentes/BiciList";
 import TraeHist from "../Componentes/RegHis";
+import QRCode from "react-qr-code";
 //import {React} from "react";
 //import { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
@@ -67,6 +68,21 @@ export class conexion{
         }
     }
 
+    async ModBici(id_t,rut_e,data){
+        try {
+            await axios.put(`${uri}/updateB/${id_t}/${rut_e}`,data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    async ModBici2(id_t,rut_e,data){
+        try {
+            await axios.put(`${uri}/updateBB/${id_t}/${rut_e}`,data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async leerB(rut){
         
         try{
@@ -117,26 +133,82 @@ export class conexion{
 }
 
 export const ListaBici = (props)=>{
-    const [lis,setLis] = useState([]);
+    const [lis,setLis] = useState([{}]);
+    //const [dat,setDat] = useState(<BiciList rut={props.rut} data={lis}/>);
     useEffect(()=>{
         Traelista();
+        
     });
+    function esperar(tiempo) {
+        return new Promise(resolve => {
+          setTimeout(resolve, tiempo);
+        });
+      }
     const Traelista = async()=>{
         try{
             const res = await axios.get(`${uri}/selectB/${props.rut}`);
+            await esperar(250);
             setLis(res.data);
         }catch(error){
             console.log(error)
         }
     }
-    return(<BiciList rut={props.rut} data={lis}/>);
+    
+    //{}
+    return (<BiciList rut={props.rut} data={lis}/>)
+    /*
+    return (<div onClick={ev=>{
+        ev.preventDefault();
+        console.log('clickeado');
+        setDat(<BiciList rut={props.rut} data={lis}/>);
+        //console.log(com.current.childNodes[0])
+    }}>
+        <div ref={com}>{dat}</div>
+    </div>);*/
 }
+
+export const TraeQRP = (props)=>{
+    const [lis,setLis] = useState({});
+    useEffect(()=>{
+        ImData();
+    },[]);
+    const ImData = async ()=>{
+        try {
+            const res = await axios.get(`${uri}/selectPB/${props.rut}`);
+            setLis(res.data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return(<QRCode className='QRcode' value={
+        props.rut+"=="+lis.id_t
+    } size={230} bgColor="#002aff" fgColor="#fff" level="H" />)
+}
+
+export const TraeQR = (props)=>{
+    const [lis,setLis] = useState({});
+    useEffect(()=>{
+        ImData();
+    },[]);
+    const ImData = async ()=>{
+        try {
+            const res = await axios.get(`${uri}/selectOB/${props.id_e}/${props.rut}`);
+            setLis(res.data);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+    return(<QRCode className='QRcode' value={
+        props.rut+"=="+lis.id_t
+    } size={230} bgColor="#002aff" fgColor="#fff" level="H" />)
+}
+
 
 export const Historial = (props)=>{
     const [lis,setLis] = useState([]);
     useEffect(()=>{
         Traelista();
-    });
+    },[]);
     const Traelista = async()=>{
         try{
             const res = await axios.get(`${uri}/selectH/${props.rut}`);

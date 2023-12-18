@@ -4,7 +4,28 @@ import db from '../database/db.js';
 //import {DataTypes} from 'sequelize';
 
 export const BikeModel = db.define('transporte',
-    {},{
+    {
+        'id_t':{
+            type:DataTypes.STRING,
+            allowNull:false,
+            primaryKey:true
+        },
+        'est_trans':{
+            type:DataTypes.TINYINT,
+            allowNull:false,
+            primaryKey:false
+        },
+        'rut_e':{
+            type:DataTypes.STRING,
+            allowNull:true,
+            primaryKey:true
+        },
+        'principal':{
+            type:DataTypes.TINYINT,
+            allowNull:true,
+            primaryKey:false
+        }
+    },{
         timestamps: false,
         tableName: 'transporte'
     }

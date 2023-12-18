@@ -11,6 +11,7 @@ import Sigbici from '../pages/sigbici';
 import Crud from '../pages/crud';
 import BikeMenu from '../pages/menuBici';
 import HistMenu from '../pages/historial';
+import CreaQRP from '../pages/creaqrP';
 function Rutas(){
     return(
         <Routes>
@@ -18,6 +19,7 @@ function Rutas(){
             <Route path='/signup' element={<Signup/>}/>
             <Route path='/UserProf' element={<UserProfile/>} />
             <Route path='/qrCode' element={<CreaQR/>} />
+            <Route path='/qrCodeP' element={<CreaQRP/>} />
             <Route path='/recover' element={<Recupera/>} />
             <Route path='/recoverOk' element={<Recuperado/>} />
             <Route path='/sigbici' element={<Sigbici/>} />

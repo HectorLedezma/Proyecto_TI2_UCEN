@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import {UserModel,UserEsModel, BikeModel, CarreraModel, HistModel} from "../models/BlogModels.js";
 
 export const Create = async (req, res)=>{
@@ -20,6 +21,42 @@ export const Update = async (req, res)=>{
         console.log(UserModel);
         const [count, updatedRows] = await UserModel.update(req.body, {
             where: { "rut": req.params.rut }
+          });
+        console.log(`Filas actualizadas: ${count}`);
+        // Verifica si se actualizaron filas antes de enviar la respuesta
+        if (count > 0) {
+            res.json({ success: true, message: `Se actualizaron ${count} filas.` });
+        } else {
+            res.json({ success: false, message: 'No se encontraron filas para actualizar.' });
+        }
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
+export const UpdateBici = async (req, res)=>{
+    try{
+        console.log(BikeModel);
+        const [count, updatedRows] = await BikeModel.update(req.body, {
+            where: { "id_t": req.params.id, "rut_e":req.params.rut }
+          });
+        console.log(`Filas actualizadas: ${count}`);
+        // Verifica si se actualizaron filas antes de enviar la respuesta
+        if (count > 0) {
+            res.json({ success: true, message: `Se actualizaron ${count} filas.` });
+        } else {
+            res.json({ success: false, message: 'No se encontraron filas para actualizar.' });
+        }
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
+export const UpdateBici2 = async (req, res)=>{
+    try{
+        console.log(BikeModel);
+        const [count, updatedRows] = await BikeModel.update(req.body, {
+            where: { "id_t":{[Op.ne]: req.params.id}, "rut_e":req.params.rut }
           });
         console.log(`Filas actualizadas: ${count}`);
         // Verifica si se actualizaron filas antes de enviar la respuesta
@@ -63,7 +100,6 @@ export const CreateBike = async (req, res)=>{
     }
 }
 
-
 export const ReadAll = async (req, res)=>{
     try{
         let blogs = await UserModel.findAll({attributes:['rut']});
@@ -76,10 +112,42 @@ export const ReadAll = async (req, res)=>{
 export const ReadAllB = async (req, res)=>{
     try{
         let blogs = await BikeModel.findAll({
-            attributes:['id_t','marca','modelo','color','tipo'],
+            attributes:['id_t','marca','modelo','color','tipo','est_trans','principal'],
             where:{
                 'rut_e':req.params.rut_e,
                 'est_trans':0
+            }
+        });
+        res.json(blogs);
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
+export const ReadOneB = async (req, res)=>{
+    try{
+        let blogs = await BikeModel.findOne({
+            attributes:['id_t','marca','modelo','color','tipo','est_trans','principal'],
+            where:{
+                'rut_e':req.params.rut_e,
+                'id_t':req.params.id_t,
+                'est_trans':0
+            }
+        });
+        res.json(blogs);
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
+
+export const ReadOnePB = async (req, res)=>{
+    try{
+        let blogs = await BikeModel.findOne({
+            attributes:['id_t','marca','modelo','color','tipo','est_trans','principal'],
+            where:{
+                'rut_e':req.params.rut_e,
+                'principal':1
             }
         });
         res.json(blogs);

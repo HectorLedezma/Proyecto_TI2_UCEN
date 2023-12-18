@@ -12,6 +12,7 @@ import { FaClock, FaUniversity } from "react-icons/fa";
 import Cookies from 'universal-cookie';
 import { MdPedalBike } from 'react-icons/md';
 import { conexion } from "../ConectionSQL/conexion";
+import { FaHeartCircleCheck } from "react-icons/fa6";
 
 
 function TraeData(nav){
@@ -63,6 +64,18 @@ function UserProfile() {
                                         } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
                                             <MdPedalBike size={25} style={{ margin: '10px' }}/>
                                             Ver bicis
+                                        </button>
+                                    </div>
+                                    <div className='userInput'>
+                                        <button onClick={
+                                            ev=>{
+                                                ev.preventDefault();
+                                                navigate('/qrCodeP')
+                                                //TraeData(navigate);
+                                            }
+                                        } id='BtnLogIn' className="centrado Iniciar InputSide izq clrWhite">
+                                            <FaHeartCircleCheck size={25} style={{ margin: '10px' }}/>
+                                            Ver bici principal
                                         </button>
                                     </div>
                                     <div className='userInput'>
