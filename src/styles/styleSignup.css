@@ -283,6 +283,10 @@ form .forgot {
     border: 0px solid var(--light-color);
 }
 
+.userInputText::placeholder{
+    font-size: 2%;
+}
+
 
 .userInputIcon{
     width: 20px;
@@ -307,7 +311,7 @@ form .forgot {
         margin-left: -23%;
     }
     .userInputText::placeholder{
-        font-size: x-small;
+        font-size: 5%;
     }
     
     h2{

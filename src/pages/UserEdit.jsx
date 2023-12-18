@@ -3,20 +3,16 @@ import "../styles/styleSignup.css";
 import { Outlet, useNavigate} from "react-router-dom";
 import { AiOutlineMail, AiOutlineLock } from "react-icons/ai";
 import { BiHide, BiShow, BiUser } from "react-icons/bi";
-import user from '../pages/users.json'
 import CryptoJS from 'crypto-js';
 import Heading from "../Componentes/heading";
 import {Carreras, conexion } from "../ConectionSQL/conexion";
 import { FaPhoneAlt,FaUniversity } from "react-icons/fa";
 import { FaUserGraduate } from "react-icons/fa";
-import Cookies from "universal-cookie";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-//import DropD from "../Componentes/dropdown";
+import Cookies from "universal-cookie";
 
-
-
-function Signup(){
+function UpUser(){
     const cambio = (ojo) => {
         if(ojo === 'BiShow'){
             setEye(
@@ -62,6 +58,7 @@ function Signup(){
         />
     );
     const [pass2,setPass2] = useState('password');
+
     const [eye2,setEye2] = useState(
         <BiShow className="clickeable" fontSize='30'
             onClick={()=>cambio2(eye.type.name)}
@@ -70,120 +67,61 @@ function Signup(){
 
     const navigate = useNavigate();
 
-    function validaRut(rut){
-        let ok = false;
-        let spg = rut.replace(/[.-]/g, '');
-        let snd = spg.slice(0, -1);
-        let r_u_t = snd.split("")
-        let t_u_r = r_u_t.reverse();
-        let tur = t_u_r.join("");
-        
-        let multi = 2;
-        let sum = 0;
-        for(let i = 0;i<tur.length;i++){
-            if(multi > 7){
-                multi = 2;
-            }
-            //console.log(tur[i]);
-            sum = sum+parseInt(tur[i]*multi);
-            multi = multi+1;
-        }
-        
-        let dv = 11-(sum%11);
-        let dvu = rut[rut.length-1];
-        if(dvu === 'k' || dvu === 'K'){
-            dvu = dvu.toUpperCase();
-        }
-        //console.log('dvu: ',dvu);
-        if(dv===11){
-            dv = "0";
-        }else if(dv === 10){
-            dv="K";
-        }
-        //console.log('dv: ',dv);
-        if(String(dv) === dvu){
-            ok = true;
-        }else{
-            ok = false
-        }
-        return ok;
-    }
-    
-
-    function Revisa(rut,nomb,apel,fono,mail,pass,pess,carr){
+    function Revisa(nomb,apel,fono,mail,pass,pess,carr){
         let con = new conexion();
-        //toast.success('Funciona', {
-        //    position:toast.POSITION.TOP_CENTER
-        //});
-        //console.log('Carrera: ',carr);
-        //chekear usuario
-        con.leerT().then(data => {
-                //console.log(data)
-                let existe = false;
-                for(let i = 0; i < data.length; i++){
-                    //console.log(data[i].rut);
-                    if(data[i].rut === rut){
-                        existe = true;
-                     //   console.log('Ya existe');
-                        toast.error('El RUT ingresado ya existe',{position:toast.POSITION.TOP_CENTER});
-                        break;
-                    }
+        const cock = new Cookies();
+        let user = cock.get('Datos');
+        if(nomb !== ''){
+            let Ndat = {
+                "nombre":nomb
+            }
+            //console.log('cambio en nombre');
+            con.cambiaClave(user.rut,Ndat);
+        }
+        if(apel !== ''){
+            let Ndat = {
+                "apellido":apel
+            }
+            //console.log('cambio en apellido');
+            con.cambiaClave(user.rut,Ndat);
+        }
+        if(fono !== ''){
+            let Ndat = {
+                "fono":fono
+            }
+            //console.log('cambio en fono');
+            con.cambiaClave(user.rut,Ndat);
+        }
+        if(mail !== ''){
+            let Ndat = {
+                "correo":mail
+            }
+            //console.log('cambio en correo');
+            con.cambiaClave(user.rut,Ndat);
+        }
+        if(revisapass(pass,pess)){
+            if(pass !== ''){
+                let Ndat = {
+                    "clave":CryptoJS.SHA256(pass).toString()
                 }
-                //console.log('Existe:'+String(existe));
-                const confir = revisapass(pass,pess);
-                if((!existe && confir) && validaRut(rut)){
-                    try {
-                        let Nuser = {
-                            "rut": rut,
-                            "nombre":nomb,
-                            "apellido":apel,
-                            "fono": fono,//ese tiene que ser String, no Int
-                            "correo":mail,
-                            "estado": 0,
-                            "clave":CryptoJS.SHA256(pass).toString()
-                        }
-                        con.crear(Nuser);
-                        let Nest ={
-                            "rut_e": rut,
-                            "carrera":carr
-                        }
-                    
-                        con.crearEst(Nest);
-                        const mensaje = 'Usuario '+nomb+' '+apel+'\nse ha creado con exito';
-                        
-                        toast.success(mensaje, {
-                            position:toast.POSITION.TOP_CENTER,
-                            autoClose: 5000,
-                            onClose:()=>{
-                                setTimeout(() => {
-                                    navigate("/");
-                                }, 5000);
-                            }
-                        });
-                        //setTimeout(navigate("/"), 5000);
-                        //alert('Usuario '+nomb+' '+apel+'\nse ha creado con exito');
-                        //navigate("/");    
-                    } catch (error) {
-                        console.log('Error')
-                    }
-                      
-                }
-            })
-            .catch(error => {
-            console.error("Error al leer los datos:", error);
-        });
-    }
-
-    function existeUs(mail){
-        const existe = mail in user;
-        return !existe;
+                //console.log('Cambio de clave');
+                con.cambiaClave(user.rut,Ndat);
+            }
+        }
+        if(carr !== 0){
+            let Ndat = {
+                "carrera":carr
+            }
+            //console.log('cambio en carrera');
+            con.cambiaCarrera(user.rut,Ndat);
+        }
     }
 
     function revisapass(pass1,pass2){
-        return pass1 === pass2;
+        return (pass1 === pass2) && (pass1 !== '' || pass1 !== '');
     }
 
-    let numrut = useRef();
+    
     let nombre = useRef();
     let apelli = useRef();
     let nofono = useRef();
@@ -193,13 +131,7 @@ function Signup(){
     let carrer = useRef();
 
     let [samepass,setSamepass] = useState(true);
-    let [newCorreo,SetNew] = useState(true);
-
-    let cock = new Cookies();
     
-    const [rut,SetRut] = useState(true);
-    
-
     return(
         <div id="page" className="site login-show">
             <div className="container">
@@ -223,22 +155,6 @@ function Signup(){
                         <div className="content-form">
                             <div className="y-style">
                                 <form action="">
-                                    <p className="badText" hidden={rut}>Ingrese un rut valido</p>
-                                    <div className="userInput" onChange={
-                                            ev=>{
-                                                ev.preventDefault();
-                                                SetRut(validaRut(numrut.current.value))
-                                            }
-                                        }>
-                                        <div className="userInputContent">
-                                            <div className="IconSide centrado">
-                                                <BiUser fontSize='25'/>
-                                            </div>
-                                            <div className="InputSide centrado">
-                                                <input ref={numrut} className="userInputText" type="text" placeholder=" Ingresa tu RUT"/>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
@@ -269,7 +185,6 @@ function Signup(){
                                             </div>
                                         </div>
                                     </div>
-                                    <p className="badText" hidden={newCorreo}>Ese correo ya existe</p>
                                     <div className="userInput">
                                         <div className="userInputContent">
                                             <div className="IconSide centrado">
@@ -279,7 +194,6 @@ function Signup(){
                                                 <input onChange={
                                                     ev=>{
                                                         ev.preventDefault();
-                                                        SetNew(existeUs(correo.current.value));
                                                     }
                                                 } ref={correo} className="userInputText" type="email" placeholder=" Ingresa tu correo"/>
                                             </div>
@@ -322,7 +236,6 @@ function Signup(){
                                         ev=>{
                                             ev.preventDefault();
                                             Revisa(
-                                                numrut.current.value,
                                                 nombre.current.value,
                                                 apelli.current.value,
                                                 nofono.current.value,
@@ -333,21 +246,10 @@ function Signup(){
                                                 );
 
                                         }
-                                    } className="Iniciar" type="sumbit">Crear cuenta
+                                    } className="Iniciar" type="sumbit">Confirmar cambios
                                         
                                     </button>
                                 </form>
-                                <div className="afterform">
-                                    <p>¿Ya tienes una cuenta?</p>
-                                    {/*cock.remove('Carreras');*/}
-                                    <p className="clickeable enlace" onClick={
-                                        ev=>{
-                                            ev.preventDefault();
-                                            cock.remove('Carreras');
-                                            navigate('/');
-                                        }
-                                    }>Inicia sesion</p>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -359,4 +261,4 @@ function Signup(){
     )
 }
 
-export default Signup
+export default UpUser

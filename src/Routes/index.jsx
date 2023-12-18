@@ -13,6 +13,7 @@ import BikeMenu from '../pages/menuBici';
 import HistMenu from '../pages/historial';
 import CreaQRP from '../pages/creaqrP';
 import LostMenu from '../pages/Perdidos';
+import UpUser from '../pages/UserEdit';
 function Rutas(){
     return(
         <Routes>
@@ -28,6 +29,7 @@ function Rutas(){
             <Route path='/bicis' element={<BikeMenu/>} />
             <Route path='/history' element={<HistMenu/>} />
             <Route path='/lost' element={<LostMenu/>} />
+            <Route path='/useredit' element={<UpUser/>} />
         </Routes>
     )
 }

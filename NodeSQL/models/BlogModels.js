@@ -39,6 +39,31 @@ export const UserModel = db.define('usuario',
             allowNull:false,
             primaryKey:true
         },
+        'nombre':{
+            type:DataTypes.STRING,
+            allowNull:true,
+            primaryKey:false
+        },
+        'apellido':{
+            type:DataTypes.STRING,
+            allowNull:true,
+            primaryKey:false
+        },
+        'fono':{
+            type:DataTypes.STRING,
+            allowNull:true,
+            primaryKey:false
+        },
+        'correo':{
+            type:DataTypes.STRING,
+            allowNull:true,
+            primaryKey:false
+        },
+        'estado':{
+            type:DataTypes.INTEGER,
+            allowNull:true,
+            primaryKey:false
+        },
         'clave':{
             type:DataTypes.STRING,
             allowNull:false,
@@ -51,7 +76,18 @@ export const UserModel = db.define('usuario',
 )
 
 export const UserEsModel = db.define('estudiante',
-    {},{
+    {
+        'rut_e':{
+            type:DataTypes.STRING,
+            primaryKey:true,
+            allowNull:false
+        },
+        'carrera':{
+            type:DataTypes.INTEGER,
+            primaryKey:false,
+            allowNull:true
+        }
+    },{
         timestamps: false,
         tableName: 'estudiante'
     }

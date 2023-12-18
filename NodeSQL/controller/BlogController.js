@@ -182,6 +182,19 @@ export const ReadCarr = async (req, res)=>{
     }
 }
 
+export const UpdateEst = async (req, res)=>{
+    try{
+        let blogs = await UserEsModel.update(req.body,{
+            where:{
+                rut_e:req.params.rut
+            }
+        });
+        res.json(blogs);
+    }catch(error){
+        res.json({message:error.message})
+    }
+}
+
 
 export const ReadOne = async (req, res)=>{
     try{

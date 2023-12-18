@@ -266,6 +266,10 @@ form .forgot {
     background-color: #efefef00;
 }
 
+.userInputText::placeholder{
+    font-size: x-small;
+}
+
 .mrg-r-10px{
     margin-right: 10px;
 }

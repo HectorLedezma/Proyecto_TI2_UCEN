@@ -1,10 +1,10 @@
 import axios from "axios";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import BiciList from "../Componentes/BiciList";
 import TraeHist from "../Componentes/RegHis";
 import QRCode from "react-qr-code";
-import { Navigate, useNavigate } from "react-router-dom";
 import TraeObjs from "../Componentes/LostList";
+import DropD from "../Componentes/dropdown";
 //import {React} from "react";
 //import { useState, useEffect } from "react";
 //import { Link } from "react-router-dom";
@@ -62,9 +62,17 @@ export class conexion{
         return this.blog;
     }
 
-    async cambiaClave(rut,newpass){
+    async cambiaClave(rut,data){
         try {
-            await axios.put(`${uri}/updateP/${rut}`,{"clave":newpass})
+            await axios.put(`${uri}/updateP/${rut}`,data)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    async cambiaCarrera(rut,data){
+        try {
+            await axios.put(`${uri}/updateEs/${rut}`,data)
         } catch (error) {
             console.log(error);
         }
@@ -228,6 +236,31 @@ export const Historial = (props)=>{
         return(<h1>No hay entradas o salidas registradas a tu nombre</h1>);
     }else{
         return(<TraeHist data={lis}/>);
+    }
+    
+}
+
+export const Carreras = ()=>{
+    const [lis,setLis] = useState([]);
+    useEffect(()=>{
+        Traelista();
+    },[]);
+    const Traelista = async()=>{
+        try{
+            const res = await axios.get(`${uri}/selectC/`);
+            setLis(res.data);
+        }catch(error){
+            console.log(error)
+        }
+    }
+    if(lis.length===0){
+        return(<h1>No hay entradas o salidas registradas a tu nombre</h1>);
+    }else{
+        let item = [];
+        for(let i = 0;i<lis.length;i++){
+            item.push(lis[i].Nombre);
+        }
+        return(<DropD titulo="Carrera" items={item}/>);
     }
     
 }
