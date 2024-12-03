@@ -181,7 +181,7 @@ export const TraeQRP = (props)=>{
     const [lis,setLis] = useState({});
     useEffect(()=>{
         ImData();
-    },[]);
+    });
     const ImData = async ()=>{
         try {
             const res = await axios.get(`${uri}/selectPB/${props.rut}`);
@@ -204,7 +204,7 @@ export const TraeQR = (props)=>{
     const [lis,setLis] = useState({});
     useEffect(()=>{
         ImData();
-    },[]);
+    });
     const ImData = async ()=>{
         try {
             const res = await axios.get(`${uri}/selectOB/${props.id_e}/${props.rut}`);
@@ -223,7 +223,7 @@ export const Historial = (props)=>{
     const [lis,setLis] = useState([]);
     useEffect(()=>{
         Traelista();
-    },[]);
+    });
     const Traelista = async()=>{
         try{
             const res = await axios.get(`${uri}/selectH/${props.rut}`);

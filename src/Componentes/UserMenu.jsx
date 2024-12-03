@@ -1,6 +1,4 @@
 import React from 'react';
-import { BiExit } from 'react-icons/bi';
-import { FaUserEdit } from 'react-icons/fa';
 
 const UserMenu = ({ userData }) => {
 return (

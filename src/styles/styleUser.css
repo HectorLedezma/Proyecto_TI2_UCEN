@@ -2,6 +2,7 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
 .left-align {
     text-align: left;
 }
@@ -75,11 +76,6 @@ button:hover{
     color: aliceblue;;
 }
 
-.centrado{
-    display: flex;
-    justify-content:start;
-    align-items: center;   
-}
 
 .centrado2{
     display: flex;
@@ -109,4 +105,11 @@ button:hover{
         text-align: left;
 
     }
+}
+
+
+.centrado{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;   
 }

@@ -3,7 +3,7 @@ import {Sequelize} from 'sequelize';
 const db = new Sequelize('integrador_proyecto','root','',{
     host:'localhost',
     dialect:'mysql',
-    port:3030//puerto
+    port:3306//puerto
 })
 
 export default db;
